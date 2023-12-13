@@ -13,7 +13,7 @@ const NavBarLogo: React.FC<Props> = ({ isDarkMode = false }) => {
         className="h-8"
         alt="TYSS Logo"
       />
-      <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+      <span className="self-center text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-3xl font-semibold whitespace-nowrap dark:text-white">
         Trade Your Shelf of Shame
       </span>
     </a>

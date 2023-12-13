@@ -24,7 +24,7 @@ const NavBarUserMenu: React.FC<Props> = ({ name }) => {
   };
 
   return (
-    <>
+    <li className="relative">
       <button
         id="dropdownNavbarLink"
         onMouseEnter={() => handleDropdown("enter")}
@@ -54,7 +54,7 @@ const NavBarUserMenu: React.FC<Props> = ({ name }) => {
           </ul>
         </div>
       )}
-    </>
+    </li>
   );
 };
 

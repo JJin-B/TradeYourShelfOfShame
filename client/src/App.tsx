@@ -6,7 +6,7 @@ const user: User = new User("UserName", "John Doe", "john.doe@gmail.com");
 function App() {
   return (
     <>
-      <NavBar user={user} isDarkMode={true} />
+      <NavBar user={user} isDarkMode={false} />
     </>
   );
 }
