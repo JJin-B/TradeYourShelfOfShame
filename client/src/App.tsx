@@ -1,12 +1,26 @@
-import User from "./components/classes/User";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import NavBar from "./components/NavBar";
 
-const user: User = new User("UserName", "John Doe", "john.doe@gmail.com");
+import FrontPage from "./FrontPage";
+import PostingDetailPage from "./PostingDetailPage";
+
+import { postings, user } from "./dummyData/dummydata";
 
 function App() {
   return (
     <>
-      <NavBar user={user} isDarkMode={false} />
+      <Router>
+        <NavBar user={user} isDarkMode={false} />
+
+        <Routes>
+          <Route path="/" element={<FrontPage postings={postings} />} />
+          <Route
+            path="/posting/:postId"
+            element={<PostingDetailPage user={user} />}
+          />
+        </Routes>
+      </Router>
     </>
   );
 }
