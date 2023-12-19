@@ -1,12 +1,13 @@
 import React from "react";
 import Posting from "./classes/Posting";
+import BuySellBadge from "./parts/BuySellBadge";
 import { Link } from "react-router-dom";
 
 interface Props {
   posting: Posting;
 }
 
-const PostingPreview: React.FC<Props> = ({ posting }) => {
+const FrontPagePostingPreview: React.FC<Props> = ({ posting }) => {
   // Function to truncate text to a specified number of characters
   const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
@@ -33,9 +34,10 @@ const PostingPreview: React.FC<Props> = ({ posting }) => {
       </Link>
       <div className="p-5">
         <Link to={`/posting/${posting._id}`}>
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {truncateText(posting.title, 30)} {/* Limit to 30 characters */}
-          </h5>
+          <BuySellBadge type={posting.type} />
+          <span className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {truncateText(posting.title, 20)} {/* Limit to 20 characters */}
+          </span>
         </Link>
         <Link to={`/posting/${posting._id}`}>
           <p className="mb-3 font-normal break-words  text-gray-700 dark:text-gray-400">
@@ -47,4 +49,4 @@ const PostingPreview: React.FC<Props> = ({ posting }) => {
   );
 };
 
-export default PostingPreview;
+export default FrontPagePostingPreview;

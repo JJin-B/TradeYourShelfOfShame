@@ -24,7 +24,7 @@ const NavBarUserMenu: React.FC<Props> = ({ name }) => {
   };
 
   return (
-    <li className="relative">
+    <li className="relative z-50">
       <button
         id="dropdownNavbarLink"
         onMouseEnter={() => handleDropdown("enter")}

@@ -1,0 +1,19 @@
+import React from "react";
+
+interface Props {
+  type: "buy" | "sell";
+}
+const BuySellBadge: React.FC<Props> = ({ type }) => {
+  const badgeColor =
+    type.toLowerCase() === "buy" ? "bg-red-500" : "bg-blue-500";
+
+  return (
+    <div
+      className={`inline-flex items-center w-12 h-5 text-center px-2 text-sm rounded-full ${badgeColor} text-white`}
+    >
+      {type.toUpperCase()}
+    </div>
+  );
+};
+
+export default BuySellBadge;

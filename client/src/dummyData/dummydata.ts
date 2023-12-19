@@ -6,13 +6,14 @@ const imageArray: string[] = [
   "/images/bgImg1.jpg",
   "/images/frontImage.jpg",
   "/images/logo-TYSS.png",
+  "/images/logo-TYSS-dark.png",
 ];
 
 const user: User = new User("UserName", "John Doe", "john.doe@gmail.com");
 
 const postings: Posting[] = [];
 
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 100; i++) {
   const randomIndex: number = Math.floor(Math.random() * bgNames.length);
   const imgSrcs: string[] = [];
   const imgCount: number = Math.floor(Math.random() * 5);
@@ -24,8 +25,11 @@ for (let i = 0; i < 50; i++) {
     imgSrcs.push(imageArray[randomImageIndex]);
   }
 
+  const postingType: "buy" | "sell" = Math.random() > 0.5 ? "buy" : "sell";
+
   const posting: Posting = new Posting(
     `${i}`,
+    postingType,
     bgNames[randomIndex],
     bgDescs[randomIndex],
     Math.floor(Math.random() * 100) + 1,

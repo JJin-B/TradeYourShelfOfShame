@@ -39,10 +39,12 @@ const PictureCarousel: React.FC<Props> = ({ picUrls }) => {
               className={`${index === currentIndex ? "active" : "hidden"}`} //prettier-ignore
             >
               <img src={picUrl} className="w-full h-96 object-cover" alt="" />
+              <div className="flex items-center justify-center border rounded-lg">
+                {index + 1} of {picUrls.length}
+              </div>
             </div>
           ))}
         </div>
-
         {/* <!-- Slider controls --> */}
         {/* prettier-ignore */}
         <button className={`start-0 ${btnClasses} hover:text-opacity-10`} onClick={prevSlide}> 

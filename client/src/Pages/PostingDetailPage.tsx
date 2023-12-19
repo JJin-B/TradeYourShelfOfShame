@@ -1,9 +1,9 @@
 import React from "react";
-import User from "./components/classes/User";
-import Posting from "./components/classes/Posting";
-import PictureCarousel from "./components/parts/PictureCarousel";
-import Button from "./components/parts/Button";
-import { postings } from "./dummyData/dummydata";
+import User from "../components/classes/User";
+import Posting from "../components/classes/Posting";
+import PictureCarousel from "../components/parts/PictureCarousel";
+import Button from "../components/parts/Button";
+import { postings } from "../dummyData/dummydata";
 import { useParams } from "react-router-dom";
 
 interface Props {
@@ -22,13 +22,14 @@ const PostingDetailPage: React.FC<Props> = ({ user }) => {
 
   return (
     <>
-      <div className="mx-auto max-w-6xl m-10">
-        <div className="flex flex-col md:flex-row">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col md:flex-row justify-center">
           <div className="m-3 flex-2/3 text-3xl max-w-2xl break-words">
             {posting.title}
             <PictureCarousel picUrls={posting.imageSrc} />
           </div>
           <div className="w-96 text-xl max-w-sm break-words border border-solid border-grey-700 p-4 ml-10 mt-10">
+            <div>Price: ${posting.price}</div>
             <div>Location : </div>
             <div>Posted On : </div>
             <div>Created By : {user.name}</div>

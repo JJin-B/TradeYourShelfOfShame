@@ -15,7 +15,7 @@ interface Props {
   isDarkMode: boolean;
 }
 
-const Navbar: React.FC<Props> = ({ user, isDarkMode }) => {
+const Navbar: React.FC<Props> = ({ user }) => {
   const [isHamburgerDropdownOpen, setisHamburgerDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -29,9 +29,9 @@ const Navbar: React.FC<Props> = ({ user, isDarkMode }) => {
     "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
 
   return (
-    <nav className="p-3 bg-white border-gay-200 dark:bg-gray-900 dark:border-gray-700">
+    <nav className="w-full z-50 p-3 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
       <div className="max-w-6xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <NavBarLogo isDarkMode={isDarkMode} />
+        <NavBarLogo />
         <NavBarHamburgerButton
           isDropdownOpen={isHamburgerDropdownOpen}
           onToggle={() => toggleDropdown()}
@@ -41,12 +41,12 @@ const Navbar: React.FC<Props> = ({ user, isDarkMode }) => {
         <div className={`${isHamburgerDropdownOpen ? "block" : "hidden"} w-full md:block md:w-auto`} id="navbar-dropdown">
           <ul className={menuClass}>
             <li>  
-              <Link to='/'>Home</Link>
+              <Link to='/' className={menuItemClass}>Home</Link>
             </li>
 
-            <LinkedLi link="#" text="All Postings" className={menuItemClass} />
-            <LinkedLi link="#" text="Buy" className={menuItemClass} />
-            <LinkedLi link="#" text="Sell" className={menuItemClass} />
+            <LinkedLi link="/search" text="All Postings" className={menuItemClass} />
+            <LinkedLi link="/search?type=buy" text="Buy" className={menuItemClass} />
+            <LinkedLi link="/search?type=sell" text="Sell" className={menuItemClass} />
             <NavBarUserMenu name={user.name} />
           </ul>
         </div>
