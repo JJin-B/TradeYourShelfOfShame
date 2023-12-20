@@ -9,7 +9,7 @@ const BuySellBadge: React.FC<Props> = ({ type }) => {
 
   return (
     <div
-      className={`inline-flex items-center w-12 h-5 text-center px-2 text-sm rounded-full ${badgeColor} text-white`}
+      className={`inline-flex items-center w-12 h-5 text-center justify-center text-sm rounded-full ${badgeColor} text-white`}
     >
       {type.toUpperCase()}
     </div>
