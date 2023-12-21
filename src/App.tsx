@@ -8,7 +8,7 @@ import SearchResultPage from "./Pages/SearchResultPage";
 
 import WrapperComponent from "./components/WrapperComponent";
 
-import { postings, user } from "./dummyData/dummydata";
+import { user } from "./dummyData/dummydata";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             path="/"
             element={
               <WrapperComponent>
-                <FrontPage postings={postings} />
+                <FrontPage />
               </WrapperComponent>
             }
           />
@@ -28,7 +28,7 @@ function App() {
             path="/posting/:postId"
             element={
               <WrapperComponent>
-                <PostingDetailPage user={user} />
+                <PostingDetailPage />
               </WrapperComponent>
             }
           />
@@ -36,7 +36,7 @@ function App() {
             path="/search"
             element={
               <WrapperComponent>
-                <SearchResultPage postings={postings} />
+                <SearchResultPage />
               </WrapperComponent>
             }
           />

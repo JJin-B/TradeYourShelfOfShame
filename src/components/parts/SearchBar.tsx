@@ -32,7 +32,7 @@ const SearchBar: React.FC = () => {
     event.preventDefault();
 
     const typeParam = searchParams.type ? `type=${searchParams.type.toLowerCase()}`: ""; //prettier-ignore
-    const inputParam = searchParams.input ? `input=${searchParams.input}` : "";
+    const inputParam = searchParams.input ? `q=${searchParams.input}` : "";
 
     const queryParams = [inputParam, typeParam].filter(Boolean).join("&");
 

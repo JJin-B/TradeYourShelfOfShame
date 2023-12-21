@@ -5,8 +5,10 @@ class Posting {
     public title: string,
     public desc: string,
     public price: number,
+    public location: string,
     public imageSrc: string[],
-    public userId: string
+    public author: { _id: string; name: string },
+    public createdAt: Date
   ) {}
 }
 

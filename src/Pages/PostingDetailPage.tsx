@@ -1,24 +1,46 @@
-import React from "react";
-import User from "../components/classes/User";
+import React, { useEffect, useState } from "react";
 import Posting from "../components/classes/Posting";
 import PictureCarousel from "../components/parts/PictureCarousel";
 import Button from "../components/parts/Button";
-import { postings } from "../dummyData/dummydata";
 import { useParams } from "react-router-dom";
 
-interface Props {
-  user: User;
-}
+interface Props {}
 
-const PostingDetailPage: React.FC<Props> = ({ user }) => {
+const PostingDetailPage: React.FC<Props> = () => {
+  const [posting, setPosting] = useState<Posting>();
+
   const { postId } = useParams<{ postId: string }>();
 
-  const posting: Posting | undefined = postings.find((p) => p._id === postId);
+  const fetchUrl = `http://localhost:3001/api/posting/${postId}`;
+
+  useEffect(() => {
+    fetch(fetchUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch the posting");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPosting(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching the posting:", error);
+      });
+  }, [fetchUrl]);
 
   if (!posting) {
     // Handle the case where the posting is not found
     return <div>Posting not found!</div>;
   }
+
+  const createdAtDate = new Date(posting.createdAt);
+
+  const formattedDate = createdAtDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  });
 
   return (
     <>
@@ -30,11 +52,11 @@ const PostingDetailPage: React.FC<Props> = ({ user }) => {
           </div>
           <div className="w-96 text-xl max-w-sm break-words border border-solid border-grey-700 p-4 ml-10 mt-10">
             <div>Price: ${posting.price}</div>
-            <div>Location : </div>
-            <div>Posted On : </div>
-            <div>Created By : {user.name}</div>
+            <div>Location : {posting.location}</div>
+            <div>Posted On : {formattedDate}</div>
+            <div>Created By : {posting.author.name}</div>
             <div className="my-3">
-              <Button text={`Check ${user.name}'s Trade List`} />
+              <Button text={`Check ${posting.author.name}'s Trade List`} />
             </div>
             <div className="mt-5">
               <form className="p-3 border border-gray-300">
@@ -48,7 +70,7 @@ const PostingDetailPage: React.FC<Props> = ({ user }) => {
                   id="message"
                   rows={6}
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  defaultValue={`Hello ${user.name}. I am interested in this item. Please let me know if this is available!`}
+                  defaultValue={`Hello ${posting.author.name}. I am interested in this item. Please let me know if this is available!`}
                 ></textarea>
                 <Button text="Send" />
               </form>
