@@ -8,7 +8,8 @@ class Posting {
     public location: string,
     public imageSrc: string[],
     public author: { _id: string; name: string },
-    public createdAt: Date
+    public createdAt: Date,
+    public bggData?: {bggIdx: string; name: string}
   ) {}
 }
 

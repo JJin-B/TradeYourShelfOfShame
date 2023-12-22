@@ -32,8 +32,8 @@ const NavBarLogo: React.FC = () => {
     <Link to={"/"}>
       <div className="flex items-center space-x-3 rtl:space-x-reverse">
         <img src={logoSrc} className="h-8" alt="TYSS Logo" />
-        <span className="self-center text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-3xl font-semibold whitespace-nowrap dark:text-white">
-          Trade Your Shelf of Shame
+        <span className="self-center break-words text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-3xl font-semibold whitespace-nowrap dark:text-white">
+          {window.innerWidth > 360 && "Trade Your Shelf of Shame"}
         </span>
       </div>
     </Link>

@@ -5,6 +5,10 @@ import "./styles/index.css";
 import { applyMode, Mode } from "@cloudscape-design/global-styles";
 applyMode(Mode.Dark);
 
+
+
+
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />

@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 import FrontPage from "./Pages/FrontPage";
 import PostingDetailPage from "./Pages/PostingDetailPage";
 import SearchResultPage from "./Pages/SearchResultPage";
+import PostPage from "./Pages/PostPage";
 
 import WrapperComponent from "./components/WrapperComponent";
 
@@ -40,7 +42,18 @@ function App() {
               </WrapperComponent>
             }
           />
+
+          <Route
+            path="/post"
+            element={
+              <WrapperComponent>
+                <PostPage />
+              </WrapperComponent>
+            }
+          />
         </Routes>
+
+        <Footer />
       </Router>
     </>
   );

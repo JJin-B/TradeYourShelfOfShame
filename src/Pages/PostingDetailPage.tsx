@@ -50,7 +50,7 @@ const PostingDetailPage: React.FC<Props> = () => {
             {posting.title}
             <PictureCarousel picUrls={posting.imageSrc} />
           </div>
-          <div className="w-96 text-xl max-w-sm break-words border border-solid border-grey-700 p-4 ml-10 mt-10">
+          <div className="w-full ml-0 sm:w-96 sm:ml-10 text-xl max-w-sm break-words border border-solid border-grey-700 p-4 mt-10 ">
             <div>Price: ${posting.price}</div>
             <div>Location : {posting.location}</div>
             <div>Posted On : {formattedDate}</div>
