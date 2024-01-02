@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Button from "../components/parts/Button";
 import PostBggSearch from "../components/parts/PostBggSearch";
@@ -31,8 +31,6 @@ interface PostParams {
 const PostPage: React.FC<Props> = () => {
   const navigate = useNavigate();
 
-  const [bggToggle, setBggToggle] = useState<boolean>(false);
-
   const [postParams, setPostParams] = useState<PostParams>({
     type: "sell",
     title: "",
@@ -43,9 +41,47 @@ const PostPage: React.FC<Props> = () => {
     author: "65834424b3614bdc5e084875",
   });
 
-  const handleBggToggle = () => {
-    setBggToggle(!bggToggle);
-  };
+  const [bggToggle, setBggToggle] = useState<boolean>(false);
+
+  const { postId } = useParams<{ postId: string }>();
+
+  const fetchUrl = `http://localhost:3001/posting/${postId}`;
+
+  useEffect(() => {
+    fetch(fetchUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch the posting");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.bggData.length > 0) {
+          setPostParams({
+            ...postParams,
+            type: data.type,
+            bggData: data.bggData,
+            title: data.title,
+            desc: data.desc,
+            price: data.price,
+            location: data.location,
+          });
+          setBggToggle(true);
+        } else {
+          setPostParams({
+            ...postParams,
+            type: data.type,
+            title: data.title,
+            desc: data.desc,
+            price: data.price,
+            location: data.location,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching the posting:", error);
+      });
+  }, [fetchUrl]);
 
   const handlePostParmas = (
     param: keyof PostParams,
@@ -77,22 +113,27 @@ const PostPage: React.FC<Props> = () => {
     }));
   };
 
+  const handleBggToggle = () => {
+    setBggToggle(!bggToggle);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const modifiedParams = { ...postParams };
     if (!bggToggle) {
       modifiedParams.bggData = [];
     }
-    
+
     try {
-      const response = await fetch("http://localhost:3001/newPosting", {
-        method: "POST",
+      console.log("before Fetch");
+      const response = await fetch(`http://localhost:3001/posting/${postId}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        
         body: JSON.stringify(modifiedParams),
       });
+      console.log("put request fetched");
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -102,14 +143,14 @@ const PostPage: React.FC<Props> = () => {
       console.log("Server response:", data);
 
       // Redirect to the posting detail page with the _id
-      navigate(`/posting/${data._id}`);
+      navigate(`/posting/${postId}`);
     } catch (error) {
       console.error("Error:", (error as Error).message);
     }
   };
 
   return (
-    <form id="newPost" onSubmit={handleSubmit}>
+    <form id="editPost" onSubmit={handleSubmit}>
       <div className="items-center m-3 rounded-lg border border-gray-500 dark:border-gray-300 max-w-4xl justify-between mx-auto p-4">
         <div className="text-2xl text-gray-900 dark:text-white font-bold flex justify-center items-center h-full">
           Post Your Board Game!
@@ -147,7 +188,13 @@ const PostPage: React.FC<Props> = () => {
           onChange={(e) => handlePostParmas("location", e.target.value)}
         />
 
-        <Button text="Post" type="submit" />
+        <Button text="Edit" type="submit" />
+        <Button
+          text="Cancel"
+          className="mx-3"
+          type="button"
+          onClick={() => navigate(`/posting/${postId}`)}
+        />
       </div>
     </form>
   );

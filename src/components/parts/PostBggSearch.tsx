@@ -29,18 +29,21 @@ interface Props {
   bggResultSelected: BggData[];
   addBggResultSelected: (chosenResult: BggData) => void;
   removeBggResultSelected: (chosenResult: BggData) => void;
+  bggToggle?: boolean;
+  handleBggToggle: () => void;
 }
 
-const PostBggSearch: React.FC<Props> = ({ bggResultSelected, addBggResultSelected, removeBggResultSelected }) => {
+const PostBggSearch: React.FC<Props> = ({
+  bggResultSelected,
+  addBggResultSelected,
+  removeBggResultSelected,
+  bggToggle = false,
+  handleBggToggle,
+}) => {
   const [bggSearchQuery, setBggSearchQuery] = useState<string>("");
-  const [bggToggle, setBggToggle] = useState<boolean>(false);
   const [bggData, setBggData] = useState<BggResponse | null>(null);
   const [bggSearchResults, setBggSearchResults] = useState<BggData[]>([]);
   const [bggResultsToggle, setBggResultsToggle] = useState<boolean>(true);
-
-  const handleBggToggle = () => {
-    setBggToggle(!bggToggle);
-  };
 
   const handleBggSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBggSearchQuery(e.target.value);
@@ -52,7 +55,6 @@ const PostBggSearch: React.FC<Props> = ({ bggResultSelected, addBggResultSelecte
       setBggData(data);
     }
   };
-
 
   useEffect(() => {
     setBggSearchResults([]);

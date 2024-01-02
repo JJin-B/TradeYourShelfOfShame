@@ -7,6 +7,7 @@ import FrontPage from "./Pages/FrontPage";
 import PostingDetailPage from "./Pages/PostingDetailPage";
 import SearchResultPage from "./Pages/SearchResultPage";
 import PostPage from "./Pages/PostPage";
+import EditPage from "./Pages/EditPage";
 
 import WrapperComponent from "./components/WrapperComponent";
 
@@ -27,14 +28,6 @@ function App() {
             }
           />
           <Route
-            path="/posting/:postId"
-            element={
-              <WrapperComponent>
-                <PostingDetailPage />
-              </WrapperComponent>
-            }
-          />
-          <Route
             path="/search"
             element={
               <WrapperComponent>
@@ -48,6 +41,22 @@ function App() {
             element={
               <WrapperComponent>
                 <PostPage />
+              </WrapperComponent>
+            }
+          />
+          <Route
+            path="/posting/:postId"
+            element={
+              <WrapperComponent>
+                <PostingDetailPage />
+              </WrapperComponent>
+            }
+          />
+          <Route
+            path="/posting/:postId/edit"
+            element={
+              <WrapperComponent>
+                <EditPage />
               </WrapperComponent>
             }
           />

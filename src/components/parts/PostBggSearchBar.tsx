@@ -34,7 +34,6 @@ const PostBggSearchBar: React.FC<Props> = ({
           value={input}
           onKeyDown={handleKeyDown}
           onChange={onChangeInput}
-          required
         />
         <div
           id="bggSearchBtn"
