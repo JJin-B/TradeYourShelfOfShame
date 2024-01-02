@@ -6,10 +6,10 @@ class Posting {
     public desc: string,
     public price: number,
     public location: string,
-    public imageSrc: string[],
     public author: { _id: string; name: string },
     public createdAt: Date,
-    public bggData?: {bggIdx: string; name: string}
+    public imageSrc: string[],
+    public bggData: [{ bggIdx: string; name: string; year?: string }]
   ) {}
 }
 

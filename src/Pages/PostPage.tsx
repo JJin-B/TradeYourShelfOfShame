@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 import Button from "../components/parts/Button";
 import PostBggSearch from "../components/parts/PostBggSearch";
@@ -8,27 +10,28 @@ import PostDescription from "../components/parts/PostDescription";
 import PostPrice from "../components/parts/PostPrice";
 import PostLocation from "../components/parts/PostLocation";
 
-
-
-interface Props {}
+interface Props {
+}
 
 interface BggData {
-  bggIdx: string;
+  id: string;
   name: string;
+  year?: string;
 }
 
 interface PostParams {
-  type: string;
+  type: "buy" | "sell";
   title: string;
   desc: string;
   price: number;
   location: string;
-  bggData?: BggData;
+  imageSrc?: string[];
+  bggData: BggData[];
+  author: string;
 }
 
-
-
 const PostPage: React.FC<Props> = () => {
+  const navigate = useNavigate();
 
   const [postParams, setPostParams] = useState<PostParams>({
     type: "sell",
@@ -36,26 +39,70 @@ const PostPage: React.FC<Props> = () => {
     desc: "",
     price: 0,
     location: "",
+    bggData: [],
+    author: "65834424b3614bdc5e084875",
   });
 
   const handlePostParmas = (
     param: keyof PostParams,
     value: string | number
   ) => {
-    if (param === "bggData") {
-      return;
-    }
     if (param === "price") {
       setPostParams({ ...postParams, price: Number(value) });
     } else {
       setPostParams({ ...postParams, [param]: String(value) });
-      console.log(postParams);
+    }
+    // console.log(postParams);
+  };
+
+  const addBggResultSelected = (chosenResult: BggData) => {
+    const isResultSelected = postParams.bggData.some(
+      (result) => result.id === chosenResult.id
+    );
+    if (!isResultSelected) {
+      setPostParams((prev) => ({
+        ...prev,
+        bggData: [...prev.bggData, chosenResult],
+      }));
     }
   };
 
+  const removeBggResultSelected = (chosenResult: BggData) => {
+    setPostParams((prev) => ({
+      ...prev,
+      bggData: prev.bggData.filter((result) => result.id !== chosenResult.id),
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      // Send a POST request here using fetch or axios
+      const response = await fetch("http://localhost:3001/newPosting", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postParams),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log("Server response:", data);
+
+      // Redirect to the posting detail page with the _id
+      navigate(`/posting/${data._id}`);
+    } catch (error) {
+      console.error("Error:", (error as Error).message);
+    }
+  };
 
   return (
-    <form action="">
+    <form id="newPost" onSubmit={handleSubmit}>
       <div className="items-center m-3 rounded-lg border border-gray-500 dark:border-gray-300 max-w-4xl justify-between mx-auto p-4">
         <div className="text-2xl text-gray-900 dark:text-white font-bold flex justify-center items-center h-full">
           Post Your Board Game!
@@ -65,7 +112,11 @@ const PostPage: React.FC<Props> = () => {
           onChange={(e) => handlePostParmas("type", e.target.value)}
         />
 
-        <PostBggSearch />
+        <PostBggSearch
+          bggResultSelected={postParams.bggData}
+          addBggResultSelected={addBggResultSelected}
+          removeBggResultSelected={removeBggResultSelected}
+        />
 
         <PostTitle
           title={postParams.title}
@@ -87,7 +138,7 @@ const PostPage: React.FC<Props> = () => {
           onChange={(e) => handlePostParmas("location", e.target.value)}
         />
 
-        <Button text="Post" />
+        <Button text="Post" type="submit" />
       </div>
     </form>
   );

@@ -1,26 +1,28 @@
-import axios, { AxiosResponse } from 'axios';
-import XMLParser from 'react-xml-parser';
+import axios, { AxiosResponse } from "axios";
+import XMLParser from "react-xml-parser";
 
 interface BggItem {
-  name: { type: string; value: string };
-  yearpublished: { value: string };
+  attributes: { id: string };
+  children: [
+    { name: "name"; attributes: { value: string } },
+    { name: "yearpublished"; attributes: { value: string } }?
+  ];
 }
 
 interface BggResponse {
-  items: { item: BggItem[] };
+  children: BggItem[];
 }
 
 const fetchBggData = async (query: string): Promise<BggResponse | null> => {
-  const apiUrl = `https://boardgamegeek.com/xmlapi2/search?query=${query}`;
+  const apiUrl = `https://boardgamegeek.com/xmlapi2/search?query=${query}&type=boardgame`;
 
   try {
     const response: AxiosResponse<string> = await axios.get(apiUrl);
     const xmlData = response.data;
-    const jsonData = new XMLParser().parseFromString(xmlData)
-    console.log(jsonData)
+    const jsonData = await new XMLParser().parseFromString(xmlData);
     return jsonData;
   } catch (error) {
-    console.error('Error fetching data from BGG API:', error);
+    console.error("Error fetching data from BGG API:", error);
     return null;
   }
 };

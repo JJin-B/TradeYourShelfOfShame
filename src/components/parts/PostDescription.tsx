@@ -8,13 +8,13 @@ const PostDescription: React.FC<Props> = ({desc, onChange}) => {
   return (
     <div className="flex flex-wrap items-center mb-2">
       <label
-        htmlFor="message"
+        htmlFor="description"
         className="block text-sm font-medium text-gray-900 dark:text-white"
       >
         Description
       </label>
       <textarea
-        id="message"
+        id="description"
         rows={4}
         value={desc}
         onChange={onChange}

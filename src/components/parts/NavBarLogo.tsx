@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import logoDark from "/images/logo-TYSS-dark.png";
-import logoLight from "/images/logo-TYSS.png";
+const logoDarkSrc =
+  "https://drive.google.com/uc?id=1WmWSVdS28B4QVsj2mvNwh4P5xyCAXmrY";
+const logoLightSrc =
+  "https://drive.google.com/uc?id=1h-17UWlOexAVaZg5O6hfjlWuOVPy-Op4";
 
 const NavBarLogo: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(
@@ -26,7 +28,7 @@ const NavBarLogo: React.FC = () => {
     };
   }, []);
 
-  const logoSrc = isDarkMode ? logoDark : logoLight;
+  const logoSrc = isDarkMode ? logoDarkSrc : logoLightSrc;
 
   return (
     <Link to={"/"}>

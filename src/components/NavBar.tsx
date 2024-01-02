@@ -50,9 +50,10 @@ const Navbar: React.FC<Props> = ({ user }) => {
             <NavBarUserMenu name={user.name} />
           </ul>
         </div>
-        <form action="#">
+
+        <Link to={`/post`}>
           <Button text="Post" />
-        </form>
+        </Link>
       </div>
 
       <SearchBar />

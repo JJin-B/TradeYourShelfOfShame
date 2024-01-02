@@ -11,7 +11,7 @@ const PostingDetailPage: React.FC<Props> = () => {
 
   const { postId } = useParams<{ postId: string }>();
 
-  const fetchUrl = `http://localhost:3001/api/posting/${postId}`;
+  const fetchUrl = `http://localhost:3001/posting/${postId}`;
 
   useEffect(() => {
     fetch(fetchUrl)

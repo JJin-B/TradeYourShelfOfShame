@@ -1,23 +1,42 @@
-import React, { useState } from "react";
-import fetchBggData from "../functions/fetchBggData";
-import PostBggSearchInput from "./PostBggSearchInput";
-import PostBggSearchBtn from "./PostBggSearchBtn";
+import React, { useState, useEffect } from "react";
 
-interface Props {}
+import fetchBggData from "../functions/fetchBggData";
+
+import PostBggSearchToggle from "./PostBggSearchToggle";
+import PostBggSearchBar from "./PostBggSearchBar";
+import PostBggSearchResult from "./PostBggSearchResult";
+import PostBggResultChosen from "./PostBggResultChosen";
 
 interface BggItem {
-  name: { type: string; value: string };
-  yearpublished: { value: string };
+  attributes: { id: string };
+  children: [
+    { name: "name"; attributes: { value: string } },
+    { name: "yearpublished"; attributes: { value: string } }?
+  ];
 }
 
 interface BggResponse {
-  items: { item: BggItem[] };
+  children: BggItem[];
 }
 
-const PostBggSearch: React.FC<Props> = () => {
-  const [bggSearchQuery, setBggSearchQuery] = useState<string>();
+interface BggData {
+  id: string;
+  name: string;
+  year?: string;
+}
+
+interface Props {
+  bggResultSelected: BggData[];
+  addBggResultSelected: (chosenResult: BggData) => void;
+  removeBggResultSelected: (chosenResult: BggData) => void;
+}
+
+const PostBggSearch: React.FC<Props> = ({ bggResultSelected, addBggResultSelected, removeBggResultSelected }) => {
+  const [bggSearchQuery, setBggSearchQuery] = useState<string>("");
   const [bggToggle, setBggToggle] = useState<boolean>(false);
-  const [bggData, setBggData] = useState<BggResponse | null>();
+  const [bggData, setBggData] = useState<BggResponse | null>(null);
+  const [bggSearchResults, setBggSearchResults] = useState<BggData[]>([]);
+  const [bggResultsToggle, setBggResultsToggle] = useState<boolean>(true);
 
   const handleBggToggle = () => {
     setBggToggle(!bggToggle);
@@ -34,15 +53,60 @@ const PostBggSearch: React.FC<Props> = () => {
     }
   };
 
+
+  useEffect(() => {
+    setBggSearchResults([]);
+    bggData?.children.map((child: BggItem) => {
+      try {
+        const newResult: BggData = {
+          id: child.attributes.id,
+          name: child.children[0].attributes.value,
+          year: child.children[1]?.attributes.value,
+        };
+        setBggSearchResults((prevResults) => [...prevResults, newResult]);
+        setBggResultsToggle(true);
+      } catch {
+        console.log(child, "has an error");
+      }
+    });
+  }, [bggData]);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    const dropdown = document.getElementById("dropdownUsers");
+    if (dropdown && !dropdown.contains(event.target as Node)) {
+      setBggResultsToggle(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
+
   return (
     <div>
-      <PostBggSearchInput bggToggle={bggToggle} onChange={handleBggToggle} />
-      <PostBggSearchBtn
+      <PostBggSearchToggle bggToggle={bggToggle} onChange={handleBggToggle} />
+      <PostBggSearchBar
         bggToggle={bggToggle}
+        input={bggSearchQuery}
         onChangeInput={handleBggSearch}
         onClick={searchOnBgg}
       />
+      {bggSearchResults.length > 0 && (
+        <PostBggSearchResult
+          results={bggSearchResults}
+          display={bggResultsToggle}
+          onClick={addBggResultSelected}
+        />
+      )}
 
+      <PostBggResultChosen
+        bggToggle={bggToggle}
+        chosenResults={bggResultSelected}
+        onButtonClick={removeBggResultSelected}
+      />
     </div>
   );
 };

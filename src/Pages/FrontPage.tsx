@@ -9,7 +9,7 @@ const FrontPage: React.FC<Props> = () => {
   const [postings, setPostings] = useState<Posting[]>([]);
   useEffect(() => {
     // Fetch data from your API
-    fetch("http://localhost:3001/api/latest-postings")
+    fetch("http://localhost:3001/latest-postings")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch latest postings");
@@ -26,7 +26,7 @@ const FrontPage: React.FC<Props> = () => {
 
   return (
     <>
-      <FrontImg imgSrc={"/images/frontImage.jpg"} />
+      <FrontImg imgSrc={"https://drive.google.com/uc?id=1NhL5KcbU9hKqf8SN0MU_iEiqttrWZ5KW"} />
       <div className="p-5 text-3xl flex flex-wrap mx-auto max-w-6xl">
         <h1>Recent Postings..</h1>
       </div>
@@ -40,3 +40,6 @@ const FrontPage: React.FC<Props> = () => {
 };
 
 export default FrontPage;
+
+
+
