@@ -27,7 +27,7 @@ const SearchResultPage: React.FC<Props> = () => {
       return;
     }
 
-    let fetchUrl = "http://localhost:3001/search?";
+    let fetchUrl = "http://3.12.146.211:3001/search?";
 
     if (typeParam) {
       fetchUrl += `type=${typeParam}`;

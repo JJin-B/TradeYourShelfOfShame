@@ -11,7 +11,7 @@ const PostingDetailPage: React.FC<Props> = () => {
 
   const { postId } = useParams<{ postId: string }>();
 
-  const fetchUrl = `http://localhost:3001/posting/${postId}`;
+  const fetchUrl = `http://3.12.146.211:3001/posting/${postId}`;
 
   useEffect(() => {
     fetch(fetchUrl)
@@ -23,6 +23,7 @@ const PostingDetailPage: React.FC<Props> = () => {
       })
       .then((data) => {
         setPosting(data);
+        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching the posting:", error);

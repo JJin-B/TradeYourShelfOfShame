@@ -85,7 +85,7 @@ const PostPage: React.FC<Props> = () => {
     }
     
     try {
-      const response = await fetch("http://localhost:3001/newPosting", {
+      const response = await fetch("http://3.12.146.211:3001/posting/new", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

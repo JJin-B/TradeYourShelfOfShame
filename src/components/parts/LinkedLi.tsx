@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   link?: string;
@@ -7,13 +8,13 @@ interface Props {
   onClick?: () => void;
 }
 
-const LinkedLi: React.FC<Props> = ({ link, text, className = "", onClick }) => {
+const LinkedLi: React.FC<Props> = ({ link, text, className, onClick }) => {
   if (link) {
     return (
       <li>
-        <a href={link} className={className} onClick={onClick}>
+        <Link to={link} className={className} onClick={onClick}>
           {text}
-        </a>
+        </Link>
       </li>
     );
   } else {

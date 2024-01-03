@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <Router>
-        <NavBar user={user} isDarkMode={true} />
+        <NavBar user={user} isLoggedIn={false} />
         <Routes>
           <Route
             path="/"
@@ -52,6 +52,7 @@ function App() {
               </WrapperComponent>
             }
           />
+          
           <Route
             path="/posting/:postId/edit"
             element={

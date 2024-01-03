@@ -9,7 +9,7 @@ const FrontPage: React.FC<Props> = () => {
   const [postings, setPostings] = useState<Posting[]>([]);
   useEffect(() => {
     // Fetch data from your API
-    fetch("http://localhost:3001/latest-postings")
+    fetch("http://3.12.146.211:3001/latest-postings")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch latest postings");

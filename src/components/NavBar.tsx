@@ -5,6 +5,7 @@ import User from "./classes/User";
 
 import NavBarLogo from "./parts/NavBarLogo";
 import NavBarHamburgerButton from "./parts/NavBarHamburgerButton";
+import NavBarLoginRegisterBtn from "./parts/NavBarLoginRegisterBtn";
 import LinkedLi from "./parts/LinkedLi";
 import NavBarUserMenu from "./parts/NavBarUserMenu";
 import Button from "./parts/Button";
@@ -12,10 +13,10 @@ import SearchBar from "./parts/SearchBar";
 
 interface Props {
   user: User;
-  isDarkMode: boolean;
+  isLoggedIn: boolean;
 }
 
-const Navbar: React.FC<Props> = ({ user }) => {
+const Navbar: React.FC<Props> = ({ user, isLoggedIn }) => {
   const [isHamburgerDropdownOpen, setisHamburgerDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -47,7 +48,7 @@ const Navbar: React.FC<Props> = ({ user }) => {
             <LinkedLi link="/search" text="All Postings" className={menuItemClass} />
             <LinkedLi link="/search?type=buy" text="Buy" className={menuItemClass} />
             <LinkedLi link="/search?type=sell" text="Sell" className={menuItemClass} />
-            <NavBarUserMenu name={user.name} />
+            {isLoggedIn? <NavBarUserMenu name={user.name} /> : <NavBarLoginRegisterBtn/>}
           </ul>
         </div>
 
