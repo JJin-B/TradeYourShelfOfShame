@@ -12,6 +12,7 @@ import EditPage from "./Pages/EditPage";
 import WrapperComponent from "./components/WrapperComponent";
 
 import { user } from "./dummyData/dummydata";
+import LoginPage from "./Pages/LoginPage";
 
 function App() {
   return (
@@ -52,12 +53,21 @@ function App() {
               </WrapperComponent>
             }
           />
-          
+
           <Route
             path="/posting/:postId/edit"
             element={
               <WrapperComponent>
                 <EditPage />
+              </WrapperComponent>
+            }
+          />
+
+          <Route
+            path="/login"
+            element={
+              <WrapperComponent>
+                <LoginPage />
               </WrapperComponent>
             }
           />

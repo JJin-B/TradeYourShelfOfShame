@@ -29,7 +29,6 @@ const SearchResultPage: React.FC<Props> = () => {
       isFirstRunRef.current = false;
       return;
     }
-    console.log(location)
 
     let fetchUrl = "http://3.12.146.211:3001/search?";
 
