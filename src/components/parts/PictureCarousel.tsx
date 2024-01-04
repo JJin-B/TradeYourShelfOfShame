@@ -11,7 +11,7 @@ const PictureCarousel: React.FC<Props> = ({ picUrls }) => {
   const prevSlide = () => {setCurrentIndex((prevIndex) =>prevIndex === 0 ? picUrls.length - 1 : prevIndex - 1);}; //prettier-ignore
 
   const btnClasses: string =
-    "absolute top-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none";
+    "absolute top-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none bg-transparent";
 
   if (picUrls.length === 0) {
     return (
@@ -38,7 +38,9 @@ const PictureCarousel: React.FC<Props> = ({ picUrls }) => {
               key={index}
               className={`${index === currentIndex ? "active" : "hidden"}`} //prettier-ignore
             >
-              <img src={picUrl} className="w-full h-96 object-cover" alt="" />
+              <div className="flex items-center justify-center ">
+                <img src={picUrl} className="h-96" alt="" />
+              </div>
               <div className="flex items-center justify-center border rounded-lg">
                 {index + 1} of {picUrls.length}
               </div>

@@ -23,7 +23,6 @@ const PostingDetailPage: React.FC<Props> = () => {
       })
       .then((data) => {
         setPosting(data);
-        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching the posting:", error);
@@ -47,7 +46,7 @@ const PostingDetailPage: React.FC<Props> = () => {
     <>
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row justify-center">
-          <div className="m-3 flex-2/3 text-3xl max-w-2xl break-words">
+          <div className="m-3 w-full flex-col text-3xl max-w-2xl break-words ">
             {posting.title}
             <PictureCarousel picUrls={posting.imageSrc} />
           </div>

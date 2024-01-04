@@ -29,12 +29,14 @@ const SearchPagePostingPreview: React.FC<Props> = ({ posting }) => {
   return (
     <Link to={`/posting/${posting._id}`}>
       <div className="m-3 max-w-6xl flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row mhover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <img
-          className="object-cover rounded-lg w-72 h-60"
-          src={posting.imageSrc[0] ? posting.imageSrc[0] : ""}
-          alt=""
-          onError={handleImageError}
-        />
+        <div className="w-72 flex items-center justify-center bg-gray-200 dark:bg-gray-700 rounded-lg border border-gray-300 dark:border-gray-600">
+          <img
+            className="rounded-lg h-60"
+            src={posting.imageSrc[0] ? posting.imageSrc[0] : ""}
+            alt=""
+            onError={handleImageError}
+          />
+        </div>
         <div className="flex flex-col justify-between p-4 leading-normal w-4/5 text-gray-900 dark:text-white">
           <BuySellBadge type={posting.type} />
           <span className="text-2xl font-normal">${posting.price}</span>

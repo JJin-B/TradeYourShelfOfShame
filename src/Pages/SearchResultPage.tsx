@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios, { AxiosResponse } from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Posting from "../components/classes/Posting";
 import SearchPagePostingPreview from "../components/SearchPagePostingPreview";
@@ -10,22 +10,26 @@ interface Props {}
 
 const SearchResultPage: React.FC<Props> = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const queryParams = new URLSearchParams(location.search);
+  
 
   const typeParam = queryParams.get("type")?.toLowerCase();
   const searchQuery = queryParams.get("q")?.toLowerCase();
 
+  const isFirstRunRef = useRef(true); // this will check the first run to prevent requesting a query twice
+
   const [postings, setPostings] = useState<Posting[]>([]);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
-  // const [isFirstRun, setIsFirstRun] = useState<boolean>(true);
-  const isFirstRunRef = useRef(true);
 
   useEffect(() => {
     if (isFirstRunRef.current) {
       isFirstRunRef.current = false;
       return;
     }
+    console.log(location)
 
     let fetchUrl = "http://3.12.146.211:3001/search?";
 
@@ -56,7 +60,27 @@ const SearchResultPage: React.FC<Props> = () => {
       .catch((error) => {
         console.error("Error fetching the result postings:", error);
       });
-  }, [page]);
+  }, [page, typeParam, searchQuery]);
+
+  useEffect(() => {
+    setPage(1); // Reset page to 1 when the URL parameters change
+    setPostings([]); // Clear existing postings
+    setHasMore(true); // Reset hasMore to true
+
+    let url = "/search?"
+    if (typeParam) {
+      url += `type=${typeParam}`;
+    }
+
+    if (searchQuery) {
+      url += `${typeParam ? "&" : ""}q=${searchQuery}`;
+    }
+
+    // Push the new URL to history to trigger a re-render
+    navigate(url);
+  }, [typeParam, searchQuery, navigate]);
+
+
 
   return (
     <div className="justify-center mx-auto max-w-6xl">

@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchButton from "./SearchButton";
 import SearchInputBar from "./SearchInputBar";
 import SearchOption from "./SearchOption";
@@ -9,6 +10,8 @@ interface SearchParams {
 }
 
 const SearchBar: React.FC = () => {
+  const navigate = useNavigate();
+
   const [searchParams, setSearchParams] = useState<SearchParams>({
     type: "",
     input: "",
@@ -35,8 +38,10 @@ const SearchBar: React.FC = () => {
     const inputParam = searchParams.input ? `q=${searchParams.input}` : "";
 
     const queryParams = [inputParam, typeParam].filter(Boolean).join("&");
-
-    window.location.href = `/search${queryParams ? `?${queryParams}` : ""}`;
+    
+    navigate(`/search${queryParams ? `?${queryParams}` : ""}`, {
+      replace: true,
+    });
   };
 
   const liClasses: string =
