@@ -3,13 +3,15 @@ import Posting from "../components/classes/Posting";
 import FrontImg from "../components/FrontImage";
 import FrontPagePostingPreview from "../components/FrontPagePostingPreview";
 
+import { apiAddress } from "../Wrapper/AuthContext";
+
 interface Props {}
 
 const FrontPage: React.FC<Props> = () => {
   const [postings, setPostings] = useState<Posting[]>([]);
   useEffect(() => {
     // Fetch data from your API
-    fetch("http://3.12.146.211:3001/latest-postings")
+    fetch(apiAddress + "/latest-postings")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch latest postings");

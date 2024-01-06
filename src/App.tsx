@@ -8,17 +8,20 @@ import PostingDetailPage from "./Pages/PostingDetailPage";
 import SearchResultPage from "./Pages/SearchResultPage";
 import PostPage from "./Pages/PostPage";
 import EditPage from "./Pages/EditPage";
+import LoginPage from "./Pages/LoginPage";
+import RegisterPage from "./Pages/RegisterPage";
 
 import WrapperComponent from "./components/WrapperComponent";
 
-import { user } from "./dummyData/dummydata";
-import LoginPage from "./Pages/LoginPage";
+// import { user } from "./dummyData/dummydata";
+import { useAuth } from "./Wrapper/AuthContext";
 
 function App() {
+  const { user } = useAuth();
   return (
     <>
       <Router>
-        <NavBar user={user} isLoggedIn={false} />
+        <NavBar user={user} />
         <Routes>
           <Route
             path="/"
@@ -64,10 +67,19 @@ function App() {
           />
 
           <Route
-            path="/login"
+            path="/signin"
             element={
               <WrapperComponent>
                 <LoginPage />
+              </WrapperComponent>
+            }
+          />
+
+          <Route
+            path="/signup"
+            element={
+              <WrapperComponent>
+                <RegisterPage />
               </WrapperComponent>
             }
           />

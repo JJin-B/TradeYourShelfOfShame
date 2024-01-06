@@ -11,13 +11,16 @@ const NavBarLoginRegisterBtn: React.FC<Props> = () => {
   const navigate = useNavigate();
 
   const loginBtnOnClick = () => {
-    navigate("/login");
+    navigate("/signin");
+  };
+  const registerBtnOnClick = () => {
+    navigate("/signup");
   };
 
   return (
     <div className={classes}>
-      <button className={btnClasses} onClick={loginBtnOnClick}>Login</button> or{" "}
-      <button className={btnClasses}>Register</button>
+      <button className={btnClasses} onClick={loginBtnOnClick}>Sign In</button> or{" "}
+      <button className={btnClasses} onClick={registerBtnOnClick}>Register</button>
     </div>
   );
 };

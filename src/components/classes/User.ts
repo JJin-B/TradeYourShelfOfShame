@@ -2,7 +2,6 @@ type EmailAddress = string;
 
 class User {
   constructor(
-    public userName: string,
     public name: string,
     public email: EmailAddress
   ) {

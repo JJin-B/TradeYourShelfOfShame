@@ -9,6 +9,9 @@ import PostDescription from "../components/parts/PostDescription";
 import PostPrice from "../components/parts/PostPrice";
 import PostLocation from "../components/parts/PostLocation";
 
+import { apiAddress } from "../Wrapper/AuthContext";
+import { useAuth } from "../Wrapper/AuthContext";
+
 interface Props {}
 
 interface BggData {
@@ -29,10 +32,16 @@ interface PostParams {
 }
 
 const PostPage: React.FC<Props> = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
 
-  const [bggToggle, setBggToggle] = useState<boolean>(false);
+  if (!user) {
+    navigate("/signin");
+    return null;
+  }
+  const userId = user._id;
 
+  const [bggToggle, setBggToggle] = useState<boolean>(false);
   const [postParams, setPostParams] = useState<PostParams>({
     type: "sell",
     title: "",
@@ -40,7 +49,7 @@ const PostPage: React.FC<Props> = () => {
     price: 0,
     location: "",
     bggData: [],
-    author: "65834424b3614bdc5e084875",
+    author: userId,
   });
 
   const handleBggToggle = () => {
@@ -83,14 +92,14 @@ const PostPage: React.FC<Props> = () => {
     if (!bggToggle) {
       modifiedParams.bggData = [];
     }
-    
+
     try {
-      const response = await fetch("http://3.12.146.211:3001/posting/new", {
+      const response = await fetch(apiAddress + "/posting/new", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        
+
         body: JSON.stringify(modifiedParams),
       });
 

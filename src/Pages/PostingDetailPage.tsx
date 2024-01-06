@@ -4,6 +4,8 @@ import PictureCarousel from "../components/parts/PictureCarousel";
 import Button from "../components/parts/Button";
 import { useParams } from "react-router-dom";
 
+import { apiAddress } from "../Wrapper/AuthContext";
+
 interface Props {}
 
 const PostingDetailPage: React.FC<Props> = () => {
@@ -11,7 +13,8 @@ const PostingDetailPage: React.FC<Props> = () => {
 
   const { postId } = useParams<{ postId: string }>();
 
-  const fetchUrl = `http://3.12.146.211:3001/posting/${postId}`;
+  
+  const fetchUrl = apiAddress + `/posting/${postId}`;
 
   useEffect(() => {
     fetch(fetchUrl)

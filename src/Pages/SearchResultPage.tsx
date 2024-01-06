@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import Posting from "../components/classes/Posting";
 import SearchPagePostingPreview from "../components/SearchPagePostingPreview";
+import { apiAddress } from "../Wrapper/AuthContext";
 
 interface Props {}
 
@@ -30,7 +31,7 @@ const SearchResultPage: React.FC<Props> = () => {
       return;
     }
 
-    let fetchUrl = "http://3.12.146.211:3001/search?";
+    let fetchUrl = apiAddress + "/search?";
 
     if (typeParam) {
       fetchUrl += `type=${typeParam}`;

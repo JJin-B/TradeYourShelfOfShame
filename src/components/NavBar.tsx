@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import User from "./classes/User";
+// import User from "./classes/User";
 
 import NavBarLogo from "./parts/NavBarLogo";
 import NavBarHamburgerButton from "./parts/NavBarHamburgerButton";
@@ -11,13 +11,20 @@ import NavBarUserMenu from "./parts/NavBarUserMenu";
 import Button from "./parts/Button";
 import SearchBar from "./parts/SearchBar";
 
-interface Props {
-  user: User;
-  isLoggedIn: boolean;
+interface User {
+  _id: string;
+  name: string;
+  email: string;
 }
 
-const Navbar: React.FC<Props> = ({ user, isLoggedIn }) => {
+interface Props {
+  user: User | null;
+}
+
+const Navbar: React.FC<Props> = ({ user }) => {
   const [isHamburgerDropdownOpen, setisHamburgerDropdownOpen] = useState(false);
+
+  
 
   const toggleDropdown = () => {
     setisHamburgerDropdownOpen((prev) => !prev);
@@ -48,11 +55,11 @@ const Navbar: React.FC<Props> = ({ user, isLoggedIn }) => {
             <LinkedLi link="/search" text="All Postings" className={menuItemClass} />
             <LinkedLi link="/search?type=buy" text="Buy" className={menuItemClass} />
             <LinkedLi link="/search?type=sell" text="Sell" className={menuItemClass} />
-            {isLoggedIn? <NavBarUserMenu name={user.name} /> : <NavBarLoginRegisterBtn/>}
+            {user? <NavBarUserMenu name={user.name} /> : <NavBarLoginRegisterBtn/>}
           </ul>
         </div>
 
-        <Link to={`/post`}>
+        <Link to={user?`/post`:'/signin'}>
           <Button text="Post" />
         </Link>
       </div>

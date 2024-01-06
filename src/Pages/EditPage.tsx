@@ -9,6 +9,8 @@ import PostDescription from "../components/parts/PostDescription";
 import PostPrice from "../components/parts/PostPrice";
 import PostLocation from "../components/parts/PostLocation";
 
+import { apiAddress } from "../Wrapper/AuthContext";
+
 interface Props {}
 
 interface BggData {
@@ -45,7 +47,7 @@ const PostPage: React.FC<Props> = () => {
 
   const { postId } = useParams<{ postId: string }>();
 
-  const fetchUrl = `http://3.12.146.211:3001/posting/${postId}`;
+  const fetchUrl = apiAddress + `posting/${postId}`;
 
   useEffect(() => {
     fetch(fetchUrl)

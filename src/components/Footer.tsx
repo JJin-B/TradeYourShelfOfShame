@@ -1,17 +1,12 @@
 import React from "react";
 import LinkedLi from "./parts/LinkedLi";
+import Copyright from "./parts/Copyright";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="absolute inset-x-0 bottom-0 max-w-6xl flex flex-wrap items-center justify-between mx-auto p-1 bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+    <footer className="fixed inset-x-0 bottom-0 max-w-6xl flex flex-wrap items-center justify-between mx-auto p-1 bg-white rounded-lg shadow m-4 my-1 dark:bg-gray-800 border border-gray-100 dark:border-gray-600">
       <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-        <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-          © 2023{" "}
-          <a href="https://flowbite.com/" className="hover:underline">
-            TYSS
-          </a>
-          . All Rights Reserved.
-        </span>
+        <Copyright />
         <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
           <LinkedLi link="#" text="Contact" className="hover:underline" />
         </ul>
