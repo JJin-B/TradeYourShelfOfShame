@@ -6,8 +6,8 @@ import React, {
   useEffect,
 } from "react";
 
-// const apiAddress = "http://3.12.146.211:3001";
-const apiAddress = "http://localhost:3001";
+const apiAddress = "http://3.12.146.211:3001";
+// const apiAddress = "http://localhost:3001";
 
 interface User {
   _id: string;
