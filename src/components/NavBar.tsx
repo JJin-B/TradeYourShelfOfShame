@@ -55,7 +55,7 @@ const Navbar: React.FC<Props> = ({ user }) => {
             <LinkedLi link="/search" text="All Postings" className={menuItemClass} />
             <LinkedLi link="/search?type=buy" text="Buy" className={menuItemClass} />
             <LinkedLi link="/search?type=sell" text="Sell" className={menuItemClass} />
-            {user? <NavBarUserMenu name={user.name} /> : <NavBarLoginRegisterBtn/>}
+            {user? <NavBarUserMenu user={user} /> : <NavBarLoginRegisterBtn/>}
           </ul>
         </div>
 

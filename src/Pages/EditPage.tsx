@@ -47,7 +47,7 @@ const PostPage: React.FC<Props> = () => {
 
   const { postId } = useParams<{ postId: string }>();
 
-  const fetchUrl = apiAddress + `posting/${postId}`;
+  const fetchUrl = apiAddress + `/posting/${postId}`;
 
   useEffect(() => {
     fetch(fetchUrl)
@@ -128,13 +128,16 @@ const PostPage: React.FC<Props> = () => {
 
     try {
       console.log("before Fetch");
-      const response = await fetch(`http://3.12.146.211:3001/posting/${postId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(modifiedParams),
-      });
+      const response = await fetch(
+        `http://3.12.146.211:3001/posting/${postId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(modifiedParams),
+        }
+      );
       console.log("put request fetched");
 
       if (!response.ok) {

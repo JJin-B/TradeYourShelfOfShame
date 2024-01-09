@@ -26,7 +26,7 @@ const LoginPage: React.FC<Props> = () => {
   };
 
   const registerButtonOnClick = () => {
-    navigate("/register");
+    navigate("/signup");
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -45,7 +45,6 @@ const LoginPage: React.FC<Props> = () => {
         .post(fetchUrl, { email: email, password: password })
         .then((res: AxiosResponse) => {
           const data = res.data;
-          console.log(data);
           if (data && data === "Not valid User") {
             toast.error("Either email or password is wrong", {
               autoClose: 5000,

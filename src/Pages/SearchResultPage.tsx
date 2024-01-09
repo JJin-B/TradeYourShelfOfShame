@@ -14,10 +14,10 @@ const SearchResultPage: React.FC<Props> = () => {
   const navigate = useNavigate();
 
   const queryParams = new URLSearchParams(location.search);
-  
 
   const typeParam = queryParams.get("type")?.toLowerCase();
   const searchQuery = queryParams.get("q")?.toLowerCase();
+  const authorParam = queryParams.get("author")?.toLowerCase();
 
   const isFirstRunRef = useRef(true); // this will check the first run to prevent requesting a query twice
 
@@ -41,7 +41,13 @@ const SearchResultPage: React.FC<Props> = () => {
       fetchUrl += `${typeParam ? "&" : ""}q=${searchQuery}`;
     }
 
-    if (typeParam || searchQuery) {
+    if (authorParam) {
+      fetchUrl += `${
+        typeParam || searchQuery ? "&" : ""
+      }author_id=${authorParam}`;
+    }
+
+    if (typeParam || searchQuery || authorParam) {
       fetchUrl += `&page=${page}`;
     } else {
       fetchUrl += `page=${page}`;
@@ -56,6 +62,7 @@ const SearchResultPage: React.FC<Props> = () => {
         }
 
         setPostings((prevPostings) => [...prevPostings, ...response.data]);
+        console.log(response.data[0]);
       })
       .catch((error) => {
         console.error("Error fetching the result postings:", error);
@@ -67,7 +74,7 @@ const SearchResultPage: React.FC<Props> = () => {
     setPostings([]); // Clear existing postings
     setHasMore(true); // Reset hasMore to true
 
-    let url = "/search?"
+    let url = "/search?";
     if (typeParam) {
       url += `type=${typeParam}`;
     }
@@ -79,8 +86,6 @@ const SearchResultPage: React.FC<Props> = () => {
     // Push the new URL to history to trigger a re-render
     navigate(url);
   }, [typeParam, searchQuery, navigate]);
-
-
 
   return (
     <div className="justify-center mx-auto max-w-6xl">

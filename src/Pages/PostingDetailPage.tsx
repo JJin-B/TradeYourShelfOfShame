@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Posting from "../components/classes/Posting";
 import PictureCarousel from "../components/parts/PictureCarousel";
 import Button from "../components/parts/Button";
@@ -9,12 +11,17 @@ import { apiAddress } from "../Wrapper/AuthContext";
 interface Props {}
 
 const PostingDetailPage: React.FC<Props> = () => {
+  const navigate = useNavigate();
+
   const [posting, setPosting] = useState<Posting>();
 
   const { postId } = useParams<{ postId: string }>();
 
-  
   const fetchUrl = apiAddress + `/posting/${postId}`;
+
+  const otherPostingOnClick = () => {
+    navigate(`/search?author=${posting?.author._id}`);
+  };
 
   useEffect(() => {
     fetch(fetchUrl)
@@ -26,6 +33,7 @@ const PostingDetailPage: React.FC<Props> = () => {
       })
       .then((data) => {
         setPosting(data);
+        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching the posting:", error);
@@ -58,6 +66,12 @@ const PostingDetailPage: React.FC<Props> = () => {
             <div>Location : {posting.location}</div>
             <div>Posted On : {formattedDate}</div>
             <div>Created By : {posting.author.name}</div>
+            <div className="my-3">
+              <Button
+                text={`Check ${posting.author.name}'s Other Postings`}
+                onClick={otherPostingOnClick}
+              />
+            </div>
             <div className="my-3">
               <Button text={`Check ${posting.author.name}'s Trade List`} />
             </div>

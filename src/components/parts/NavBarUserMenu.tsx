@@ -3,11 +3,18 @@ import React, { useState } from "react";
 import LinkedLi from "./LinkedLi";
 import { useAuth } from "../../Wrapper/AuthContext";
 
-interface Props {
+interface User {
+  _id: string;
   name: string;
+  email: string;
 }
 
-const NavBarUserMenu: React.FC<Props> = ({ name }) => {
+interface Props {
+  user: User;
+}
+
+
+const NavBarUserMenu: React.FC<Props> = ({ user }) => {
   const { signout } = useAuth();
 
   const buttonClass: string =
@@ -35,7 +42,7 @@ const NavBarUserMenu: React.FC<Props> = ({ name }) => {
         data-dropdown-toggle="dropdownNavbar"
         className={buttonClass}
       >
-        {name} ▼{/* {isDropdownOn ? "▲" : "▼"} */}
+        {user.name} ▼{/* {isDropdownOn ? "▲" : "▼"} */}
       </button>
       {/* Dropdown menu */}
       {isDropdownOn && (
@@ -47,9 +54,8 @@ const NavBarUserMenu: React.FC<Props> = ({ name }) => {
         >
           {/* prettier-ignore */}
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-            <LinkedLi link="#" className={userMenuItemClass} text="Dashboard" />
-            <LinkedLi link="#" className={userMenuItemClass} text="Setting" />
-            <LinkedLi link="#" className={userMenuItemClass} text="My Postings"/>
+            <LinkedLi link="#" className={userMenuItemClass} text="Settings" />
+            <LinkedLi link={`/search?author=${user._id}`} className={userMenuItemClass} text="My Postings"/>
             <LinkedLi link="#" className={userMenuItemClass} text="My Interests"/>
           </ul>
           <ul className="text-sm text-gray-700 dark:text-gray-200 ">
