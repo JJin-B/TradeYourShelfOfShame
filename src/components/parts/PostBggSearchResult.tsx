@@ -22,10 +22,10 @@ const PostBggSearchResult: React.FC<Props> = ({ results, display, onClick }) => 
       id="dropdownUsers"
       className={`${
         !display && "hidden"
-      } w-96 z-100 border bg-gray-200 rounded-lg shadow dark:bg-gray-700 mb-3`}
+      } w-96 z-100 border rounded-lg shadow bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 mb-3`}
     >
       <ul
-        className="h-48 py-2 overflow-y-auto text-gray-700 dark:text-gray-200"
+        className="h-48 py-2 overflow-y-auto"
         aria-labelledby="dropdownUsersButton"
       >
         {results.map((result) => (

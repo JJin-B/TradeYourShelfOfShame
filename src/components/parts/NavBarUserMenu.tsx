@@ -54,9 +54,9 @@ const NavBarUserMenu: React.FC<Props> = ({ user }) => {
         >
           {/* prettier-ignore */}
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-            <LinkedLi link="#" className={userMenuItemClass} text="Settings" />
+            <LinkedLi link="/setting" className={userMenuItemClass} text="Settings" />
             <LinkedLi link={`/search?author=${user._id}`} className={userMenuItemClass} text="My Postings"/>
-            <LinkedLi link="#" className={userMenuItemClass} text="My Interests"/>
+            <LinkedLi link={`/trade/${user._id}`} className={userMenuItemClass} text="My Trade List"/>
           </ul>
           <ul className="text-sm text-gray-700 dark:text-gray-200 ">
             <LinkedLi

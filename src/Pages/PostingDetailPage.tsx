@@ -23,6 +23,10 @@ const PostingDetailPage: React.FC<Props> = () => {
     navigate(`/search?author=${posting?.author._id}`);
   };
 
+  const tradeListOnClick = () => {
+    navigate(`/trade/${posting?.author._id}`);
+  };
+
   useEffect(() => {
     fetch(fetchUrl)
       .then((response) => {
@@ -73,7 +77,10 @@ const PostingDetailPage: React.FC<Props> = () => {
               />
             </div>
             <div className="my-3">
-              <Button text={`Check ${posting.author.name}'s Trade List`} />
+              <Button
+                text={`Check ${posting.author.name}'s Trade List`}
+                onClick={tradeListOnClick}
+              />
             </div>
             <div className="mt-5">
               <form className="p-3 border border-gray-300">

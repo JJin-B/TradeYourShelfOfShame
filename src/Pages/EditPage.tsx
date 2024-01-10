@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Button from "../components/parts/Button";
 import PostBggSearch from "../components/parts/PostBggSearch";
@@ -8,11 +9,17 @@ import PostTitle from "../components/parts/PostTitle";
 import PostDescription from "../components/parts/PostDescription";
 import PostPrice from "../components/parts/PostPrice";
 import PostLocation from "../components/parts/PostLocation";
-
 import { apiAddress } from "../Wrapper/AuthContext";
 
-interface Props {}
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+}
 
+interface Props {
+  user: User;
+}
 interface BggData {
   id: string;
   name: string;
@@ -27,10 +34,9 @@ interface PostParams {
   location: string;
   imageSrc?: string[];
   bggData: BggData[];
-  author: string;
 }
 
-const PostPage: React.FC<Props> = () => {
+const PostPage: React.FC<Props> = ({ user }) => {
   const navigate = useNavigate();
 
   const [postParams, setPostParams] = useState<PostParams>({
@@ -40,8 +46,9 @@ const PostPage: React.FC<Props> = () => {
     price: 0,
     location: "",
     bggData: [],
-    author: "65834424b3614bdc5e084875",
   });
+
+  const [authorId, setAuthorId] = useState<string>("");
 
   const [bggToggle, setBggToggle] = useState<boolean>(false);
 
@@ -58,6 +65,8 @@ const PostPage: React.FC<Props> = () => {
         return response.json();
       })
       .then((data) => {
+        setAuthorId(data.author._id);
+
         if (data.bggData.length > 0) {
           setPostParams({
             ...postParams,
@@ -84,6 +93,18 @@ const PostPage: React.FC<Props> = () => {
         console.error("Error fetching the posting:", error);
       });
   }, [fetchUrl]);
+
+
+  useEffect(() => {
+    if (authorId && authorId !== user._id) {
+      navigate(`/posting/${postId}`);
+      toast.warning("You don't have permission to edit the post!", {
+        autoClose: 5000,
+      });
+    }
+  }, [authorId, user._id, navigate, postId]);
+
+
 
   const handlePostParmas = (
     param: keyof PostParams,
@@ -153,6 +174,8 @@ const PostPage: React.FC<Props> = () => {
       console.error("Error:", (error as Error).message);
     }
   };
+
+
 
   return (
     <form id="editPost" onSubmit={handleSubmit}>

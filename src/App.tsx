@@ -10,6 +10,8 @@ import PostPage from "./Pages/PostPage";
 import EditPage from "./Pages/EditPage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
+import UserSettingPage from "./Pages/UserSettingPage";
+import UserTradePage from "./Pages/UserTradePage";
 
 import WrapperComponent from "./components/WrapperComponent";
 
@@ -44,7 +46,7 @@ function App() {
             path="/post"
             element={
               <WrapperComponent>
-                <PostPage />
+                {user ? <PostPage /> : <LoginPage />}
               </WrapperComponent>
             }
           />
@@ -61,7 +63,7 @@ function App() {
             path="/posting/:postId/edit"
             element={
               <WrapperComponent>
-                <EditPage />
+                {user ? <EditPage user={user} /> : <LoginPage />}
               </WrapperComponent>
             }
           />
@@ -80,6 +82,23 @@ function App() {
             element={
               <WrapperComponent>
                 <RegisterPage />
+              </WrapperComponent>
+            }
+          />
+
+          <Route
+            path="/setting"
+            element={
+              <WrapperComponent>
+                {user ? <UserSettingPage user={user} /> : <LoginPage />}
+              </WrapperComponent>
+            }
+          />
+          <Route
+            path="/trade/:userId"
+            element={
+              <WrapperComponent>
+                <UserTradePage />
               </WrapperComponent>
             }
           />

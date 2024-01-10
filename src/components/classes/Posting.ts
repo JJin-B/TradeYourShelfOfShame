@@ -9,7 +9,7 @@ class Posting {
     public author: { _id: string; name: string },
     public createdAt: Date,
     public imageSrc: string[],
-    public bggData: [{ bggIdx: string; name: string; year?: string }]
+    public bggData: [{ id: string; name: string; year?: string }]
   ) {}
 }
 
