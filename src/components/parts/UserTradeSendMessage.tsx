@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import { useAuth } from "../../Wrapper/AuthContext";
 
@@ -12,9 +12,15 @@ interface Props {
 }
 const UserTradeSendMessage: React.FC<Props> = ({ userPOI }) => {
   const { user } = useAuth();
+  const isLoggedIn = user ? true : false;
+
   const [message, setMessage] = useState<string>(
     `Hello ${userPOI.name}. I'm interested in trading and wanted to check if you might be interested as well. Please let me know your thoughts when you have a moment. Thank you!!`
   );
+
+  useEffect(() => {
+    !isLoggedIn && setMessage("Please sign in to send a message!");
+  }, [user]);
 
   const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
@@ -36,8 +42,9 @@ const UserTradeSendMessage: React.FC<Props> = ({ userPOI }) => {
           className="block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={message}
           onChange={onChangeTextArea}
+          disabled={!isLoggedIn}
         ></textarea>
-        <Button text="Send" className="m-1" />
+        {isLoggedIn && <Button text="Send" className={`m-1`}/>}
       </form>
     </div>
   );

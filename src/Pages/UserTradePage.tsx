@@ -176,7 +176,7 @@ const UserTradePage: React.FC<Props> = () => {
           </div>
         </div>
 
-        {user && user._id === userPOI._id ? (
+        {user?._id === userPOI._id ? (
           <UserMyInterestList defaultUserInterestList={userPOI.interests} />
         ) : (
           <UserTradeSendMessage
