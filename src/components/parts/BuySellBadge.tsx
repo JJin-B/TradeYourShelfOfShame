@@ -5,7 +5,7 @@ interface Props {
 }
 const BuySellBadge: React.FC<Props> = ({ type }) => {
   const badgeColor =
-    type.toLowerCase() === "buy" ? "bg-red-500" : "bg-blue-500";
+    type.toLowerCase() === "sell" ? "bg-red-500" : "bg-blue-500";
 
   return (
     <div

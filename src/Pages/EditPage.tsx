@@ -94,7 +94,6 @@ const PostPage: React.FC<Props> = ({ user }) => {
       });
   }, [fetchUrl]);
 
-
   useEffect(() => {
     if (authorId && authorId !== user._id) {
       navigate(`/posting/${postId}`);
@@ -103,8 +102,6 @@ const PostPage: React.FC<Props> = ({ user }) => {
       });
     }
   }, [authorId, user._id, navigate, postId]);
-
-
 
   const handlePostParmas = (
     param: keyof PostParams,
@@ -148,17 +145,13 @@ const PostPage: React.FC<Props> = ({ user }) => {
     }
 
     try {
-      console.log("before Fetch");
-      const response = await fetch(
-        `http://3.12.146.211:3001/posting/${postId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(modifiedParams),
-        }
-      );
+      const response = await fetch(fetchUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(modifiedParams),
+      });
       console.log("put request fetched");
 
       if (!response.ok) {
@@ -174,8 +167,6 @@ const PostPage: React.FC<Props> = ({ user }) => {
       console.error("Error:", (error as Error).message);
     }
   };
-
-
 
   return (
     <form id="editPost" onSubmit={handleSubmit}>

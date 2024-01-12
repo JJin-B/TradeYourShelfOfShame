@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Posting from "../components/classes/Posting";
 import PictureCarousel from "../components/parts/PictureCarousel";
 import Button from "../components/parts/Button";
+import BuySellBadge from "../components/parts/BuySellBadge";
+
 import { useParams } from "react-router-dom";
 
 import { apiAddress } from "../Wrapper/AuthContext";
@@ -61,7 +63,8 @@ const PostingDetailPage: React.FC<Props> = () => {
     <>
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row justify-center">
-          <div className="m-3 w-full flex-col text-3xl max-w-2xl break-words ">
+          <div className="flex items-start m-3 w-full flex-col text-3xl max-w-2xl break-words ">
+            {<BuySellBadge type={posting.type} />}
             {posting.title}
             <PictureCarousel picUrls={posting.imageSrc} />
           </div>

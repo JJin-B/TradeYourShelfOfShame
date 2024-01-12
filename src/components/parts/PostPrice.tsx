@@ -18,7 +18,7 @@ const PostPrice: React.FC<Props> = ({price,onChange}) => {
         name="price"
         type="number"
         aria-describedby="helper-text-explanation"
-        className="w-36 px-3 py-2 bg-gray-100 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="w-36 px-3 py-2 bg-gray-100 border-2 border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         min={0}
         step={0.01}
         pattern="\d+(\.\d{0,2})?"

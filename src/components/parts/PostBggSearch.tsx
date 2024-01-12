@@ -44,6 +44,7 @@ const PostBggSearch: React.FC<Props> = ({
   const [bggData, setBggData] = useState<BggResponse | null>(null);
   const [bggSearchResults, setBggSearchResults] = useState<BggData[]>([]);
   const [bggResultsToggle, setBggResultsToggle] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleBggSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBggSearchQuery(e.target.value);
@@ -51,8 +52,11 @@ const PostBggSearch: React.FC<Props> = ({
 
   const searchOnBgg = async () => {
     if (bggSearchQuery) {
+      setBggData(null);
+      setIsLoading(true);
       const data = await fetchBggData(bggSearchQuery);
       setBggData(data);
+      setIsLoading(false);
     }
   };
 
@@ -98,9 +102,10 @@ const PostBggSearch: React.FC<Props> = ({
       />
       {bggSearchResults.length > 0 && (
         <PostBggSearchResult
+          isLoading={isLoading}
           results={bggSearchResults}
           display={bggResultsToggle}
-          onClick={addBggResultSelected}
+          onClickAdd={addBggResultSelected}
         />
       )}
 
