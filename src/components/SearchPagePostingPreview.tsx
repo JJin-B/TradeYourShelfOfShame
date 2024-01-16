@@ -39,7 +39,7 @@ const SearchPagePostingPreview: React.FC<Props> = ({ posting }) => {
 
   return (
     <div className="m-3 max-w-6xl flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row mhover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-      <div className="w- flex items-center justify-center bg-gray-200 dark:bg-gray-700 rounded-lg border border-gray-300 dark:border-gray-600">
+      <div className="w-72 flex items-center justify-center bg-gray-200 dark:bg-gray-700 rounded-lg border border-gray-300 dark:border-gray-600">
         <Link to={`/posting/${posting._id}`}>
           <img
             className="rounded-lg h-60"
