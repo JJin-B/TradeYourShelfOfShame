@@ -60,10 +60,11 @@ const UserTradePage: React.FC<Props> = () => {
     }
 
     let fetchUrl = apiAddress + `/user/${userId}`;
-
+    console.log("Trade page fetching starts");
     axios
       .get<User>(fetchUrl)
       .then((response: AxiosResponse<User>) => {
+        console.log(response.data);
         if (response.data) {
           setUserPOI(response.data);
         }

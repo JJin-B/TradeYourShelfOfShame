@@ -53,11 +53,14 @@ const SearchResultPage: React.FC<Props> = () => {
       fetchUrl += `page=${page}`;
     }
 
+    
+    console.log('Search Fetching Starts')
     axios
       .get<Posting[]>(fetchUrl)
       .then((response: AxiosResponse<Posting[]>) => {
         if (!response.data || response.data.length === 0) {
           setHasMore(false);
+          console.log(response.data)
           return;
         }
 
