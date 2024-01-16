@@ -15,9 +15,9 @@ const SearchResultPage: React.FC<Props> = () => {
 
   const queryParams = new URLSearchParams(location.search);
 
-  const typeParam = queryParams.get("type")?.toLowerCase();
-  const searchQuery = queryParams.get("q")?.toLowerCase();
-  const authorParam = queryParams.get("author")?.toLowerCase();
+  const typeParam = queryParams.get("type")?.toLowerCase() || '';
+  const searchQuery = queryParams.get("q")?.toLowerCase() || '';
+  const authorParam = queryParams.get("author")?.toLowerCase() || '';
 
   const isFirstRunRef = useRef(true); // this will check the first run to prevent requesting a query twice
 
