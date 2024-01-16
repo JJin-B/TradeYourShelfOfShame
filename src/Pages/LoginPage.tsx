@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { useAuth } from "../Wrapper/AuthContext";
@@ -127,12 +127,12 @@ const LoginPage: React.FC<Props> = () => {
             >
               Sign In
             </button>
-            <Link
+            {/* <Link
               to="#"
               className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
             >
               Forgot Password?
-            </Link>
+            </Link> */}
           </div>
         </form>
         <div className="my-1 text-center border border-t-2 border-0 border-gray-400 py-1">

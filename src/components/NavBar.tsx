@@ -10,11 +10,18 @@ import LinkedLi from "./parts/LinkedLi";
 import NavBarUserMenu from "./parts/NavBarUserMenu";
 import Button from "./parts/Button";
 import SearchBar from "./parts/SearchBar";
+import NavBarNotifications from "./parts/NavBarNotifications";
 
+interface PostingNotification {
+  postingId: { _id: string; title: string; type: "sell" | "buy" };
+  isViewed: string;
+}
 interface User {
   _id: string;
   name: string;
   email: string;
+  userSetting: {};
+  notifications: PostingNotification[];
 }
 
 interface Props {
@@ -24,10 +31,9 @@ interface Props {
 const Navbar: React.FC<Props> = ({ user }) => {
   const [isHamburgerDropdownOpen, setisHamburgerDropdownOpen] = useState(false);
 
-  
-
   const toggleDropdown = () => {
     setisHamburgerDropdownOpen((prev) => !prev);
+    
   };
 
   const menuClass: string =
@@ -58,8 +64,9 @@ const Navbar: React.FC<Props> = ({ user }) => {
             {user? <NavBarUserMenu user={user} /> : <NavBarLoginRegisterBtn/>}
           </ul>
         </div>
+        {user && <NavBarNotifications userId ={user._id} notifications={user.notifications} />}
 
-        <Link to={user?`/post`:'/signin'}>
+        <Link to={user ? `/post` : "/signin"}>
           <Button text="Post" />
         </Link>
       </div>

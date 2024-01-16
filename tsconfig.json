@@ -25,7 +25,7 @@
     "src",
     "src/components",
     "typings/react-xml-parser.d.ts",
-    "src/**/*"
-  ],
+    "src/**/*",
+    ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

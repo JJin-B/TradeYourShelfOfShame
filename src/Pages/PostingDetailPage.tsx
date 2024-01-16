@@ -39,7 +39,6 @@ const PostingDetailPage: React.FC<Props> = () => {
       })
       .then((data) => {
         setPosting(data);
-        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching the posting:", error);

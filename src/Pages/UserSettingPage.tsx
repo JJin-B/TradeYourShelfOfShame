@@ -11,7 +11,7 @@ interface Props {
 }
 
 const UserSettingPage: React.FC<Props> = ({ user }) => {
-  return <div>Content</div>;
+  return <div>{user?.name}</div>;
 };
 
 export default UserSettingPage;
