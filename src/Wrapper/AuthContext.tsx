@@ -9,7 +9,7 @@ import React, {
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const apiAddress = "http://3.12.146.211:3001";
+const apiAddress = "http://3.145.3.210:3001";
 // const apiAddress = "http://localhost:3001";
 
 interface PostingNotification {
