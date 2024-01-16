@@ -126,7 +126,7 @@ const UserTradePage: React.FC<Props> = () => {
     setPostingSellTradeList(
       uniqueTypeBggDataCombinations.filter((comb) => comb.type === "sell")
     );
-  }, [postings]);
+  }, [JSON.stringify(postings)]);
 
   if (error || !userPOI) {
     return <div>{error}</div>;

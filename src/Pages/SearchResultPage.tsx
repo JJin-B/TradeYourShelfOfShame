@@ -53,14 +53,13 @@ const SearchResultPage: React.FC<Props> = () => {
       fetchUrl += `page=${page}`;
     }
 
-    
-    console.log('Search Fetching Starts')
+    console.log("Search Fetching Starts");
     axios
       .get<Posting[]>(fetchUrl)
       .then((response: AxiosResponse<Posting[]>) => {
         if (!response.data || response.data.length === 0) {
           setHasMore(false);
-          console.log(response.data)
+          console.log(response.data);
           return;
         }
 
@@ -70,7 +69,7 @@ const SearchResultPage: React.FC<Props> = () => {
       .catch((error) => {
         console.error("Error fetching the result postings:", error);
       });
-  }, [page, typeParam, searchQuery]);
+  }, [page, typeParam, searchQuery, authorParam]);
 
   useEffect(() => {
     setPage(1); // Reset page to 1 when the URL parameters change
@@ -88,7 +87,7 @@ const SearchResultPage: React.FC<Props> = () => {
 
     // Push the new URL to history to trigger a re-render
     navigate(url);
-  }, [typeParam, searchQuery, navigate]);
+  }, [typeParam, searchQuery, authorParam, navigate]);
 
   return (
     <div className="justify-center mx-auto max-w-6xl">
