@@ -12,11 +12,10 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import UserSettingPage from "./Pages/UserSettingPage";
 import UserTradePage from "./Pages/UserTradePage";
-import MessagePage from "./Pages/MessagePage";
+import ChatPage from "./Pages/ChatPage";
 
 import WrapperComponent from "./Wrapper/WrapperComponent";
 
-// import { user } from "./dummyData/dummydata";
 import { useAuth } from "./Wrapper/AuthContext";
 
 function App() {
@@ -105,10 +104,10 @@ function App() {
           />
 
           <Route
-            path="/message"
+            path="/chat"
             element={
               <WrapperComponent>
-                <MessagePage />
+                {user ? <ChatPage userId={user._id} /> : <LoginPage />}
               </WrapperComponent>
             }
           />

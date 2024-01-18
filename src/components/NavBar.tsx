@@ -11,6 +11,7 @@ import NavBarUserMenu from "./parts/NavBarUserMenu";
 import Button from "./parts/Button";
 import SearchBar from "./parts/SearchBar";
 import NavBarNotifications from "./parts/NavBarNotifications";
+import MailboxIcon from "./parts/MailboxIcon";
 
 interface PostingNotification {
   postingId: { _id: string; title: string; type: "sell" | "buy" };
@@ -33,7 +34,6 @@ const Navbar: React.FC<Props> = ({ user }) => {
 
   const toggleDropdown = () => {
     setisHamburgerDropdownOpen((prev) => !prev);
-    
   };
 
   const menuClass: string =
@@ -64,8 +64,16 @@ const Navbar: React.FC<Props> = ({ user }) => {
             {user? <NavBarUserMenu user={user} /> : <NavBarLoginRegisterBtn/>}
           </ul>
         </div>
-        {user && <NavBarNotifications userId ={user._id} notifications={user.notifications} />}
+        {user && (
+          <div className="flex justify-between w-20">
+            <NavBarNotifications
+              userId={user._id}
+              notifications={user.notifications}
+            />
 
+            <MailboxIcon />
+          </div>
+        )}
         <Link to={user ? `/post` : "/signin"}>
           <Button text="Post" />
         </Link>

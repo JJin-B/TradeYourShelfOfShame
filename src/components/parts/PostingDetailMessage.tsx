@@ -58,9 +58,17 @@ const PostingDetailMessage: React.FC<Props> = ({ posting }) => {
       message: message,
     };
 
-    axios.put(fetchUrl, data).then(() => {
-      navigator("/message");
-    });
+    axios
+      .put(fetchUrl, data)
+      .then((res: AxiosResponse) => {
+        navigator(`/chat?chatId=${res.data._id}`);
+        toast.success(
+          `Your message has been sent to ${res.data.receiver.name}`
+        );
+      })
+      .catch((error) => {
+        console.error("Error sending message:", error);
+      });
   };
 
   return (

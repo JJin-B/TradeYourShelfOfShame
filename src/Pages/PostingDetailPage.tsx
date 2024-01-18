@@ -8,7 +8,7 @@ import BuySellBadge from "../components/parts/BuySellBadge";
 
 import { useParams } from "react-router-dom";
 
-import { apiAddress } from "../Wrapper/AuthContext";
+import { apiAddress, useAuth } from "../Wrapper/AuthContext";
 import PostingDetailMessage from "../components/parts/PostingDetailMessage";
 
 interface Props {}
@@ -19,6 +19,7 @@ const PostingDetailPage: React.FC<Props> = () => {
   const [posting, setPosting] = useState<Posting>();
 
   const { postId } = useParams<{ postId: string }>();
+  const { user } = useAuth();
 
   const fetchUrl = apiAddress + `/posting/${postId}`;
 
@@ -85,8 +86,9 @@ const PostingDetailPage: React.FC<Props> = () => {
                 onClick={tradeListOnClick}
               />
             </div>
-            <PostingDetailMessage posting={posting}/>
-
+            {posting.author._id != user?._id && (
+              <PostingDetailMessage posting={posting} />
+            )}
           </div>
         </div>
       </div>

@@ -2,5 +2,5 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 body {
-  background-color: rgb(230,230,230);
+  background-color: rgb(255, 255, 255);
 }

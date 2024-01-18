@@ -14,6 +14,7 @@ const notyIconStyle = {
 const notyNumStyle = {
   position: "absolute" as const,
   right: "0" as const,
+  marginTop: "-6px" as const , 
   backgroundColor: "rgb(29, 161, 242)" as const,
   fontSize: "11px" as const,
   color: "white" as const,
