@@ -53,7 +53,11 @@ const LoginPage: React.FC<Props> = () => {
           }
 
           signin(data);
-          navigate("/");
+          if (document.referrer) {
+            navigate(-1);
+          } else {
+            navigate("/");
+          }
         });
     } catch (e) {
       if (e instanceof Error) {

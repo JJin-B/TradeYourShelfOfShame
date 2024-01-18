@@ -9,6 +9,7 @@ import BuySellBadge from "../components/parts/BuySellBadge";
 import { useParams } from "react-router-dom";
 
 import { apiAddress } from "../Wrapper/AuthContext";
+import PostingDetailMessage from "../components/parts/PostingDetailMessage";
 
 interface Props {}
 
@@ -61,8 +62,8 @@ const PostingDetailPage: React.FC<Props> = () => {
   return (
     <>
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row justify-center">
-          <div className="flex items-start m-3 w-full flex-col text-3xl max-w-2xl break-words ">
+        <div className="flex flex-col md:flex-row items-center justify-center">
+          <div className="flex items-start justify-center m-3 w-full flex-col text-3xl max-w-2xl break-words ">
             {<BuySellBadge type={posting.type} />}
             {posting.title}
             <PictureCarousel picUrls={posting.imageSrc} />
@@ -84,23 +85,8 @@ const PostingDetailPage: React.FC<Props> = () => {
                 onClick={tradeListOnClick}
               />
             </div>
-            <div className="mt-5">
-              <form className="p-3 border border-gray-300">
-                <label
-                  htmlFor="message"
-                  className="p-1 px-3 font-black block mb-2 text-sm font-medium text-gray-900 dark:text-white dark:bg-gray-700 rounded-md"
-                >
-                  Your message
-                </label>
-                <textarea
-                  id="message"
-                  rows={6}
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  defaultValue={`Hello ${posting.author.name}. I am interested in this item. Please let me know if this is available!`}
-                ></textarea>
-                <Button text="Send" />
-              </form>
-            </div>
+            <PostingDetailMessage posting={posting}/>
+
           </div>
         </div>
       </div>

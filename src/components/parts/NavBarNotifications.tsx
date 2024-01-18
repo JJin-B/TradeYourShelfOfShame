@@ -62,15 +62,17 @@ const NavBarNotifications: React.FC<Props> = ({ userId, notifications }) => {
         } absolute w-96 right-0 top-10 z-50 bg-gray-300 rounded-lg max-h-96 p-2 overflow-auto border-2 border-gray-700`}
       >
         <ul>
-          {notifications.map((notification) => (
+          {notifications.map((notification, index) => (
             <li
               className={`${
                 !notification.isViewed && "bg-gray-400"
               } rounded-md my-2 border border-gray-500 p-2`}
-              key={notification.postingId._id}
+              key={notification.postingId._id || index}
             >
               <button onClick={() => notyOnClick(notification.postingId._id)}>
-                <BuySellBadge type={notification.postingId.type} />
+                {notification.postingId.type && (
+                  <BuySellBadge type={notification.postingId.type} />
+                )}
                 {` ${notification.postingId.title}`}
               </button>
             </li>

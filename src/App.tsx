@@ -12,8 +12,9 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import UserSettingPage from "./Pages/UserSettingPage";
 import UserTradePage from "./Pages/UserTradePage";
+import MessagePage from "./Pages/MessagePage";
 
-import WrapperComponent from "./components/WrapperComponent";
+import WrapperComponent from "./Wrapper/WrapperComponent";
 
 // import { user } from "./dummyData/dummydata";
 import { useAuth } from "./Wrapper/AuthContext";
@@ -99,6 +100,15 @@ function App() {
             element={
               <WrapperComponent>
                 <UserTradePage />
+              </WrapperComponent>
+            }
+          />
+
+          <Route
+            path="/message"
+            element={
+              <WrapperComponent>
+                <MessagePage />
               </WrapperComponent>
             }
           />

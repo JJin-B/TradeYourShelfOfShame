@@ -9,8 +9,8 @@ import React, {
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const apiAddress = "http://3.145.3.210:3001";
-// const apiAddress = "http://localhost:3001";
+// const apiAddress = "http://3.145.3.210:3001";
+const apiAddress = "http://localhost:3001";
 
 interface PostingNotification {
   postingId: { _id: string; title: string; type: "sell" | "buy" };
@@ -76,15 +76,17 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         console.error(e);
       }
     }
-  }, []);
+  }, [user]);
 
   const signin = (userData: User) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
+    
   };
   const signout = () => {
     setUser(null);
     localStorage.removeItem("user");
+    window.location.reload();
   };
 
   const contextValue: AuthContextProps = {
