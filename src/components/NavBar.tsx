@@ -65,7 +65,7 @@ const Navbar: React.FC<Props> = ({ user }) => {
           </ul>
         </div>
         {user && (
-          <div className="flex justify-between w-20">
+          <div className="flex justify-between w-20 mx-2">
             <NavBarNotifications
               userId={user._id}
               notifications={user.notifications}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Posting from "../components/classes/Posting";
-import FrontImg from "../components/FrontImage";
-import FrontPagePostingPreview from "../components/FrontPagePostingPreview";
+import FrontImg from "../components/parts/FrontImage";
+import FrontPagePostingPreview from "../components/parts/FrontPagePostingPreview";
 
 import { apiAddress } from "../Wrapper/AuthContext";
 

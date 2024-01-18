@@ -1,10 +1,10 @@
 import React from "react";
-import Posting from "./classes/Posting";
-import BuySellBadge from "./parts/BuySellBadge";
+import Posting from "../classes/Posting";
+import BuySellBadge from "./BuySellBadge";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "./parts/Button";
-import DeleteButton from "./parts/DeleteButton";
-import { useAuth } from "../Wrapper/AuthContext";
+import Button from "./Button";
+import DeleteButton from "./DeleteButton";
+import { useAuth } from "../../Wrapper/AuthContext";
 
 interface Props {
   posting: Posting;

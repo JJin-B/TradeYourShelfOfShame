@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import Posting from "../components/classes/Posting";
-import SearchPagePostingPreview from "../components/SearchPagePostingPreview";
+import SearchPagePostingPreview from "../components/parts/SearchPagePostingPreview";
 import { apiAddress } from "../Wrapper/AuthContext";
 
 interface Props {}

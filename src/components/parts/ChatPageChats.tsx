@@ -29,13 +29,20 @@ interface Chat {
 interface Props {
   chats: Chat[];
   userId: string;
+  chatOnClick: (cid: string) => void;
 }
-const ChatPageChats: React.FC<Props> = ({ chats, userId }) => {
+const ChatPageChats: React.FC<Props> = ({ chats, userId, chatOnClick }) => {
+
   return (
     <div>
       <ul>
         {chats.map((chat) => (
-          <ChatPageChatList key={chat._id} chat={chat} userId={userId} />
+          <ChatPageChatList
+            key={chat._id}
+            chat={chat}
+            userId={userId}
+            chatOnClick={chatOnClick}
+          />
         ))}
       </ul>
     </div>

@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { apiAddress } from "../Wrapper/AuthContext";
-import { useNavigate, useLocation } from "react-router-dom";
-import ChatPageChats from "../components/parts/ChatPageChats";
-import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
+
+import ChatPageOverview from "../components/parts/ChatPageOverview";
+
 import axios, { AxiosResponse } from "axios";
+import ChatPageChatting from "../components/parts/ChatPageChatting";
 
 interface Message {
   _id: string;
@@ -36,10 +38,10 @@ interface Props {
   userId: string;
 }
 const ChatPage: React.FC<Props> = ({ userId }) => {
-  const navigator = useNavigate();
   const location = useLocation();
 
-  const [chatId, setChatId] = useState<String>("");
+  const [chatSelected, setChatSelected] = useState<Chat | null>(null);
+
   const [chats, setChats] = useState<Chat[]>([]);
   const [displayChats, setDisplayChats] = useState<Chat[]>([]);
   const [displayOption, setDisplayOption] = useState<"all" | "new" | "my">(
@@ -49,7 +51,9 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
   const queryParams = new URLSearchParams(location.search);
 
   useEffect(() => {
-    setChatId(queryParams.get("messageId")?.toLowerCase() || "");
+    const chatId = queryParams.get("chatId")?.toLowerCase();
+    const chat = chats.find((chat) => chat._id === chatId) || null;
+    setChatSelected(chat);
 
     const fetchUrl = apiAddress + `/message/${userId}`;
 
@@ -76,7 +80,7 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
       .catch((error) => {
         console.error("Error fetching messages:", error);
       });
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     if (displayOption === "all") {
@@ -96,46 +100,42 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
     }
   }, [displayOption, chats, userId]);
 
-  const displayOptionClass = `p-2 border border-gray-400 rounded-md bg-gray-200`;
-
   const displayOptionOnClick = (option: "all" | "new" | "my") => {
     setDisplayOption(option);
   };
 
-  return (
-    <div className="mx-auto max-w-4xl ">
-      <div className="m-3 rounded-sm flex items-center h-14">
-        <button
-          className={displayOptionClass}
-          onClick={() => displayOptionOnClick("all")}
-        >
-          All Messages
-        </button>
-        <button
-          className={displayOptionClass}
-          onClick={() => displayOptionOnClick("new")}
-        >
-          New Messages
-        </button>
-        <button
-          className={displayOptionClass}
-          onClick={() => displayOptionOnClick("my")}
-        >
-          My Postings
-        </button>
-      </div>
+  const chatOnClick = (chatId: string) => {
+    const chat = chats.find((chat) => chat._id === chatId) || null;
+    setChatSelected(chat);
+  };
 
-      <div className="border border-2 rounded-md h-[720px] my-2 overflow-auto">
-        {displayChats ? (
-          <ChatPageChats chats={displayChats} userId={userId} />
-        ) : (
-          <div className="flex justify-center text-xl p-3">
-            There are no chats
-          </div>
-        )}
+  const backToOverview = () => {
+    setChatSelected(null);
+  };
+
+  if (!chatSelected) {
+    return (
+      <ChatPageOverview
+        displayChats={displayChats}
+        userId={userId}
+        displayOption={displayOption}
+        displayOptionOnClick={displayOptionOnClick}
+        chatOnClick={chatOnClick}
+      />
+    );
+  } else {
+    return (
+      <div className="mx-auto max-w-4xl">
+        <button
+          className="m-3 p-1 rounded-md flex items-center h-14 w-20 bg-gray-200 justify-center"
+          onClick={backToOverview}
+        >
+          Back To Messages
+        </button>
+        {<ChatPageChatting chat={chatSelected} userId={userId} />}
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default ChatPage;

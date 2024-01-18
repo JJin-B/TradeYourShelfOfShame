@@ -33,8 +33,9 @@ const truncateText = (text: string, maxLength: number) => {
 interface Props {
   chat: Chat;
   userId: string;
+  chatOnClick: (cid: string) => void;
 }
-const ChatPageChatList: React.FC<Props> = ({ chat, userId }) => {
+const ChatPageChatList: React.FC<Props> = ({ chat, userId, chatOnClick }) => {
   const undreadMessage = chat.messages.filter((message) => {
     return message.sentBy !== userId && !message.isViewed;
   });
@@ -58,7 +59,11 @@ const ChatPageChatList: React.FC<Props> = ({ chat, userId }) => {
 
   return (
     <li className={liClassName}>
-      <button className="flex w-full h-full">
+      <button
+        className="flex w-full h-full"
+        // onClick={() => chatOnClick(chat._id)}
+        onClick={() => chatOnClick(chat._id)}
+      >
         <div className="flex items-center h-full">
           <LetterWithRound letter={chattingWith[0]} />
         </div>

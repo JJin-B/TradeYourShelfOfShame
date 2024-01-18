@@ -22,7 +22,7 @@ const mailboxNumStyle = {
   borderRadius: "20px" as const,
 };
 
-const MailboxIcon: React.FC<MailboxProps> = ({ width = "30px" }) => {
+const MailboxIcon: React.FC<MailboxProps> = () => {
   const navigator = useNavigate();
   const mailboxOnClick = () => {
     navigator("/chat");

@@ -1,6 +1,6 @@
 import React from "react";
-import Posting from "./classes/Posting";
-import BuySellBadge from "./parts/BuySellBadge";
+import Posting from "../classes/Posting";
+import BuySellBadge from "./BuySellBadge";
 import { Link } from "react-router-dom";
 
 interface Props {
