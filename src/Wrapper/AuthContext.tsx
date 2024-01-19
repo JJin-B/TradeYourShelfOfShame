@@ -9,8 +9,8 @@ import React, {
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const apiAddress = "https://9afnnp3x28.execute-api.us-east-2.amazonaws.com/TTYS";
-// const apiAddress = "http://localhost:3001";
+// const apiAddress = "https://9afnnp3x28.execute-api.us-east-2.amazonaws.com/TTYS";
+const apiAddress = "http://localhost:3001";
 
 interface PostingNotification {
   postingId: { _id: string; title: string; type: "sell" | "buy" };

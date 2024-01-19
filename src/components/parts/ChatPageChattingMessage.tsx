@@ -28,7 +28,9 @@ const ChatPageChattingMessage: React.FC<Props> = ({
     minute: "2-digit",
   });
 
-  const className = `flex justify-${isMyMessage ? "end" : "start"} items-${isMyMessage ? "end" : "start"}`;
+  const className = `flex justify-${isMyMessage ? "end" : "start"} items-${
+    isMyMessage ? "end" : "start"
+  }`;
   const color = isMyMessage ? "bg-blue-800 text-white" : "bg-gray-300";
 
   return (
@@ -38,19 +40,19 @@ const ChatPageChattingMessage: React.FC<Props> = ({
           <LetterWithRound letter={talkingTo[0]} />
         </div>
       )}
-      <div className={className + " flex-col"}>
+      <div className={className + " flex-col min-w-[240px]"}>
         <div
-          className={`flex items-center w-4/5 border-2 rounded-lg p-2 ${color}`}
+          className={`flex items-end mr-2 w-4/5 border-2 rounded-lg p-2 ${color}`}
         >
           {message.message}
         </div>
-        <div className="text-xs w-4/5 flex justify-between">
+        <div className="text-xs w-4/5 mr-2 flex justify-between">
           {isMyMessage && (
             <span className="font-bold text-slate-500">
               {message.isViewed ? "READ" : "SENT"}
             </span>
           )}
-          <span >{dateSent}</span>
+          <span>{dateSent}</span>
         </div>
       </div>
     </div>

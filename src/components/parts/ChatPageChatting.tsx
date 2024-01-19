@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ChatPageChattingMessage from "./ChatPageChattingMessage";
 import { apiAddress } from "../../Wrapper/AuthContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface Message {
   _id: string;
@@ -48,6 +49,7 @@ const ChatPageChatting: React.FC<Props> = ({
 }) => {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState<string>("");
+  const navigator = useNavigate();
 
   const inputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
@@ -70,13 +72,20 @@ const ChatPageChatting: React.FC<Props> = ({
     }
   }, [chat.messages]);
 
+  const titleOnClick = (postId: string) => {
+    navigator(`/posting/${postId}`);
+  };
+
   const talkingTo =
     chat.receiver._id === userId ? chat.sender.name : chat.receiver.name;
   const className = "bg-gray-200 h-[480px] rounded-lg p-2";
   return (
     <div>
       <div className={className}>
-        <div className="text-lg hover:underline cursor-pointer flex justify-center p-3 bg-gray-200 border-b-2 border-gray-700">
+        <div
+          className="text-lg hover:underline cursor-pointer flex justify-center p-3 bg-gray-200 border-b-2 border-gray-700"
+          onClick={() => titleOnClick(chat.posting._id)}
+        >
           {chat.posting.title}
         </div>
         <div

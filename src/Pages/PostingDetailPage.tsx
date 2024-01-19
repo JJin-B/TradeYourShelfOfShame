@@ -60,6 +60,9 @@ const PostingDetailPage: React.FC<Props> = () => {
     day: "2-digit",
   });
 
+  const otherPostingBtnName = posting.author._id == user?._id? "Check My Other Postings": `Check ${posting.author.name}'s Other Postings` 
+  const tradeListBtnName = posting.author._id == user?._id? "Check My Trade List": `Check ${posting.author.name}'s Trade List`
+
   return (
     <>
       <div className="mx-auto max-w-6xl">
@@ -76,13 +79,13 @@ const PostingDetailPage: React.FC<Props> = () => {
             <div>Created By : {posting.author.name}</div>
             <div className="my-3">
               <Button
-                text={`Check ${posting.author.name}'s Other Postings`}
+                text={otherPostingBtnName}
                 onClick={otherPostingOnClick}
               />
             </div>
             <div className="my-3">
               <Button
-                text={`Check ${posting.author.name}'s Trade List`}
+                text={tradeListBtnName}
                 onClick={tradeListOnClick}
               />
             </div>
