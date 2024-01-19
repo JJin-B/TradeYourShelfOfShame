@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { useRef } from "react";
+import { useRef } from "react";
 import axios, { AxiosResponse } from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ const SearchResultPage: React.FC<Props> = () => {
   const searchQuery = queryParams.get("q")?.toLowerCase() || "";
   const authorParam = queryParams.get("author")?.toLowerCase() || "";
 
-  // const isFirstRunRef = useRef(true); // this will check the first run to prevent requesting a query twice
+  const isFirstRunRef = useRef(true); // this will check the first run to prevent requesting a query twice
 
   const [postings, setPostings] = useState<Posting[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -63,6 +63,7 @@ const SearchResultPage: React.FC<Props> = () => {
           return;
         }
 
+        
         setPostings((prevPostings) => [...prevPostings, ...response.data]);
       })
       .catch((error) => {

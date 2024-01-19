@@ -76,7 +76,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         console.error(e);
       }
     }
-  }, [user]);
+  }, []);
 
   const signin = (userData: User) => {
     setUser(userData);

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // import User from "./classes/User";
 
 import NavBarLogo from "./parts/NavBarLogo";
 import NavBarHamburgerButton from "./parts/NavBarHamburgerButton";
 import NavBarLoginRegisterBtn from "./parts/NavBarLoginRegisterBtn";
-import LinkedLi from "./parts/LinkedLi";
 import NavBarUserMenu from "./parts/NavBarUserMenu";
 import Button from "./parts/Button";
 import SearchBar from "./parts/SearchBar";
@@ -30,6 +29,7 @@ interface Props {
 }
 
 const Navbar: React.FC<Props> = ({ user }) => {
+  const navigator = useNavigate();
   const [isHamburgerDropdownOpen, setisHamburgerDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -41,6 +41,14 @@ const Navbar: React.FC<Props> = ({ user }) => {
 
   const menuItemClass: string =
     "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
+
+  const postOnClick = () => {
+    if (user) {
+      navigator("/post");
+    } else {
+      navigator("/signin");
+    }
+  };
 
   return (
     <nav className="w-full z-50 p-3 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
@@ -54,13 +62,12 @@ const Navbar: React.FC<Props> = ({ user }) => {
         {/* prettier-ignore */}
         <div className={`${isHamburgerDropdownOpen ? "block" : "hidden"} w-full md:block md:w-auto`} id="navbar-dropdown">
           <ul className={menuClass}>
-            <li>  
-              <Link to='/' className={menuItemClass}>Home</Link>
-            </li>
+            <li onClick={()=>navigator('/')} className={menuItemClass}>Home</li>
+            <li onClick={()=>navigator('/search')} className={menuItemClass}>All Postings</li>
+            <li onClick={()=>navigator('/search?type=buy')} className={menuItemClass}>Buy</li>
+            <li onClick={()=>navigator('/search?type=sell')} className={menuItemClass}>Sell</li>
 
-            <LinkedLi link="/search" text="All Postings" className={menuItemClass} />
-            <LinkedLi link="/search?type=buy" text="Buy" className={menuItemClass} />
-            <LinkedLi link="/search?type=sell" text="Sell" className={menuItemClass} />
+
             {user? <NavBarUserMenu user={user} /> : <NavBarLoginRegisterBtn/>}
           </ul>
         </div>
@@ -74,9 +81,9 @@ const Navbar: React.FC<Props> = ({ user }) => {
             <MailboxIcon />
           </div>
         )}
-        <Link to={user ? `/post` : "/signin"}>
-          <Button text="Post" />
-        </Link>
+        <li>
+          <Button text="Post" onClick={postOnClick} />
+        </li>
       </div>
 
       <SearchBar />
