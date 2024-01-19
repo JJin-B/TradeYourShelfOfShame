@@ -51,14 +51,7 @@ const UserTradePage: React.FC<Props> = () => {
     PostingBggData[]
   >([]);
 
-  const isFirstRunRef = useRef(true); // this will check the first run to prevent requesting a query twice
-
   useEffect(() => {
-    if (isFirstRunRef.current) {
-      isFirstRunRef.current = false;
-      return;
-    }
-
     let fetchUrl = apiAddress + `/user/${userId}`;
     console.log("Trade page fetching starts");
     axios
