@@ -27,10 +27,10 @@ const SearchResultPage: React.FC<Props> = () => {
   const [hasMore, setHasMore] = useState<boolean>(true);
 
   useEffect(() => {
-    // if (isFirstRunRef.current) {
-    //   isFirstRunRef.current = false;
-    //   return;
-    // }
+    if (isFirstRunRef.current) {
+      isFirstRunRef.current = false;
+      return;
+    }
 
     let fetchUrl = apiAddress + "/search?";
 

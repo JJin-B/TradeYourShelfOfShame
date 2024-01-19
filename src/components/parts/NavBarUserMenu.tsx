@@ -13,7 +13,6 @@ interface Props {
   user: User;
 }
 
-
 const NavBarUserMenu: React.FC<Props> = ({ user }) => {
   const { signout } = useAuth();
 

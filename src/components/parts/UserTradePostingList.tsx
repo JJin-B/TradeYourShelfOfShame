@@ -20,8 +20,7 @@ const UserTradePostingList: React.FC<Props> = ({ postings }) => {
     return <span>No Trade List from Postings</span>;
   }
 
-  const liClasses =
-    "w-4/5 text-base my-1 overflow-auto";
+  const liClasses = "w-4/5 text-base my-1 overflow-auto";
 
   return (
     <ul className={liClasses}>

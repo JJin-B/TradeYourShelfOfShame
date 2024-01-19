@@ -1,5 +1,4 @@
 import React from "react";
-import LinkedLi from "./LinkedLi";
 import Button from "./Button";
 
 interface BggSearchResult {
@@ -30,7 +29,7 @@ const PostBggSearchResult: React.FC<Props> = ({
   onClickAdd,
   classesToAdd,
   interestType,
-  isLoading
+  isLoading,
 }) => {
   const onClick = (result: BggSearchResult) => {
     const interest: UserInterest = {
@@ -51,17 +50,19 @@ const PostBggSearchResult: React.FC<Props> = ({
       className={`${
         !display && "hidden"
       } text-lg w-96 z-100 border rounded-lg shadow bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 mb-3 ${classesToAdd}`}
-    >{isLoading && <div className="flex items-center justify-center">Loading...</div>}
+    >
+      {isLoading && (
+        <div className="flex items-center justify-center">Loading...</div>
+      )}
       <ul
         className="h-48 py-2 overflow-y-auto"
         aria-labelledby="dropdownUsersButton"
       >
         {results.map((result) => (
           <div className="flex justify-between" key={result.id}>
-            <LinkedLi
-              className={className}
-              text={`${result.name}${result.year ? ` (${result.year})` : ""}`}
-            />
+            <li className={className}>{`${result.name}${
+              result.year ? ` (${result.year})` : ""
+            }`}</li>
             <Button
               text="Add"
               className="my-1"
