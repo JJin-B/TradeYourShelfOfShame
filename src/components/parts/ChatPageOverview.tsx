@@ -76,7 +76,7 @@ const ChatPageOverview: React.FC<Props> = ({
       </div>
 
       <div className="border border-2 rounded-md h-[720px] bg-gray-300 my-2 overflow-auto">
-        {displayChats ? (
+        {displayChats.length > 0 ? (
           <ChatPageChats
             chats={displayChats}
             userId={userId}

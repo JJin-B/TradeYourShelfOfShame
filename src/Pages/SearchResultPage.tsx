@@ -15,9 +15,9 @@ const SearchResultPage: React.FC<Props> = () => {
 
   const queryParams = new URLSearchParams(location.search);
 
-  const typeParam = queryParams.get("type")?.toLowerCase() || '';
-  const searchQuery = queryParams.get("q")?.toLowerCase() || '';
-  const authorParam = queryParams.get("author")?.toLowerCase() || '';
+  const typeParam = queryParams.get("type")?.toLowerCase() || "";
+  const searchQuery = queryParams.get("q")?.toLowerCase() || "";
+  const authorParam = queryParams.get("author")?.toLowerCase() || "";
 
   const isFirstRunRef = useRef(true); // this will check the first run to prevent requesting a query twice
 
@@ -53,18 +53,16 @@ const SearchResultPage: React.FC<Props> = () => {
       fetchUrl += `page=${page}`;
     }
 
-    console.log("Search Fetching Starts");
     axios
       .get<Posting[]>(fetchUrl)
       .then((response: AxiosResponse<Posting[]>) => {
         if (!response.data || response.data.length === 0) {
           setHasMore(false);
-          console.log(response.data);
+
           return;
         }
 
         setPostings((prevPostings) => [...prevPostings, ...response.data]);
-        console.log(response.data[0]);
       })
       .catch((error) => {
         console.error("Error fetching the result postings:", error);

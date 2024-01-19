@@ -49,12 +49,9 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
   );
 
   const queryParams = new URLSearchParams(location.search);
+  const chatId = queryParams.get("chatId")?.toLowerCase();
 
-  useEffect(() => {
-    const chatId = queryParams.get("chatId")?.toLowerCase();
-    const chat = chats.find((chat) => chat._id === chatId) || null;
-    setChatSelected(chat);
-
+  const fetchMessages = (chatId?: string) => {
     const fetchUrl = apiAddress + `/message/${userId}`;
 
     axios
@@ -76,10 +73,23 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
         });
 
         setChats(data);
+        if (chatId) {
+          const chat = data.find((chat) => chat._id === chatId) || null;
+          setChatSelected(chat);
+        }
       })
       .catch((error) => {
         console.error("Error fetching messages:", error);
       });
+  };
+
+  useEffect(() => {
+    fetchMessages(chatId);
+    const intervalId = setInterval(fetchMessages, 600000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [location]);
 
   useEffect(() => {
@@ -111,6 +121,54 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
 
   const backToOverview = () => {
     setChatSelected(null);
+    fetchMessages();
+  };
+
+  const sendMessage = (
+    e: React.FormEvent<HTMLFormElement>,
+    chatId: string,
+    message: string
+  ) => {
+    e.preventDefault();
+
+    if (!message) {
+      return;
+    }
+
+    const fetchUrl = apiAddress + `/message/${chatId}`;
+    const data = {
+      chatId: chatId,
+      userId: userId,
+      messageContent: message,
+    };
+    axios
+      .put(fetchUrl, data)
+      .then((res: AxiosResponse<Chat[]>) => {
+        const data = res.data.sort((a, b) => {
+          const lastMessageA = a.messages[a.messages.length - 1];
+          const lastMessageB = b.messages[b.messages.length - 1];
+
+          if (lastMessageA && lastMessageB) {
+            return (
+              new Date(lastMessageB.createdAt).getTime() -
+              new Date(lastMessageA.createdAt).getTime()
+            );
+          }
+
+          // Handle cases where there are no messages in one or both chats
+          return 0;
+        });
+
+        setChats(data);
+        if (chatId) {
+          const chat = data.find((chat) => chat._id === chatId) || null;
+          setChatSelected(chat);
+          console.log(chat);
+        }
+      })
+      .catch((error) => {
+        console.error("Error sending messages:", error);
+      });
   };
 
   if (!chatSelected) {
@@ -132,7 +190,14 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
         >
           Back To Messages
         </button>
-        {<ChatPageChatting chat={chatSelected} userId={userId} />}
+        {
+          <ChatPageChatting
+            chat={chatSelected}
+            userId={userId}
+            fetchMessages={fetchMessages}
+            formOnSubmit={sendMessage}
+          />
+        }
       </div>
     );
   }

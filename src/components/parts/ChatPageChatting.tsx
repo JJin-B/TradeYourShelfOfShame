@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatPageChattingMessage from "./ChatPageChattingMessage";
 import { apiAddress } from "../../Wrapper/AuthContext";
 import axios from "axios";
@@ -32,10 +32,26 @@ interface Chat {
 interface Props {
   userId: string;
   chat: Chat;
+  fetchMessages: () => void;
+  formOnSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    chatId: string,
+    message: string
+  ) => void;
 }
 
-const ChatPageChatting: React.FC<Props> = ({ userId, chat }) => {
+const ChatPageChatting: React.FC<Props> = ({
+  userId,
+  chat,
+  fetchMessages,
+  formOnSubmit,
+}) => {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const [message, setMessage] = useState<string>("");
+
+  const inputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
 
   useEffect(() => {
     const data = {
@@ -44,6 +60,7 @@ const ChatPageChatting: React.FC<Props> = ({ userId, chat }) => {
     };
     const fetchUrl = apiAddress + `/message/readMessages`;
     axios.put(fetchUrl, data).then().catch();
+    fetchMessages;
   }, []);
 
   useEffect(() => {
@@ -77,10 +94,17 @@ const ChatPageChatting: React.FC<Props> = ({ userId, chat }) => {
         </div>
       </div>
       <div className="my-2 flex">
-        <form className="w-full flex items-center">
+        <form
+          className="w-full flex items-center"
+          onSubmit={(e) => {
+            formOnSubmit(e, chat._id, message), setMessage("");
+          }}
+        >
           <input
             className="w-full h-10 rounded-md p-2"
             placeholder="Your message"
+            value={message}
+            onChange={(e) => inputOnChange(e)}
           />
           <button
             className="mx-1 inline-block text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5"
