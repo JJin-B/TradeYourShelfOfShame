@@ -60,8 +60,14 @@ const PostingDetailPage: React.FC<Props> = () => {
     day: "2-digit",
   });
 
-  const otherPostingBtnName = posting.author._id == user?._id? "Check My Other Postings": `Check ${posting.author.name}'s Other Postings` 
-  const tradeListBtnName = posting.author._id == user?._id? "Check My Trade List": `Check ${posting.author.name}'s Trade List`
+  const otherPostingBtnName =
+    posting.author._id == user?._id
+      ? "Check My Other Postings"
+      : `Check ${posting.author.name}'s Other Postings`;
+  const tradeListBtnName =
+    posting.author._id == user?._id
+      ? "Check My Trade List"
+      : `Check ${posting.author.name}'s Trade List`;
 
   return (
     <>
@@ -84,10 +90,7 @@ const PostingDetailPage: React.FC<Props> = () => {
               />
             </div>
             <div className="my-3">
-              <Button
-                text={tradeListBtnName}
-                onClick={tradeListOnClick}
-              />
+              <Button text={tradeListBtnName} onClick={tradeListOnClick} />
             </div>
             {posting.author._id != user?._id && (
               <PostingDetailMessage posting={posting} />

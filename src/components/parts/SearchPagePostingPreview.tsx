@@ -76,7 +76,7 @@ const SearchPagePostingPreview: React.FC<Props> = ({ posting }) => {
         </div>
         {user && user._id === posting.author._id && (
           <div>
-            <Button className="m-1 w-24" text="Edit" onClick={editOnClick} />
+            <Button className="m-1 w-24 bg-blue-400" text="Edit" onClick={editOnClick} />
             <DeleteButton posting_id={posting._id} />
           </div>
         )}

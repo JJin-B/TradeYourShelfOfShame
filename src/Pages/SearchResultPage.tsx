@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import axios, { AxiosResponse } from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Posting from "../components/classes/Posting";
 import SearchPagePostingPreview from "../components/parts/SearchPagePostingPreview";
@@ -12,7 +12,6 @@ interface Props {}
 
 const SearchResultPage: React.FC<Props> = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const queryParams = new URLSearchParams(location.search);
 
@@ -59,11 +58,9 @@ const SearchResultPage: React.FC<Props> = () => {
       .then((response: AxiosResponse<Posting[]>) => {
         if (!response.data || response.data.length === 0) {
           setHasMore(false);
-
           return;
         }
 
-        
         setPostings((prevPostings) => [...prevPostings, ...response.data]);
       })
       .catch((error) => {
@@ -75,19 +72,7 @@ const SearchResultPage: React.FC<Props> = () => {
     setPage(1); // Reset page to 1 when the URL parameters change
     setPostings([]); // Clear existing postings
     setHasMore(true); // Reset hasMore to true
-
-    let url = "/search?";
-    if (typeParam) {
-      url += `type=${typeParam}`;
-    }
-
-    if (searchQuery) {
-      url += `${typeParam ? "&" : ""}q=${searchQuery}`;
-    }
-
-    // Push the new URL to history to trigger a re-render
-    navigate(url);
-  }, [typeParam, searchQuery, authorParam, navigate]);
+  }, [location]);
 
   return (
     <div className="justify-center mx-auto max-w-6xl">
@@ -96,7 +81,7 @@ const SearchResultPage: React.FC<Props> = () => {
           dataLength={postings.length}
           next={() => setPage(page + 1)}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
+          loader={<h1>Loading...</h1>}
         >
           {postings.map((posting) => (
             <SearchPagePostingPreview key={posting._id} posting={posting} />
@@ -105,7 +90,7 @@ const SearchResultPage: React.FC<Props> = () => {
       ) : (
         <div>
           {hasMore ? (
-            <h4>Loading...</h4>
+            <h1>Loading...</h1>
           ) : (
             <div className="text-center">NO POSTINGS FOUND</div>
           )}
