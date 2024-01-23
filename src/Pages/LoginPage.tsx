@@ -41,24 +41,31 @@ const LoginPage: React.FC<Props> = () => {
 
     try {
       const fetchUrl = apiAddress + "/user/signin";
-      await axios
-        .post(fetchUrl, { email: email, password: password })
-        .then((res: AxiosResponse) => {
-          const data = res.data;
-          if (data && data === "Not valid User") {
-            toast.error("Either email or password is wrong", {
-              autoClose: 5000,
-            });
-            return;
-          }
+      // await axios
+      //   .post(fetchUrl, { email: email, password: password })
+      axios({
+        method: "options", // Use 'options' for preflight CORS request
+        url: fetchUrl,
+        headers: {
+          "Access-Control-Request-Method": "POST", // Use the actual HTTP method you intend to use
+          Origin: "https://tradeyourshelfofshame.com",
+        },
+      }).then((res: AxiosResponse) => {
+        const data = res.data;
+        if (data && data === "Not valid User") {
+          toast.error("Either email or password is wrong", {
+            autoClose: 5000,
+          });
+          return;
+        }
 
-          signin(data);
-          if (document.referrer) {
-            navigate(-1);
-          } else {
-            navigate("/");
-          }
-        });
+        signin(data);
+        if (document.referrer) {
+          navigate(-1);
+        } else {
+          navigate("/");
+        }
+      });
     } catch (e) {
       if (e instanceof Error) {
         const errorMessage = e.message || "An unexpected error occurred.";
