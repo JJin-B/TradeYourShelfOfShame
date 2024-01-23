@@ -44,12 +44,13 @@ const LoginPage: React.FC<Props> = () => {
       // await axios
       //   .post(fetchUrl, { email: email, password: password })
       axios({
-        method: "options", // Use 'options' for preflight CORS request
+        method: "post",
         url: fetchUrl,
-        headers: {
-          "Access-Control-Request-Method": "POST", // Use the actual HTTP method you intend to use
-          Origin: "https://tradeyourshelfofshame.com",
+        data: {
+          email: email,
+          password: password,
         },
+        withCredentials: true,
       }).then((res: AxiosResponse) => {
         const data = res.data;
         if (data && data === "Not valid User") {
