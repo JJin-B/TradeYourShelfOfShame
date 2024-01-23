@@ -58,7 +58,6 @@ const LoginPage: React.FC<Props> = () => {
           email: email,
           password: password,
         },
-        withCredentials: true,
       }).then((res: AxiosResponse) => {
         const data = res.data;
         if (data && data === "Not valid User") {
