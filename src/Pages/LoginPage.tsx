@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import { useAuth } from "../Wrapper/AuthContext";
 import { apiAddress } from "../Wrapper/AuthContext";
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 interface Props {}
 const LoginPage: React.FC<Props> = () => {
   const navigate = useNavigate();
@@ -14,12 +16,18 @@ const LoginPage: React.FC<Props> = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const [isValidEmail, setIsValidEmail] = useState<boolean>(
+    Boolean(email.match(emailRegex))
+  );
+
   const handleOnChange = (
     inputType: "email" | "password",
     e: ChangeEvent<HTMLInputElement>
   ) => {
     if (inputType === "email") {
-      setEmail(e.target.value);
+      const emailInput = e.target.value;
+      setEmail(emailInput);
+      setIsValidEmail(Boolean(emailInput.match(emailRegex)));
     } else if (inputType === "password") {
       setPassword(e.target.value);
     }
@@ -109,6 +117,11 @@ const LoginPage: React.FC<Props> = () => {
                 Please enter your email address.
               </p>
             )}
+            {email && !isValidEmail && (
+              <p className="text-red-500 text-xs italic">
+                Please enter a valid email address.
+              </p>
+            )}
           </div>
           <div className="mb-6">
             <label
@@ -133,9 +146,13 @@ const LoginPage: React.FC<Props> = () => {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
+                !isValidEmail || !password
+                  ? "opacity-50 cursor-not-allowed"
+                  : "cursor-pointer"
+              }`}
               type="submit"
-              disabled={email && password ? false : true}
+              disabled={!isValidEmail || !password ? true : false}
             >
               Sign In
             </button>

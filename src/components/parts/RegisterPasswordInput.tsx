@@ -85,20 +85,20 @@ const RegisterPasswordInput: React.FC<Props> = ({
       </div>
       <div className="mx-auto flex items-center">
         <ul>
-          <li className={`font-bold text-${conditionMet(charCount)}`}>
+          <li className={`font-bold px-2 text-${conditionMet(charCount)}`}>
             at least 8 characters
           </li>
-          <li className={`font-bold text-${conditionMet(specialChar)}`}>
+          <li className={`font-bold px-2 text-${conditionMet(specialChar)}`}>
             at least 1 special character <br />({"!@#$%^&*()_+{}[]:;<>,.?~\\/-"}
             )
           </li>
-          <li className={`font-bold text-${conditionMet(upperChar)}`}>
+          <li className={`font-bold px-2 text-${conditionMet(upperChar)}`}>
             at least 1 upper character
           </li>
-          <li className={`font-bold text-${conditionMet(lowerChar)}`}>
+          <li className={`font-bold px-2 text-${conditionMet(lowerChar)}`}>
             at least 1 lower character
           </li>
-          <li className={`font-bold text-${conditionMet(number)}`}>
+          <li className={`font-bold px-2 text-${conditionMet(number)}`}>
             at least 1 number
           </li>
         </ul>
