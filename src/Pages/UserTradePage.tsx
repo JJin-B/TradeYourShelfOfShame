@@ -95,6 +95,9 @@ const UserTradePage: React.FC<Props> = () => {
     const uniqueTypeBggDataCombinations: PostingBggData[] = [];
 
     for (const posting of postings) {
+      if (!posting.bggData) {
+        return;
+      }
       for (const bggData of posting.bggData) {
         const existingCombination = uniqueTypeBggDataCombinations.find(
           (combo) => combo.type === posting.type && combo.id === bggData.id

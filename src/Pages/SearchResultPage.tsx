@@ -31,7 +31,7 @@ const SearchResultPage: React.FC<Props> = () => {
       return;
     }
 
-    let fetchUrl = apiAddress + "/search?";
+    let fetchUrl = apiAddress + "/posting/search?";
 
     if (typeParam) {
       fetchUrl += `type=${typeParam}`;

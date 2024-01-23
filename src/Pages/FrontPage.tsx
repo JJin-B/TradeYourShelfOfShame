@@ -11,7 +11,7 @@ const FrontPage: React.FC<Props> = () => {
   const [postings, setPostings] = useState<Posting[]>([]);
   useEffect(() => {
     // Fetch data from your API
-    fetch(apiAddress + "/latest-postings")
+    fetch(apiAddress + "/posting/latest-postings")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch latest postings");
