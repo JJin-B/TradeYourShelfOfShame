@@ -52,10 +52,12 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
   const chatId = queryParams.get("chatId")?.toLowerCase();
 
   const fetchMessages = (chatId?: string) => {
-    const fetchUrl = apiAddress + `/message/${userId}`;
+    const fetchUrl = apiAddress + `/message`;
+
+    console.log(fetchUrl);
 
     axios
-      .get<Chat[]>(fetchUrl)
+      .get<Chat[]>(fetchUrl, { params: { userId: userId } })
       .then((res: AxiosResponse<Chat[]>) => {
         const data = res.data.sort((a, b) => {
           const lastMessageA = a.messages[a.messages.length - 1];
