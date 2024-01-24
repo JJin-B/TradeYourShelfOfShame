@@ -24,7 +24,7 @@ const UserTradeSendMessage: React.FC<Props> = ({ userPOI }) => {
 
   const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
-    console.log(message);
+    // console.log(message);
   };
 
   return (

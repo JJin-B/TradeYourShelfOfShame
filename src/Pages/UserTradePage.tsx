@@ -53,7 +53,6 @@ const UserTradePage: React.FC<Props> = () => {
 
   useEffect(() => {
     let fetchUrl = apiAddress + `/user/${userId}`;
-    console.log("Trade page fetching starts");
     axios
       .get<User>(fetchUrl)
       .then((response: AxiosResponse<User>) => {
@@ -74,7 +73,7 @@ const UserTradePage: React.FC<Props> = () => {
         }
       });
 
-    fetchUrl = apiAddress + `/search?author_id=${userId}&viewAll=true`;
+    fetchUrl = apiAddress + `/posting/search?author_id=${userId}&viewAll=true`;
 
     axios
       .get<Posting[]>(fetchUrl)

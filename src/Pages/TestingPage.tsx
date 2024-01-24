@@ -11,7 +11,7 @@ const TestingPage: React.FC<Props> = () => {
 
   const onClick1 = async () => {
     setResult("");
-    console.log(fetchUrl);
+    // console.log(fetchUrl);
     axios
       .get(fetchUrl)
       .then((res) => {

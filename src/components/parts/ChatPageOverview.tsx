@@ -42,7 +42,6 @@ const ChatPageOverview: React.FC<Props> = ({
   chatOnClick,
 }) => {
   const displayOptionClass = `p-3 bg-gray-200 border-b-2 text-slate-500 hover:text-slate-700 hover:border-slate-700`;
-  // console.log(displayOption);
   return (
     <div className="mx-auto max-w-4xl">
       <div className="m-3 rounded-sm flex items-center h-14">

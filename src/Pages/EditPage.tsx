@@ -152,7 +152,7 @@ const PostPage: React.FC<Props> = ({ user }) => {
         },
         body: JSON.stringify(modifiedParams),
       });
-      console.log("put request fetched");
+      
 
       if (!response.ok) {
         throw new Error("Network response was not ok");

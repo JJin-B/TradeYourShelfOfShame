@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Picture: React.FC<Props> = ({ url }) => {
-  console.log(url);
+  
   return (
     <div className="hidden duration-700 ease-in-out" data-carousel-item>
       <img

@@ -54,7 +54,7 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
   const fetchMessages = (chatId?: string) => {
     const fetchUrl = apiAddress + `/message`;
 
-    console.log(fetchUrl);
+    // console.log(fetchUrl);
 
     axios
       .get<Chat[]>(fetchUrl, { params: { userId: userId } })
