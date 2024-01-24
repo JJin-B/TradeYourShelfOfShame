@@ -115,7 +115,7 @@ const UserTradeBggSearch: React.FC<Props> = ({ onClickAdd }) => {
           input={bggSearchQuery}
           onChangeInput={handleBggSearch}
           onClick={searchOnBgg}
-          classNamesToAdd="sm:w-[312px]"
+          classNamesToAdd="sm:w-full"
         />
       </div>
       <PostBggSearchResult
@@ -123,7 +123,7 @@ const UserTradeBggSearch: React.FC<Props> = ({ onClickAdd }) => {
         interestType={bggInterestType}
         display={true}
         onClickAdd={onClickAdd}
-        classesToAdd="border-2 border-gray-500 bg-white"
+        classesToAdd="border-2 border-gray-500 bg-white w-full"
         isLoading={isLoading}
       />
     </div>
