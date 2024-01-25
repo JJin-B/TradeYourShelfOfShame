@@ -47,34 +47,33 @@ const LoginPage: React.FC<Props> = () => {
       return;
     }
 
+    const data = {
+      email: email,
+      password: password,
+    };
+
     try {
       const fetchUrl = apiAddress + "/user/signin";
-      // await axios
-      //   .post(fetchUrl, { email: email, password: password })
-      axios({
-        method: "post",
-        url: fetchUrl,
-        data: {
-          email: email,
-          password: password,
-        },
-      }).then((res: AxiosResponse) => {
-        const data = res.data;
-        if (data && data === "Not valid User") {
-          toast.error("Either email or password is wrong", {
-            autoClose: 5000,
-          });
-          return;
-        }
 
-        signin(data);
-        if (document.referrer) {
-          navigate(-1);
-        } else {
-          navigate("/");
-        }
-      });
+      axios
+        .post(fetchUrl, data)
+        .then((res: AxiosResponse) => {
+          const data = res.data;
+          signin(data.userInfo._doc);
+          if (document.referrer) {
+            navigate(-1);
+          } else {
+            navigate("/");
+          }
+        })
+        .catch((e) => {
+          const message = e.response.data.message;
+          if (message) {
+            toast.error(message, { autoClose: 5000 });
+          }
+        });
     } catch (e) {
+      // console.log(e);
       if (e instanceof Error) {
         const errorMessage = e.message || "An unexpected error occurred.";
         toast.error(
