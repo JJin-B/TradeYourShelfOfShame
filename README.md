@@ -1,11 +1,29 @@
-# React + TypeScript + Vite
+# Trade Your Shelf of Shame
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Purpose
+This project aims to create a dedicated platform for board gamers looking to trade their less-played board games, often referred to as the "Shelf-of-Shame." While there are various platforms for trading used items, there's a noticeable gap when it comes to board games.
 
-Currently, two official plugins are available:
+### Key Features:
+1. Game Database Integration:
+Users can easily add their games for buying, selling, or trading by selecting titles from the comprehensive Board Game Geek's board game list.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. Trade Listings:
+In addition to traditional buying and selling, users can list games they're willing to trade. This unique feature encourages a dynamic exchange of board games within the community.
+
+3. Interest Notifications:
+Users can create a list of games they are interested in. Whenever another user publishes a relevant listing, the interested user receives notifications, facilitating potential trades.
+
+By providing a platform specifically tailored for board gamers, this project aims to foster a vibrant community centered around the shared passion for board games. Through efficient game matching and personalized notifications, users can easily connect with others who share their gaming preferences and expand their collections.
+
+
+## Installation
+
+
+
+
+
+
+
 
 ## Expanding the ESLint configuration
 
