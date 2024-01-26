@@ -17,32 +17,22 @@ By providing a platform specifically tailored for board gamers, this project aim
 
 
 ## Installation
+1. Clone this repository `git clone https://github.com/JJin-B/TradeYourShelfOfShame.git`
+2. Navigate to the project directory `cd TradeYourShelfOfShame`
+3. Install dependencies `npm install`
+
+## Backend Dependency
+This project assumes running the backend using another repository: [TradeYourShelfOfShame-Backend](https://github.com/JJin-B/TTYS-Backend). Follow the instructions in the backend repository to set up and run the server.
+
+
+## Run
+1. Ensure you have completed the installation steps outlined in the "Installation" section.
+2. Open `src/Wrapper/AuthContext.tsx`
+3. Update `isLocal` variable to `true` if you running on local server. `const isLocal = true`
+4. Update `apidAddress` variable with the address of your backend server. 
+5. Run TypeScript compiler: `tsc` (to convert Typescript to JavaScript)
+6. Start the app `npm run dev`
+7. Open your browser and go to `http://localhost:PORTNUMBER` to access the website. Make sure to replace the port number placeholder with the actual port number used for the development server. 
 
 
 
-
-
-
-
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
