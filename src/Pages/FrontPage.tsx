@@ -28,7 +28,7 @@ const FrontPage: React.FC<Props> = () => {
 
   return (
     <>
-      <FrontImg imgSrc={"https://drive.google.com/uc?id=1NhL5KcbU9hKqf8SN0MU_iEiqttrWZ5KW"} />
+      <FrontImg imgSrc={"https://lh3.google.com/u/0/d/1NhL5KcbU9hKqf8SN0MU_iEiqttrWZ5KW"} />
       <div className="p-5 text-3xl flex flex-wrap mx-auto max-w-6xl">
         <h1>Recent Postings..</h1>
       </div>
