@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const logoDarkSrc =
-  "https://drive.google.com/uc?id=1WmWSVdS28B4QVsj2mvNwh4P5xyCAXmrY";
+  "https://lh3.google.com/u/0/d/1WmWSVdS28B4QVsj2mvNwh4P5xyCAXmrY";
 const logoLightSrc =
-  "https://drive.google.com/uc?id=1h-17UWlOexAVaZg5O6hfjlWuOVPy-Op4";
+  "https://lh3.google.com/u/0/d/1h-17UWlOexAVaZg5O6hfjlWuOVPy-Op4";
 
 const NavBarLogo: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(
