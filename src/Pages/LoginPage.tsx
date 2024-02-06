@@ -60,6 +60,9 @@ const LoginPage: React.FC<Props> = () => {
         .then((res: AxiosResponse) => {
           const data = res.data;
           signin(data.userInfo._doc);
+          toast.success("You have successfully signed in!", {
+            autoClose: 5000,
+          });
           if (document.referrer) {
             navigate(-1);
           } else {
