@@ -10,8 +10,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 // const apiAddress = "http://13.59.201.41:3001" // http url for AWS EC2 backend
-// const apiAddress = "https://9afnnp3x28.execute-api.us-east-2.amazonaws.com/TTYS"; // API Gateway address
-const apiAddress = "http://localhost:3001"; // local server for development
+const apiAddress = "https://9afnnp3x28.execute-api.us-east-2.amazonaws.com/TTYS"; // API Gateway address
+// const apiAddress = "http://localhost:3001"; // local server for development
 
 
 interface PostingNotification {

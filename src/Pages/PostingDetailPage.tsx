@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 
 import { apiAddress, useAuth } from "../Wrapper/AuthContext";
 import PostingDetailMessage from "../components/parts/PostingDetailMessage";
+import PostingDetailsRelatedBggGames from "../components/parts/PostingDetailsRelatedBggGames";
 
 interface Props {}
 
@@ -99,16 +100,9 @@ const PostingDetailPage: React.FC<Props> = () => {
         </div>
       </div>
 
-      <div className="mx-auto h-18 p-3 min-h-fit max-w-6xl m-10 dark:border dark:border-grey-700 overflow-auto rounded-md">
-        <h1 className="text-2xl">Related BGG Games</h1>
-        {posting.bggData.map((bgg) => (
-          <li key={bgg.id} className="hover:underline hover:text-blue-500">
-            <a href={`https://boardgamegeek.com/boardgame/${bgg.id}}`} target="_blank">
-              {bgg.name}
-            </a>
-          </li>
-        ))}
-      </div>
+      {posting.bggData.length > 0 && (
+        <PostingDetailsRelatedBggGames posting={posting} />
+      )}
 
       <div className="mx-auto h-64 p-3 min-h-fit max-w-6xl m-10 dark:border dark:border-grey-700 rounded-md">
         <h1 className="text-2xl">Description</h1>
