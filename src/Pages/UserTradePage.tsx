@@ -5,35 +5,11 @@ import axios, { AxiosResponse } from "axios";
 import { useAuth, apiAddress } from "../Wrapper/AuthContext";
 
 import Posting from "../components/classes/Posting";
-import UserTradePostingList from "../components/parts/UserTradePostingList";
-import UserTradeInterestList from "../components/parts/UserTradeInterestList";
 import UserMyInterestList from "../components/parts/UserMyInterestList";
 import UserTradeSendMessage from "../components/parts/UserTradeSendMessage";
 
-interface UserInterest {
-  interestType: "sell" | "buy";
-  id: string;
-  name: string;
-  year?: string;
-}
-
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  interests: UserInterest[];
-}
-
-interface BggData {
-  id: string;
-  name: string;
-  year?: string;
-}
-
-interface PostingBggData extends BggData {
-  type: "sell" | "buy";
-  postingId: string;
-}
+import { PostingBggData, User } from "../components/classes/interfaces";
+import UserTradeList from "../components/parts/UserTradeList";
 
 interface Props {}
 
@@ -133,44 +109,17 @@ const UserTradePage: React.FC<Props> = () => {
     <div className="my-2 text-2xl text-gray-900 w-full dark:text-white font-bold flex flex-col items-center">
       <span>{isMyList ? "My" : `${userPOI?.name}'s`} Trade List</span>
       <div className="flex flex-wrap justify-center w-full max-w-6xl my-2">
-        <div className="flex flex-col items-center w-full">
-          <span className="flex justify-center mx-1 text-lg font-bold rounded-md p-2 w-full bg-blue-300 text-gray-900">
-            I Am Looking For ...
-          </span>
-          <div className="flex flex-wrap justify-center w-full">
-            <div className="text-md flex flex-col items-center border border-2 border-blue-500 rounded-lg w-2/5  max-w-[600px] min-w-[280px] h-64 m-2 p-1 bg-gray-100 dark:bg-gray-500">
-              <span className="border-b-2 mb-2">List from Postings</span>
-              <UserTradePostingList postings={postingBuyTradeList} />
-            </div>
-            <div className="text-md flex flex-col items-center border border-2 border-blue-500 rounded-lg w-2/5  max-w-[600px] min-w-[280px] h-64 m-2 p-1 bg-gray-100 dark:bg-gray-500">
-              <span className="border-b-2 mb-2">Interest List</span>
-              <UserTradeInterestList
-                interests={userPOI.interests?.filter(
-                  (interest) => interest.interestType === "buy"
-                )}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col items-center w-full">
-          <span className="flex justify-center mx-1 text-lg font-bold rounded-md p-2 w-full bg-red-300 text-gray-900">
-            I Am Offering ...
-          </span>
-          <div className="flex flex-wrap justify-center w-full">
-            <div className="text-md flex flex-col items-center border border-2 border-red-500 rounded-lg w-2/5  max-w-[600px] min-w-[280px] h-64 m-2 p-1 bg-gray-100 dark:bg-gray-500">
-              <span className="border-b-2 mb-2">List from Postings</span>
-              <UserTradePostingList postings={postingSellTradeList} />
-            </div>
-            <div className="text-md flex flex-col items-center border border-2 border-red-500 rounded-lg w-2/5  max-w-[600px] min-w-[280px] h-64 m-2 p-1 bg-gray-100 dark:bg-gray-500">
-              <span className="border-b-2 mb-2">Interest List</span>
-              <UserTradeInterestList
-                interests={userPOI.interests?.filter(
-                  (interest) => interest.interestType === "sell"
-                )}
-              />
-            </div>
-          </div>
-        </div>
+        <UserTradeList
+          type="buy"
+          postings={postingBuyTradeList}
+          user={userPOI}
+        />
+
+        <UserTradeList
+          type="sell"
+          postings={postingSellTradeList}
+          user={userPOI}
+        />
 
         {user?._id === userPOI._id ? (
           <UserMyInterestList defaultUserInterestList={userPOI.interests} />
