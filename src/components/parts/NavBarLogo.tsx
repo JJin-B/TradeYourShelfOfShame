@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const logoDarkSrc =
   "https://lh3.google.com/u/0/d/1WmWSVdS28B4QVsj2mvNwh4P5xyCAXmrY";
+  
 const logoLightSrc =
   "https://lh3.google.com/u/0/d/1h-17UWlOexAVaZg5O6hfjlWuOVPy-Op4";
 

@@ -30,8 +30,7 @@ const PictureCarousel: React.FC<Props> = ({ picUrls }) => {
   }
 
   return (
-    <div className="relative w-full mt-5" data-carousel="slide">
-      <div className="carousel">
+      <div className="relative w-full mt-5 carousel px-1 mx-1" data-carousel="slide">
         <div className="carousel-inner">
           {picUrls.map((picUrl, index) => (
             <div
@@ -47,17 +46,19 @@ const PictureCarousel: React.FC<Props> = ({ picUrls }) => {
             </div>
           ))}
         </div>
-        {/* <!-- Slider controls --> */}
-        {/* prettier-ignore */}
-        <button className={`start-0 ${btnClasses} hover:text-opacity-10`} onClick={prevSlide}> 
+        <button
+          className={`start-0 ${btnClasses} hover:text-opacity-10`}
+          onClick={prevSlide}
+        >
           ◀
         </button>
-        {/* prettier-ignore */}
-        <button className={`end-0 ${btnClasses} hover:text-opacity-10`} onClick={nextSlide}>
+        <button
+          className={`end-0 ${btnClasses} hover:text-opacity-10`}
+          onClick={nextSlide}
+        >
           ▶
         </button>
       </div>
-    </div>
   );
 };
 
