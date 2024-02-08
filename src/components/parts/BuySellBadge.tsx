@@ -1,9 +1,7 @@
-import React from "react";
-
-interface Props {
+interface BuySellBadgeProps {
   type: "buy" | "sell";
 }
-const BuySellBadge: React.FC<Props> = ({ type }) => {
+const BuySellBadge: React.FC<BuySellBadgeProps> = ({ type }) => {
   const badgeColor =
     type.toLowerCase() === "sell" ? "bg-red-500" : "bg-blue-500";
 

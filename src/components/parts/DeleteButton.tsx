@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { apiAddress } from "../../Wrapper/AuthContext";
 
-interface Props {
+interface DeleteBtnProps {
   posting_id: string;
 }
-const DeleteButton: React.FC<Props> = ({ posting_id }) => {
+const DeleteButton: React.FC<DeleteBtnProps> = ({ posting_id }) => {
   const navigate = useNavigate();
   const [deletePopup, setDeletePopup] = useState<boolean>(false);
 

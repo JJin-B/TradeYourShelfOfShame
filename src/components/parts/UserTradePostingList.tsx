@@ -27,7 +27,7 @@ const UserTradePostingList: React.FC<Props> = ({ postings }) => {
       {postings.map((posting) => (
         <LinkedLi
           key={posting.id}
-          className="hover:underline"
+          className="hover:underline hover:cursor-pointer"
           link={`/posting/${posting.postingId}`}
           text={`- ${posting.name} (${posting.year})`}
         />

@@ -3,34 +3,18 @@ import ChatPageChattingMessage from "./ChatPageChattingMessage";
 import { apiAddress } from "../../Wrapper/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Chat } from "../classes/interfaces";
 
-interface Message {
-  _id: string;
-  message: string;
-  sentBy: string;
-  isViewed: boolean;
-  createdAt: Date;
-}
+const getChattingWith = (
+  receiverId: string,
+  userId: string,
+  senderName: string,
+  receiverName: string
+) => {
+  return receiverId === userId ? senderName : receiverName;
+};
 
-interface Chat {
-  _id: string;
-  sender: {
-    _id: string;
-    name: string;
-  };
-  receiver: {
-    _id: string;
-    name: string;
-  };
-  posting: {
-    _id: string;
-    title: string;
-    author: string;
-  };
-  messages: Message[];
-}
-
-interface Props {
+interface ChattingProps {
   userId: string;
   chat: Chat;
   fetchMessages: () => void;
@@ -41,7 +25,7 @@ interface Props {
   ) => void;
 }
 
-const ChatPageChatting: React.FC<Props> = ({
+const ChatPageChatting: React.FC<ChattingProps> = ({
   userId,
   chat,
   fetchMessages,
@@ -76,12 +60,16 @@ const ChatPageChatting: React.FC<Props> = ({
     navigator(`/posting/${postId}`);
   };
 
-  const talkingTo =
-    chat.receiver._id === userId ? chat.sender.name : chat.receiver.name;
-  const className = "bg-gray-200 h-[480px] rounded-lg p-2";
+  const chattingWith = getChattingWith(
+    chat.receiver._id,
+    userId,
+    chat.sender.name,
+    chat.receiver.name
+  );
+
   return (
     <div>
-      <div className={className}>
+      <div className="bg-gray-200 h-[480px] rounded-lg p-2">
         <div
           className="text-lg hover:underline cursor-pointer flex justify-center p-3 bg-gray-200 border-b-2 border-gray-700"
           onClick={() => titleOnClick(chat.posting._id)}
@@ -96,7 +84,7 @@ const ChatPageChatting: React.FC<Props> = ({
             <ChatPageChattingMessage
               key={message._id || index}
               userId={userId}
-              talkingTo={talkingTo}
+              chattingWith={chattingWith}
               message={message}
             />
           ))}

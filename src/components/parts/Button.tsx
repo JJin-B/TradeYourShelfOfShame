@@ -1,13 +1,11 @@
-import React from "react";
-
-interface Props {
+interface BtnProps {
   text?: string;
   className?: string;
   onClick?: () => void;
   type?: "submit" | "button" | "reset" | undefined;
 }
 
-const Button: React.FC<Props> = ({
+const Button: React.FC<BtnProps> = ({
   text = "Submit",
   type = "button",
   className,

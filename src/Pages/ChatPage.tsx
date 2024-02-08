@@ -8,36 +8,12 @@ import ChatPageOverview from "../components/parts/ChatPageOverview";
 import axios, { AxiosResponse } from "axios";
 import ChatPageChatting from "../components/parts/ChatPageChatting";
 
-interface Message {
-  _id: string;
-  message: string;
-  sentBy: string;
-  isViewed: boolean;
-  createdAt: Date;
-}
+import { Chat } from "../components/classes/interfaces";
 
-interface Chat {
-  _id: string;
-  sender: {
-    _id: string;
-    name: string;
-  };
-  receiver: {
-    _id: string;
-    name: string;
-  };
-  posting: {
-    _id: string;
-    title: string;
-    author: string;
-  };
-  messages: Message[];
-}
-
-interface Props {
+interface ChatProps {
   userId: string;
 }
-const ChatPage: React.FC<Props> = ({ userId }) => {
+const ChatPage: React.FC<ChatProps> = ({ userId }) => {
   const location = useLocation();
 
   const [chatSelected, setChatSelected] = useState<Chat | null>(null);
@@ -53,8 +29,6 @@ const ChatPage: React.FC<Props> = ({ userId }) => {
 
   const fetchMessages = (chatId?: string) => {
     const fetchUrl = apiAddress + `/message`;
-
-    // console.log(fetchUrl);
 
     axios
       .get<Chat[]>(fetchUrl, { params: { userId: userId } })

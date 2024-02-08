@@ -1,52 +1,33 @@
-import React from "react";
 import LetterWithRound from "./LetterWithRound";
-
-interface Message {
-  _id: string;
-  message: string;
-  sentBy: string;
-  isViewed: boolean;
-  createdAt: Date;
-}
-
-interface Chat {
-  _id: string;
-  sender: {
-    _id: string;
-    name: string;
-  };
-  receiver: {
-    _id: string;
-    name: string;
-  };
-  posting: {
-    _id: string;
-    title: string;
-  };
-  messages: Message[];
-}
+import { Chat } from "../classes/interfaces";
 
 const truncateText = (text: string, maxLength: number) => {
   return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 };
 
-interface Props {
-  chat: Chat;
-  userId: string;
-  chatOnClick: (cid: string) => void;
-}
-const ChatPageChatList: React.FC<Props> = ({ chat, userId, chatOnClick }) => {
-  const undreadMessage = chat.messages.filter((message) => {
+const getStypeByUnread = (chat: Chat, userId: string) => {
+  const unreadMessage = chat.messages.filter((message) => {
     return message.sentBy !== userId && !message.isViewed;
   });
+  const isNew: boolean = unreadMessage.length > 0;
 
-  const isNew = undreadMessage.length > 0;
-
-  const liClassName = `flex items-start h-24 w-full ${
+  const liStyleClass = `flex items-start h-24 w-full ${
     isNew ? "bg-gray-400" : "bg-gray-200"
   } hover:bg-gray-500 hover:text-white m-1 border-2 rounded-md text-xs`;
-  const isSentChat = chat.sender._id === userId;
-  const chattingWith = isSentChat ? chat.receiver.name : chat.sender.name;
+
+  return { isNew, liStyleClass };
+};
+
+const getChatInfo = (chat: Chat, userId: string) => {
+  const { isNew, liStyleClass } = getStypeByUnread(chat, userId);
+
+  const title = chat.posting.title
+    ? truncateText(chat.posting.title, 50)
+    : "Trade";
+
+  const chattingWith =
+    chat.sender._id === userId ? chat.receiver.name : chat.sender.name;
+
   const dateSent = new Date(
     chat.messages[chat.messages.length - 1].createdAt
   ).toLocaleString("en-US", {
@@ -57,11 +38,28 @@ const ChatPageChatList: React.FC<Props> = ({ chat, userId, chatOnClick }) => {
     minute: "2-digit",
   });
 
+  return { isNew, liStyleClass, title, chattingWith, dateSent };
+};
+
+interface ChatListProps {
+  chat: Chat;
+  userId: string;
+  chatOnClick: (cid: string) => void;
+}
+const ChatPageChatList: React.FC<ChatListProps> = ({
+  chat,
+  userId,
+  chatOnClick,
+}) => {
+  const { isNew, liStyleClass, title, chattingWith, dateSent } = getChatInfo(
+    chat,
+    userId
+  );
+
   return (
-    <li className={liClassName}>
+    <li className={liStyleClass}>
       <button
         className="flex w-full h-full"
-        // onClick={() => chatOnClick(chat._id)}
         onClick={() => chatOnClick(chat._id)}
       >
         <div className="flex items-center h-full">
@@ -69,9 +67,7 @@ const ChatPageChatList: React.FC<Props> = ({ chat, userId, chatOnClick }) => {
         </div>
         <div className="flex flex-col w-full h-full">
           <div className="flex justify-center text-base sm:text-lg">
-            {chat.posting.title
-              ? truncateText(chat.posting.title, 50)
-              : "Trade"}
+            {title}
           </div>
           <div className="flex items-center justify-center h-full text-slate-800">
             {chat.messages[chat.messages.length - 1].message}

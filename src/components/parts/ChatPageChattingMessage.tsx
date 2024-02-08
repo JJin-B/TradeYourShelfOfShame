@@ -1,24 +1,9 @@
 import React from "react";
 import LetterWithRound from "./LetterWithRound";
 
-interface Message {
-  _id: string;
-  message: string;
-  sentBy: string;
-  isViewed: boolean;
-  createdAt: Date;
-}
+import { Message } from "../classes/interfaces";
 
-interface Props {
-  userId: string;
-  talkingTo: string;
-  message: Message;
-}
-const ChatPageChattingMessage: React.FC<Props> = ({
-  userId,
-  talkingTo,
-  message,
-}) => {
+const getChattingInfo = (userId: string, message: Message) => {
   const isMyMessage = message.sentBy === userId;
   const dateSent = new Date(message.createdAt).toLocaleString("en-US", {
     year: "numeric",
@@ -28,19 +13,38 @@ const ChatPageChattingMessage: React.FC<Props> = ({
     minute: "2-digit",
   });
 
-  const className = `flex justify-${isMyMessage ? "end" : "start"} items-${
+  const styleClassName = `flex justify-${isMyMessage ? "end" : "start"} items-${
     isMyMessage ? "end" : "start"
   }`;
   const color = isMyMessage ? "bg-blue-800 text-white" : "bg-gray-300";
 
+  return { isMyMessage, dateSent, styleClassName, color };
+};
+
+interface ChattingMessageProps {
+  userId: string;
+  chattingWith: string;
+  message: Message;
+}
+
+const ChatPageChattingMessage: React.FC<ChattingMessageProps> = ({
+  userId,
+  chattingWith,
+  message,
+}) => {
+  const { isMyMessage, dateSent, styleClassName, color } = getChattingInfo(
+    userId,
+    message
+  );
+
   return (
-    <div className={className}>
+    <div className={styleClassName}>
       {!isMyMessage && (
         <div>
-          <LetterWithRound letter={talkingTo[0]} />
+          <LetterWithRound letter={chattingWith[0]} />
         </div>
       )}
-      <div className={className + " flex-col min-w-[240px]"}>
+      <div className={styleClassName + " flex-col min-w-[240px]"}>
         <div
           className={`flex items-end mr-2 w-4/5 border-2 rounded-lg p-2 ${color}`}
         >
