@@ -17,7 +17,6 @@ import ChatPage from "./Pages/ChatPage";
 import WrapperComponent from "./Wrapper/WrapperComponent";
 
 import { useAuth } from "./Wrapper/AuthContext";
-import TestPage from "./Pages/TestPage";
 
 function App() {
   const { user } = useAuth();
@@ -109,14 +108,6 @@ function App() {
             element={
               <WrapperComponent>
                 {user ? <ChatPage userId={user._id} /> : <LoginPage />}
-              </WrapperComponent>
-            }
-          />
-          <Route
-            path="/test"
-            element={
-              <WrapperComponent>
-                <TestPage />
               </WrapperComponent>
             }
           />
