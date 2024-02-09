@@ -25,14 +25,20 @@ By providing a platform specifically tailored for board gamers, this project aim
 This project assumes running the backend using another repository: [TradeYourShelfOfShame-Backend](https://github.com/JJin-B/TTYS-Backend). Follow the instructions in the backend repository to set up and run the server.
 
 
-## Run
+## Run Locally
 1. Ensure you have completed the installation steps outlined in the "Installation" section.
-2. Open `src/Wrapper/AuthContext.tsx`
-3. Update `isLocal` variable to `true` if you running on local server. `const isLocal = true`
-4. Update `apidAddress` variable with the address of your backend server. 
-5. Run TypeScript compiler: `tsc` (to convert Typescript to JavaScript)
-6. Start the app `npm run dev`
-7. Open your browser and go to `http://localhost:PORTNUMBER` to access the website. Make sure to replace the port number placeholder with the actual port number used for the development server. 
+2. Start the app:
+ `npm run dev`
+This command automatically compiles TypeScript to JavaScript and starts the development server.
+3. Open your browser and go to http://localhost:5173 (or the specified port number) to access the website.
 
+## Run Locally
+1. If you want to run the app with a backend connected to AWS Gateway, create a .env file in the root directory of the project.
+2. Inside the .env file, set the API address:
+  `VITE_REACT_APP_AWS_API_Gateway_Address=https://your-aws-api-gateway-address`
+3. Start the app:
+ `npm run dev`
+This command automatically compiles TypeScript to JavaScript and starts the development server.
+4. Open your browser and go to http://localhost:5173 (or the specified port number) to access the website.
 
 
