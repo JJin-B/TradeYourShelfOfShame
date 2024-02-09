@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Posting from "../components/classes/Posting";
 import PictureCarousel from "../components/parts/PictureCarousel";
@@ -11,9 +11,7 @@ import PostingDetailTitle from "../components/parts/PostingDetailTitle";
 import PostingDetailInfo from "../components/parts/PostingDetailInfo";
 import PostingDetailDesc from "../components/parts/PostingDetailDesc";
 
-interface Props {}
-
-const PostingDetailPage: React.FC<Props> = () => {
+const PostingDetailPage: React.FC = () => {
   const [posting, setPosting] = useState<Posting>();
 
   const { postId } = useParams<{ postId: string }>();
@@ -37,7 +35,6 @@ const PostingDetailPage: React.FC<Props> = () => {
   }, [fetchUrl]);
 
   if (!posting) {
-    // Handle the case where the posting is not found
     return <div>Posting not found!</div>;
   }
 

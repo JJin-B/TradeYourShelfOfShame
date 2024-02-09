@@ -1,10 +1,8 @@
-import React from "react";
-
-interface Props {
-    desc: string;
-    onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
+interface PostDescProps {
+  desc: string;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
 }
-const PostDescription: React.FC<Props> = ({desc, onChange}) => {
+const PostDescription: React.FC<PostDescProps> = ({ desc, onChange }) => {
   return (
     <div className="flex flex-wrap items-center mb-2">
       <label

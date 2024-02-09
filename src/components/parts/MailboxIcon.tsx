@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface MailboxProps {
@@ -27,7 +26,7 @@ const MailboxIcon: React.FC<MailboxProps> = () => {
   const mailboxOnClick = () => {
     navigator("/chat");
   };
-  const count = 1;
+  const count = 0;
   return (
     <button
       onClick={mailboxOnClick}
@@ -35,7 +34,7 @@ const MailboxIcon: React.FC<MailboxProps> = () => {
       type="button"
     >
       <div style={mailboxIconStyle}>
-        {count > 0 ? <div style={mailboxNumStyle}>{count}</div> : null}
+        {count > 0 && <div style={mailboxNumStyle}>{count}</div>}
 
         <svg
           xmlns="http://www.w3.org/2000/svg"

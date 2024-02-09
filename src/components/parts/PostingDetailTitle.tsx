@@ -1,11 +1,10 @@
-import React from "react";
 import BuySellBadge from "./BuySellBadge";
 
-interface Props {
+interface PostingDetailTitleProps {
   type: "buy" | "sell";
   title: string;
 }
-const PostingDetailTitle: React.FC<Props> = ({ type, title }) => {
+const PostingDetailTitle: React.FC<PostingDetailTitleProps> = ({ type, title }) => {
   return (
     <title className="mx-auto max-w-6xl flex flex-col items-start justify-start text-3xl my-2 px-2">
       {<BuySellBadge type={type} />}

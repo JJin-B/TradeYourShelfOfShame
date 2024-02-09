@@ -1,12 +1,10 @@
-import React from "react";
-
 import Posting from "../classes/Posting";
 
-interface Props {
+interface RelatedBggGamesProps {
   posting: Posting;
 }
 
-const PostingDetailsRelatedBggGames: React.FC<Props> = ({ posting }) => {
+const PostingDetailsRelatedBggGames: React.FC<RelatedBggGamesProps> = ({ posting }) => {
   return (
     <div className="mx-auto h-18 p-3 min-h-fit max-w-6xl m-10 dark:border dark:border-grey-700 overflow-auto rounded-md">
       <h1 className="text-2xl">Related BGG Games</h1>

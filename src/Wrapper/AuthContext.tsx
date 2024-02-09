@@ -8,28 +8,15 @@ import React, {
 
 import axios from "axios";
 import { toast } from "react-toastify";
+import { UserWithNotification } from "../components/classes/interfaces";
 
 // const apiAddress = "http://13.59.201.41:3001" // http url for AWS EC2 backend
 // const apiAddress = "https://9afnnp3x28.execute-api.us-east-2.amazonaws.com/TTYS"; // API Gateway address
 const apiAddress = "http://localhost:3001"; // local server for development
 
-
-interface PostingNotification {
-  postingId: { _id: string; title: string; type: "sell" | "buy" };
-  isViewed: string;
-}
-
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  userSetting: {};
-  notifications: PostingNotification[];
-}
-
 interface AuthContextProps {
-  user: User | null; // Replace YourUserType with your actual user type
-  signin: (userData: User) => void;
+  user: UserWithNotification | null; // Replace YourUserType with your actual user type
+  signin: (userData: UserWithNotification) => void;
   signout: () => void;
 }
 
@@ -40,7 +27,7 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContextProps | null>(null);
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserWithNotification | null>(null);
 
   useEffect(() => {
     // Check if user data exists in localStorage on component mount
@@ -80,10 +67,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, []);
 
-  const signin = (userData: User) => {
+  const signin = (userData: UserWithNotification) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
-    
   };
   const signout = () => {
     setUser(null);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NotificationBell from "./NotificationBell";
 import BuySellBadge from "./BuySellBadge";
@@ -10,12 +10,15 @@ interface PostingNotification {
   isViewed: string;
 }
 
-interface Props {
+interface NotificationProps {
   notifications: PostingNotification[];
   userId: string;
 }
 
-const NavBarNotifications: React.FC<Props> = ({ userId, notifications }) => {
+const NavBarNotifications: React.FC<NotificationProps> = ({
+  userId,
+  notifications,
+}) => {
   const navigate = useNavigate();
 
   const { signin } = useAuth();
@@ -43,10 +46,6 @@ const NavBarNotifications: React.FC<Props> = ({ userId, notifications }) => {
         .catch((e) => console.log(e));
     }
   };
-
-  // const onClickOutside = () => {
-  //   setNotyDropdownToggle(false);
-  // };
 
   const notyOnClick = (postingId: string) => {
     navigate(`/posting/${postingId}`);

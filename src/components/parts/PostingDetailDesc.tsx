@@ -1,10 +1,8 @@
-import React from "react";
-
-interface Props {
+interface PostingDetailDescProps {
   desc: string;
 }
 
-const PostingDetailDesc: React.FC<Props> = ({ desc }) => {
+const PostingDetailDesc: React.FC<PostingDetailDescProps> = ({ desc }) => {
   return (
     <div className="mx-auto h-64 p-3 min-h-fit max-w-6xl m-10 dark:border dark:border-grey-700 rounded-md">
       <h1 className="text-2xl">Description</h1>

@@ -1,10 +1,9 @@
-import React from "react";
-
-interface Props {
-    price: number;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
+interface PostPriceProps {
+  price: number;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
-const PostPrice: React.FC<Props> = ({price,onChange}) => {
+
+const PostPrice: React.FC<PostPriceProps> = ({ price, onChange }) => {
   return (
     <div className="flex flex-col flex-wrap mb-2">
       <label

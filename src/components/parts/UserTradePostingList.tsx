@@ -1,29 +1,19 @@
-import React from "react";
 import LinkedLi from "./LinkedLi";
 
-interface BggData {
-  id: string;
-  name: string;
-  year?: string;
-}
+import { PostingBggData } from "../classes/interfaces";
 
-interface PostingBggData extends BggData {
-  type: "sell" | "buy";
-  postingId: string;
-}
-
-interface Props {
+interface UserTradePostingListProps {
   postings: PostingBggData[];
 }
-const UserTradePostingList: React.FC<Props> = ({ postings }) => {
+const UserTradePostingList: React.FC<UserTradePostingListProps> = ({
+  postings,
+}) => {
   if (postings.length === 0) {
     return <span>No Trade List from Postings</span>;
   }
 
-  const liClasses = "w-4/5 text-base my-1 overflow-auto";
-
   return (
-    <ul className={liClasses}>
+    <ul className="w-4/5 text-base my-1 overflow-auto">
       {postings.map((posting) => (
         <LinkedLi
           key={posting.id}

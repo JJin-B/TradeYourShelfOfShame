@@ -1,8 +1,11 @@
-import React, { useState, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchButton from "./SearchButton";
 import SearchInputBar from "./SearchInputBar";
 import SearchOption from "./SearchOption";
+
+const liStyleClasses: string =
+  "inline-flex w-full px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white";
 
 interface SearchParams {
   type: "" | "Buy" | "Sell";
@@ -38,19 +41,11 @@ const SearchBar: React.FC = () => {
     const inputParam = searchParams.input ? `q=${searchParams.input}` : "";
 
     const queryParams = [inputParam, typeParam].filter(Boolean).join("&");
-    
+
     navigate(`/search${queryParams ? `?${queryParams}` : ""}`, {
       replace: true,
     });
   };
-
-  const liClasses: string =
-    "inline-flex w-full px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white";
-  const categoryClasses: string =
-    "flex-shrink-0 justify-between z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600 w-36";
-
-  const dropdownClasses: string =
-    "absolute flex-shrink-0 z-10 inline-flex py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600 w-36";
 
   return (
     <form
@@ -60,28 +55,32 @@ const SearchBar: React.FC = () => {
       <div className="flex">
         <button
           id="dropdown-button"
-          className={categoryClasses}
+          className="flex-shrink-0 justify-between z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600 w-36"
           type="button"
           onClick={toggleDropdown}
         >
-          {searchParams.type ? searchParams.type : "All Postings"} <span>▼</span>
+          {searchParams.type ? searchParams.type : "All Postings"}{" "}
+          <span>▼</span>
         </button>
         {isDropdownOpen && (
-          <div id="dropdown" className={dropdownClasses}>
+          <div
+            id="dropdown"
+            className="absolute flex-shrink-0 z-10 inline-flex py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600 w-36"
+          >
             <ul className="text-gray-700 rounded-lg dark:text-gray-200">
               <SearchOption
                 text="All Postings"
-                liClasses={liClasses}
+                liClasses={liStyleClasses}
                 onClickEvent={() => selectOption("")}
               />
               <SearchOption
                 text="Buy"
-                liClasses={liClasses}
+                liClasses={liStyleClasses}
                 onClickEvent={() => selectOption("Buy")}
               />
               <SearchOption
                 text="Sell"
-                liClasses={liClasses}
+                liClasses={liStyleClasses}
                 onClickEvent={() => selectOption("Sell")}
               />
             </ul>

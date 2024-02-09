@@ -1,10 +1,9 @@
-import React from "react";
-
-interface Props {
+interface PostTitleProps {
   title: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
-const PostTitle: React.FC<Props> = ({ title, onChange }) => {
+
+const PostTitle: React.FC<PostTitleProps> = ({ title, onChange }) => {
   return (
     <div className="flex flex-wrap items-center mb-2">
       <label

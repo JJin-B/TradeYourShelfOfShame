@@ -1,4 +1,3 @@
-import React from "react";
 import Copyright from "./parts/Copyright";
 
 const Footer: React.FC = () => {

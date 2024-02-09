@@ -19,8 +19,20 @@ export interface UserInterest {
 export interface User {
   _id: string;
   name: string;
+}
+
+export interface UserInfo extends User {
   email: string;
   interests: UserInterest[];
+}
+
+interface PostingNotification {
+  postingId: { _id: string; title: string; type: "sell" | "buy" };
+  isViewed: string;
+}
+
+export interface UserWithNotification extends UserInfo {
+  notifications: PostingNotification[];
 }
 
 export interface Message {
@@ -33,18 +45,37 @@ export interface Message {
 
 export interface Chat {
   _id: string;
-  sender: {
-    _id: string;
-    name: string;
-  };
-  receiver: {
-    _id: string;
-    name: string;
-  };
+  sender: User;
+  receiver: User;
+
   posting: {
     _id: string;
     title: string;
     author: string;
   };
   messages: Message[];
+}
+
+export interface BggSearchResult {
+  id: string;
+  name: string;
+  year?: string;
+}
+
+export interface BggData {
+  id: string;
+  name: string;
+  year?: string;
+}
+
+export interface BggItem {
+  attributes: { id: string };
+  children: [
+    { name: "name"; attributes: { value: string } },
+    { name: "yearpublished"; attributes: { value: string } }?,
+  ];
+}
+
+export interface BggResponse {
+  children: BggItem[];
 }

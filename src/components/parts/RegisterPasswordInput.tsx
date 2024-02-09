@@ -1,4 +1,12 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
+
+const conditionMet = (condition: boolean) => {
+  if (condition) {
+    return "blue-500";
+  } else {
+    return "red-500";
+  }
+};
 
 interface passwrodCriteria {
   charCount: boolean;
@@ -7,7 +15,7 @@ interface passwrodCriteria {
   lowerChar: boolean;
   number: boolean;
 }
-interface Props {
+interface RegisterPasswordInputProps {
   password: string;
   confirmPassword: string;
   handleOnChange: (
@@ -17,19 +25,12 @@ interface Props {
   passwordCriteria: passwrodCriteria;
 }
 
-const RegisterPasswordInput: React.FC<Props> = ({
+const RegisterPasswordInput: React.FC<RegisterPasswordInputProps> = ({
   password,
   confirmPassword,
   handleOnChange,
   passwordCriteria: { charCount, specialChar, upperChar, lowerChar, number },
 }) => {
-  const conditionMet = (condition: boolean) => {
-    if (condition) {
-      return "blue-500";
-    } else {
-      return "red-500";
-    }
-  };
   const isValidPassword =
     charCount && specialChar && upperChar && lowerChar && number;
 

@@ -1,6 +1,4 @@
-import React from "react";
-
-interface Props {
+interface NotyBellProps {
   width?: string;
   count?: number;
   onClick: () => void;
@@ -23,7 +21,7 @@ const notyNumStyle = {
   borderRadius: "20px" as const,
 };
 
-const NotificationBell: React.FC<Props> = ({
+const NotificationBell: React.FC<NotyBellProps> = ({
   width = "30px",
   count = 0,
   onClick,

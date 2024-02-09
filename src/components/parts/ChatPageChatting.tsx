@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatPageChattingMessage from "./ChatPageChattingMessage";
 import { apiAddress } from "../../Wrapper/AuthContext";
 import axios from "axios";

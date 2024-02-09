@@ -1,4 +1,3 @@
-import React from "react";
 import ChatPageChatList from "./ChatPageChatList";
 import { Chat } from "../classes/interfaces";
 

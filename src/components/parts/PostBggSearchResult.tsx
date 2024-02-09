@@ -1,21 +1,8 @@
-import React from "react";
 import Button from "./Button";
+import { BggData, UserInterest } from "../classes/interfaces";
 
-interface BggSearchResult {
-  id: string;
-  name: string;
-  year?: string;
-}
-
-interface UserInterest {
-  interestType: "sell" | "buy";
-  id: string;
-  name: string;
-  year?: string;
-}
-
-interface Props {
-  results: BggSearchResult[];
+interface BggSearchResultProps {
+  results: BggData[];
   display: boolean;
   onClickAdd: (result: UserInterest) => void;
   classesToAdd?: string;
@@ -23,7 +10,7 @@ interface Props {
   isLoading: boolean;
 }
 
-const PostBggSearchResult: React.FC<Props> = ({
+const PostBggSearchResult: React.FC<BggSearchResultProps> = ({
   results,
   display,
   onClickAdd,
@@ -31,7 +18,7 @@ const PostBggSearchResult: React.FC<Props> = ({
   interestType,
   isLoading,
 }) => {
-  const onClick = (result: BggSearchResult) => {
+  const onClick = (result: BggData) => {
     const interest: UserInterest = {
       interestType: interestType ? interestType : "buy",
       id: result.id,

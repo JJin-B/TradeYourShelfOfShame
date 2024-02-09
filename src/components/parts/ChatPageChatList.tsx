@@ -1,9 +1,7 @@
 import LetterWithRound from "./LetterWithRound";
 import { Chat } from "../classes/interfaces";
+import { truncateText } from "../functions/utils";
 
-const truncateText = (text: string, maxLength: number) => {
-  return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
-};
 
 const getStypeByUnread = (chat: Chat, userId: string) => {
   const unreadMessage = chat.messages.filter((message) => {

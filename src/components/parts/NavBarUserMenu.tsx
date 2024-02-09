@@ -1,26 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import LinkedLi from "./LinkedLi";
 import { useAuth } from "../../Wrapper/AuthContext";
 
-interface User {
-  _id: string;
-  name: string;
-  email: string;
+import { UserInfo } from "../classes/interfaces";
+
+const buttonClass: string =
+  "flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent";
+
+const userMenuItemClass: string =
+  "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer";
+
+interface UserMenuProps {
+  user: UserInfo;
 }
 
-interface Props {
-  user: User;
-}
-
-const NavBarUserMenu: React.FC<Props> = ({ user }) => {
+const NavBarUserMenu: React.FC<UserMenuProps> = ({ user }) => {
   const { signout } = useAuth();
-
-  const buttonClass: string =
-    "flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent";
-
-  const userMenuItemClass: string =
-    "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer";
 
   const [isDropdownOn, setIsDropdownOn] = useState(false);
 
@@ -41,7 +37,7 @@ const NavBarUserMenu: React.FC<Props> = ({ user }) => {
         data-dropdown-toggle="dropdownNavbar"
         className={buttonClass}
       >
-        {user.name} ▼{/* {isDropdownOn ? "▲" : "▼"} */}
+        {user.name} ▼
       </button>
       {/* Dropdown menu */}
       {isDropdownOn && (

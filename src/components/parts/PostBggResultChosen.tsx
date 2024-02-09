@@ -1,24 +1,17 @@
-import React, { MouseEvent } from "react";
+import { MouseEvent } from "react";
+import { BggSearchResult } from "../classes/interfaces";
 
-interface BggSearchResult {
-  id: string;
-  name: string;
-  year?: string;
-}
-
-interface Props {
+interface BggResultChosenProps {
   bggToggle: boolean;
   chosenResults: BggSearchResult[];
   onButtonClick: (result: BggSearchResult, e: MouseEvent) => void;
 }
 
-const PostBggResultChosen: React.FC<Props> = ({
+const PostBggResultChosen: React.FC<BggResultChosenProps> = ({
   bggToggle,
   chosenResults,
   onButtonClick,
 }) => {
-
-
   if (bggToggle) {
     return (
       <div className="mr-2 font-medium text-gray-900 dark:text-white">
@@ -33,7 +26,12 @@ const PostBggResultChosen: React.FC<Props> = ({
           >
             {chosenResults.map((result) => (
               <li key={result.id} className="my-1">
-                <button className="bg-red-400 rounded-lg p-2" onClick={(e) => onButtonClick(result, e)}>Remove</button> {" "}
+                <button
+                  className="bg-red-400 rounded-lg p-2"
+                  onClick={(e) => onButtonClick(result, e)}
+                >
+                  Remove
+                </button>{" "}
                 <span>
                   {`${result.name}${result.year ? ` (${result.year})` : ""}`}
                 </span>

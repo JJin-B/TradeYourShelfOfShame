@@ -1,6 +1,6 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 
-interface Props {
+interface RegisterEmailInputProps {
   email: string;
   handleOnChange: (
     inputType: "email" | "password" | "name" | "confirmPassword",
@@ -10,7 +10,10 @@ interface Props {
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const RegisterEmailInput: React.FC<Props> = ({ email, handleOnChange }) => {
+const RegisterEmailInput: React.FC<RegisterEmailInputProps> = ({
+  email,
+  handleOnChange,
+}) => {
   return (
     <div className="mb-4">
       <label

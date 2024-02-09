@@ -1,13 +1,17 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 
-interface Props {
+interface RegisterNameInputProps {
   name: string;
   handleOnChange: (
     inputType: "email" | "password" | "name" | "confirmPassword",
     e: ChangeEvent<HTMLInputElement>
   ) => void;
 }
-const RegisterNameInput: React.FC<Props> = ({ name, handleOnChange }) => {
+
+const RegisterNameInput: React.FC<RegisterNameInputProps> = ({
+  name,
+  handleOnChange,
+}) => {
   return (
     <div className="mb-4">
       <label

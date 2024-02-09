@@ -1,11 +1,9 @@
-import React from "react";
-
-interface Props {
+interface SearchInputBarProps {
   input: string;
   onChange: (input: string) => void;
 }
 
-const SearchInputBar: React.FC<Props> = ({ input, onChange }) => {
+const SearchInputBar: React.FC<SearchInputBarProps> = ({ input, onChange }) => {
   return (
     <>
       <label htmlFor="search" className="sr-only">

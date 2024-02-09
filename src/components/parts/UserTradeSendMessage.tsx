@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 import { useAuth } from "../../Wrapper/AuthContext";
 
-interface UserInfo {
-  _id: string;
-  name: string;
-}
+import { UserInfo } from "../classes/interfaces";
 
-interface Props {
+interface UserTradeSendMessageProps {
   userPOI: UserInfo;
 }
-const UserTradeSendMessage: React.FC<Props> = ({ userPOI }) => {
+const UserTradeSendMessage: React.FC<UserTradeSendMessageProps> = ({
+  userPOI,
+}) => {
   const { user } = useAuth();
   const isLoggedIn = user ? true : false;
 
@@ -24,7 +23,6 @@ const UserTradeSendMessage: React.FC<Props> = ({ userPOI }) => {
 
   const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
-    // console.log(message);
   };
 
   return (
@@ -44,7 +42,7 @@ const UserTradeSendMessage: React.FC<Props> = ({ userPOI }) => {
           onChange={onChangeTextArea}
           disabled={!isLoggedIn}
         ></textarea>
-        {isLoggedIn && <Button text="Send" className={`m-1`}/>}
+        {isLoggedIn && <Button text="Send" className={`m-1`} />}
       </form>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { apiAddress } from "../Wrapper/AuthContext";
 import { useLocation } from "react-router-dom";

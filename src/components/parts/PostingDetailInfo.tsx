@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "./Button";
 import PostingDetailMessage from "./PostingDetailMessage";
 
@@ -6,11 +5,28 @@ import Posting from "../classes/Posting";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Wrapper/AuthContext";
 
-interface Props {
+const getBtnNames = (
+  authorId: string,
+  userId: undefined | string,
+  authorName: string
+) => {
+  const otherPostingBtnName =
+    authorId == userId
+      ? "Check My Other Postings"
+      : `Check ${authorName}'s Other Postings`;
+  const tradeListBtnName =
+    authorId == userId
+      ? "Check My Trade List"
+      : `Check ${authorName}'s Trade List`;
+
+  return { otherPostingBtnName, tradeListBtnName };
+};
+
+interface PostingDetailInfoProps {
   posting: Posting;
 }
 
-const PostingDetailInfo: React.FC<Props> = ({ posting }) => {
+const PostingDetailInfo: React.FC<PostingDetailInfoProps> = ({ posting }) => {
   const { user } = useAuth();
 
   const navigate = useNavigate();
@@ -31,14 +47,11 @@ const PostingDetailInfo: React.FC<Props> = ({ posting }) => {
     day: "2-digit",
   });
 
-  const otherPostingBtnName =
-    posting.author._id == user?._id
-      ? "Check My Other Postings"
-      : `Check ${posting.author.name}'s Other Postings`;
-  const tradeListBtnName =
-    posting.author._id == user?._id
-      ? "Check My Trade List"
-      : `Check ${posting.author.name}'s Trade List`;
+  const { otherPostingBtnName, tradeListBtnName } = getBtnNames(
+    posting.author._id,
+    user?._id,
+    posting.author.name
+  );
 
   return (
     <div className="w-full ml-0 sm:w-96 sm:ml-10 text-xl max-w-sm break-words border border-solid border-grey-700 p-4 mt-10 ">

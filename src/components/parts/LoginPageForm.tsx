@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useAuth, apiAddress } from "../../Wrapper/AuthContext";
 import { toast } from "react-toastify";
 import axios, { AxiosResponse } from "axios";
@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-interface Props {}
-const LoginPageForm: React.FC<Props> = () => {
+const LoginPageForm: React.FC = () => {
   const navigate = useNavigate();
   const { signin } = useAuth();
 

@@ -1,8 +1,6 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
-interface Props {}
-const LoginPageRegisterBtn: React.FC<Props> = () => {
+const LoginPageRegisterBtn: React.FC = () => {
   const navigate = useNavigate();
 
   const registerButtonOnClick = () => {

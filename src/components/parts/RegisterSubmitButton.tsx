@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
@@ -10,14 +9,14 @@ interface UserParams {
   password: string;
 }
 
-interface Props {
+interface RegisterSubmitBtnProps {
   name: string;
   email: string;
   password: string;
   isValidInputs: boolean;
 }
 
-const RegisterSubmitButton: React.FC<Props> = ({
+const RegisterSubmitButton: React.FC<RegisterSubmitBtnProps> = ({
   name,
   email,
   password,
@@ -32,7 +31,7 @@ const RegisterSubmitButton: React.FC<Props> = ({
     password: password,
   };
 
-  const onSubmit = async (): Promise<void> => {
+  const onSubmit = async () => {
     if (!isValidInputs) {
       toast.error("Invalid Inputs!", {
         autoClose: 5000,

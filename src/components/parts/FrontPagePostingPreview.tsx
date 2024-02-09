@@ -1,33 +1,37 @@
-import React from "react";
 import Posting from "../classes/Posting";
 import BuySellBadge from "./BuySellBadge";
 import { Link } from "react-router-dom";
+import { truncateText } from "../functions/utils";
 
-interface Props {
+const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  e.currentTarget.src = "/images/noImage.jpg";
+};
+
+const getPreviewImgSrc = (imgSrc: string) => {
+  const src = imgSrc ? imgSrc : "";
+
+  return src;
+};
+
+interface FrontPostingPreviewProps {
   posting: Posting;
 }
 
-const FrontPagePostingPreview: React.FC<Props> = ({ posting }) => {
-  // Function to truncate text to a specified number of characters
-  const truncateText = (text: string, maxLength: number) => {
-    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
-  };
-
-  //prettier-ignore
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    // Replace the source with a placeholder image or set a default image source
-    e.currentTarget.src = '/images/noImage.jpg';
-  };
-
-  const postingClasses: string =
-    "m-3 w-60 h-96 inline-block max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700";
+const FrontPagePostingPreview: React.FC<FrontPostingPreviewProps> = ({
+  posting,
+}) => {
+  const frontImgSrc = getPreviewImgSrc(posting.imageSrc[0]);
 
   return (
-    <div key={posting._id} className={postingClasses}>
+    <div
+      key={posting._id}
+      className="m-3 w-60 h-96 inline-block max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+    >
       <Link to={`/posting/${posting._id}`}>
         <img
           className="rounded-t-lg w-full h-48 object-cover"
-          src={posting.imageSrc[0] ? posting.imageSrc[0] : ""}
+          src={frontImgSrc}
+          // src={posting.imageSrc[0]}
           alt=""
           onError={handleImageError}
         />

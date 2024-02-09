@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // import User from "./classes/User";
@@ -12,35 +12,25 @@ import SearchBar from "./parts/SearchBar";
 import NavBarNotifications from "./parts/NavBarNotifications";
 import MailboxIcon from "./parts/MailboxIcon";
 
-interface PostingNotification {
-  postingId: { _id: string; title: string; type: "sell" | "buy" };
-  isViewed: string;
-}
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  userSetting: {};
-  notifications: PostingNotification[];
+import { UserWithNotification } from "./classes/interfaces";
+
+const menuClass: string =
+  "flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700";
+
+const menuItemClass: string =
+  "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent cursor-pointer";
+
+interface NavBarProps {
+  user: UserWithNotification | null;
 }
 
-interface Props {
-  user: User | null;
-}
-
-const Navbar: React.FC<Props> = ({ user }) => {
+const Navbar: React.FC<NavBarProps> = ({ user }) => {
   const navigator = useNavigate();
   const [isHamburgerDropdownOpen, setisHamburgerDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setisHamburgerDropdownOpen((prev) => !prev);
   };
-
-  const menuClass: string =
-    "flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700";
-
-  const menuItemClass: string =
-    "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent cursor-pointer";
 
   const postOnClick = () => {
     if (user) {

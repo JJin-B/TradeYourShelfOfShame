@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../components/parts/Button";
@@ -13,13 +13,7 @@ import { apiAddress } from "../Wrapper/AuthContext";
 import { useAuth } from "../Wrapper/AuthContext";
 import PostPageTitle from "../components/parts/PostPageTitle";
 
-interface Props {}
-
-interface BggData {
-  id: string;
-  name: string;
-  year?: string;
-}
+import { BggData } from "../components/classes/interfaces";
 
 interface PostParams {
   type: "buy" | "sell";
@@ -32,7 +26,7 @@ interface PostParams {
   author: string;
 }
 
-const PostPage: React.FC<Props> = () => {
+const PostPage: React.FC = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -125,7 +119,7 @@ const PostPage: React.FC<Props> = () => {
       onSubmit={handleSubmit}
     >
       <PostPageTitle />
-      
+
       <PostType
         type={postParams.type}
         onChange={(e) => handlePostParmas("type", e.target.value)}

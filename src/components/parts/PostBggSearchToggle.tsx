@@ -1,11 +1,12 @@
-import React from "react";
-
-interface Props {
+interface BggSearchToggleProps {
   bggToggle: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const PostBggSearchToggle: React.FC<Props> = ({ bggToggle, onChange }) => {
+const PostBggSearchToggle: React.FC<BggSearchToggleProps> = ({
+  bggToggle,
+  onChange,
+}) => {
   return (
     <div className="flex flex-wrap items-center mb-2">
       <div className="mr-3 py-1 font-medium text-gray-900 dark:text-white">

@@ -1,4 +1,3 @@
-import React from "react";
 import LetterWithRound from "./LetterWithRound";
 
 import { Message } from "../classes/interfaces";

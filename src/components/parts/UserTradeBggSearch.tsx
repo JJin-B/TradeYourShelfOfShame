@@ -1,40 +1,24 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import fetchBggData from "../functions/fetchBggData";
 
 import PostBggSearchBar from "./PostBggSearchBar";
 import PostBggSearchResult from "./PostBggSearchResult";
 
-interface UserInterest {
-  interestType: "sell" | "buy";
-  id: string;
-  name: string;
-  year?: string;
-}
+import {
+  BggItem,
+  UserInterest,
+  BggData,
+  BggResponse,
+} from "../classes/interfaces";
 
-interface BggItem {
-  attributes: { id: string };
-  children: [
-    { name: "name"; attributes: { value: string } },
-    { name: "yearpublished"; attributes: { value: string } }?
-  ];
-}
-
-interface BggResponse {
-  children: BggItem[];
-}
-
-interface BggData {
-  id: string;
-  name: string;
-  year?: string;
-}
-
-interface Props {
+interface UserTradeBggSearchProps {
   onClickAdd: (interest: UserInterest) => void;
 }
 
-const UserTradeBggSearch: React.FC<Props> = ({ onClickAdd }) => {
+const UserTradeBggSearch: React.FC<UserTradeBggSearchProps> = ({
+  onClickAdd,
+}) => {
   const [bggSearchQuery, setBggSearchQuery] = useState<string>("");
   const [bggData, setBggData] = useState<BggResponse | null>(null);
   const [bggSearchResults, setBggSearchResults] = useState<BggData[]>([]);

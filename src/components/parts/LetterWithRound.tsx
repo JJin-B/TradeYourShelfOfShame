@@ -1,12 +1,10 @@
-import React from "react";
-
-interface Props {
+interface LetterWithRoundProps {
   letter: string;
   color?: string;
   className?: string;
 }
 
-const LetterWithRound: React.FC<Props> = ({
+const LetterWithRound: React.FC<LetterWithRoundProps> = ({
   letter,
   color = "red-500",
   className = "w-6 h-6 mx-3 sm:w-14 sm:h-14 sm:flex hidden",

@@ -1,10 +1,8 @@
-import React from "react";
-
-interface Props {
+interface PostTypeProps {
   type: string;
   onChange: React.ChangeEventHandler<HTMLSelectElement>;
 }
-const PostType: React.FC<Props> = ({ type, onChange }) => {
+const PostType: React.FC<PostTypeProps> = ({ type, onChange }) => {
   return (
     <div className="flex flex-wrap items-center mb-2">
       <label

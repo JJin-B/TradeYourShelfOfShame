@@ -1,4 +1,3 @@
-import React from "react";
 import ChatPageChats from "./ChatPageChats";
 import { Chat } from "../classes/interfaces";
 
@@ -6,17 +5,14 @@ const getStyleClass = (displayOption: "all" | "new" | "my") => {
   const displayOptionClass = `p-3 bg-gray-200 border-b-2 text-slate-500 hover:text-slate-700 hover:border-slate-700`;
 
   const allStyleClass =
-    displayOptionClass + displayOption === "all"
-      ? " text-slate-900 border-black"
-      : "";
+    displayOptionClass +
+    (displayOption === "all" ? " text-slate-900 border-black" : "");
   const newStyleClass =
-    displayOptionClass + displayOption === "all"
-      ? " text-slate-900 border-black"
-      : "";
+    displayOptionClass +
+    (displayOption === "new" ? " text-slate-900 border-black" : "");
   const myStyleClass =
-    displayOptionClass + displayOption === "all"
-      ? " text-slate-900 border-black"
-      : "";
+    displayOptionClass +
+    (displayOption === "my" ? " text-slate-900 border-black" : "");
 
   return { allStyleClass, newStyleClass, myStyleClass };
 };

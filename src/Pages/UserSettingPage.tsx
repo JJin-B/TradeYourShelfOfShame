@@ -1,13 +1,7 @@
-import React from "react";
-
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-}
+import { UserInfo } from "../components/classes/interfaces";
 
 interface Props {
-  user: User | null;
+  user: UserInfo | null;
 }
 
 const UserSettingPage: React.FC<Props> = ({ user }) => {

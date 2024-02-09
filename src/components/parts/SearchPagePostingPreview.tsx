@@ -1,37 +1,40 @@
-import React from "react";
 import Posting from "../classes/Posting";
 import BuySellBadge from "./BuySellBadge";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import DeleteButton from "./DeleteButton";
+
+import { truncateText } from "../functions/utils";
+
 import { useAuth } from "../../Wrapper/AuthContext";
 
-interface Props {
+const getDate = (createdAtDate: Date) => {
+  const date = new Date(createdAtDate);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-indexed, so we add 1
+  const day = date.getDate().toString().padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+};
+
+interface SearchPagePostingPreviewProps {
   posting: Posting;
 }
 
-const SearchPagePostingPreview: React.FC<Props> = ({ posting }) => {
+const SearchPagePostingPreview: React.FC<SearchPagePostingPreviewProps> = ({
+  posting,
+}) => {
   const navigate = useNavigate();
 
   const { user } = useAuth();
 
-  // Function to truncate text to a specified number of characters
-  const truncateText = (text: string, maxLength: number) => {
-    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
-  };
-
   //prettier-ignore
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    // Replace the source with a placeholder image or set a default image source
     e.currentTarget.src = '/images/noImage.jpg';
   };
 
-  const createdAtDate = new Date(posting.createdAt);
-  const year = createdAtDate.getFullYear();
-  const month = (createdAtDate.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-indexed, so we add 1
-  const day = createdAtDate.getDate().toString().padStart(2, "0");
-
-  const formattedDate = `${year}-${month}-${day}`;
+  const formattedDate = getDate(posting.createdAt);
 
   const editOnClick = () => {
     navigate(`/posting/${posting._id}/edit`);
@@ -76,7 +79,11 @@ const SearchPagePostingPreview: React.FC<Props> = ({ posting }) => {
         </div>
         {user && user._id === posting.author._id && (
           <div>
-            <Button className="m-1 w-24 bg-blue-400" text="Edit" onClick={editOnClick} />
+            <Button
+              className="m-1 w-24 bg-blue-400"
+              text="Edit"
+              onClick={editOnClick}
+            />
             <DeleteButton posting_id={posting._id} />
           </div>
         )}

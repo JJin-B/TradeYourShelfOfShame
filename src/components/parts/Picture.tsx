@@ -1,11 +1,8 @@
-import React from "react";
-
-interface Props {
+interface PictureProps {
   url: string;
 }
 
-const Picture: React.FC<Props> = ({ url }) => {
-  
+const Picture: React.FC<PictureProps> = ({ url }) => {
   return (
     <div className="hidden duration-700 ease-in-out" data-carousel-item>
       <img

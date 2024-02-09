@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -17,11 +17,13 @@ interface UserInterest {
   year?: string;
 }
 
-interface Props {
+interface MyInterestListProps {
   defaultUserInterestList: UserInterest[];
 }
 
-const UserMyInterestList: React.FC<Props> = ({ defaultUserInterestList }) => {
+const UserMyInterestList: React.FC<MyInterestListProps> = ({
+  defaultUserInterestList,
+}) => {
   const navigate = useNavigate();
   const [userInterestList, setUserInterestList] = useState<UserInterest[]>(
     defaultUserInterestList

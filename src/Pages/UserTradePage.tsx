@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 
@@ -8,17 +8,15 @@ import Posting from "../components/classes/Posting";
 import UserMyInterestList from "../components/parts/UserMyInterestList";
 import UserTradeSendMessage from "../components/parts/UserTradeSendMessage";
 
-import { PostingBggData, User } from "../components/classes/interfaces";
+import { PostingBggData, UserInfo } from "../components/classes/interfaces";
 import UserTradeList from "../components/parts/UserTradeList";
 
-interface Props {}
-
-const UserTradePage: React.FC<Props> = () => {
+const UserTradePage: React.FC = () => {
   const { user } = useAuth();
   const { userId } = useParams<{ userId: string }>();
 
   const [postings, setPostings] = useState<Posting[]>([]);
-  const [userPOI, setUserPOI] = useState<User>();
+  const [userPOI, setUserPOI] = useState<UserInfo>();
   const [error, setError] = useState<string | null>(null);
   const [postingBuyTradeList, setPostingBuyTradeList] = useState<
     PostingBggData[]
@@ -30,8 +28,8 @@ const UserTradePage: React.FC<Props> = () => {
   useEffect(() => {
     let fetchUrl = apiAddress + `/user/${userId}`;
     axios
-      .get<User>(fetchUrl)
-      .then((response: AxiosResponse<User>) => {
+      .get<UserInfo>(fetchUrl)
+      .then((response: AxiosResponse<UserInfo>) => {
         console.log(response.data);
         if (response.data) {
           setUserPOI(response.data);
@@ -124,9 +122,7 @@ const UserTradePage: React.FC<Props> = () => {
         {user?._id === userPOI._id ? (
           <UserMyInterestList defaultUserInterestList={userPOI.interests} />
         ) : (
-          <UserTradeSendMessage
-            userPOI={{ _id: userPOI._id, name: userPOI.name }}
-          />
+          <UserTradeSendMessage userPOI={userPOI} />
         )}
       </div>
     </div>

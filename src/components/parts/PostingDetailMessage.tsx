@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
@@ -14,7 +13,7 @@ interface data {
   message: string;
 }
 
-interface Props {
+interface PostingDetailMessageProps {
   posting: {
     _id: string;
     author: {
@@ -24,7 +23,9 @@ interface Props {
   };
 }
 
-const PostingDetailMessage: React.FC<Props> = ({ posting }) => {
+const PostingDetailMessage: React.FC<PostingDetailMessageProps> = ({
+  posting,
+}) => {
   const navigator = useNavigate();
   const { user } = useAuth();
 

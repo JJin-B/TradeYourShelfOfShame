@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Posting from "../components/classes/Posting";
 import FrontImg from "../components/parts/FrontImage";
 import FrontPagePostingPreview from "../components/parts/FrontPagePostingPreview";
 
 import { apiAddress } from "../Wrapper/AuthContext";
 
-interface Props {}
-
-const FrontPage: React.FC<Props> = () => {
+const FrontPage: React.FC = () => {
   const [postings, setPostings] = useState<Posting[]>([]);
   useEffect(() => {
     // Fetch data from your API
@@ -28,7 +26,7 @@ const FrontPage: React.FC<Props> = () => {
 
   return (
     <>
-      <FrontImg imgSrc={"https://lh3.google.com/u/0/d/1NhL5KcbU9hKqf8SN0MU_iEiqttrWZ5KW"} />
+      <FrontImg imgSrc={"/images/frontImage.webp"} />
       <div className="p-5 text-3xl flex flex-wrap mx-auto max-w-6xl">
         <h1>Recent Postings..</h1>
       </div>
@@ -42,6 +40,3 @@ const FrontPage: React.FC<Props> = () => {
 };
 
 export default FrontPage;
-
-
-

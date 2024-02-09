@@ -1,10 +1,8 @@
-import React from "react";
-
-interface Props {
+interface PostLocationProps {
   location: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
-const PostLocation: React.FC<Props> = ({ location, onChange }) => {
+const PostLocation: React.FC<PostLocationProps> = ({ location, onChange }) => {
   return (
     <div className="flex flex-col flex-wrap mb-2">
       <label

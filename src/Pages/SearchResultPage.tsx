@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios, { AxiosResponse } from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -8,9 +8,7 @@ import Posting from "../components/classes/Posting";
 import SearchPagePostingPreview from "../components/parts/SearchPagePostingPreview";
 import { apiAddress } from "../Wrapper/AuthContext";
 
-interface Props {}
-
-const SearchResultPage: React.FC<Props> = () => {
+const SearchResultPage: React.FC = () => {
   const location = useLocation();
 
   const queryParams = new URLSearchParams(location.search);
@@ -18,8 +16,6 @@ const SearchResultPage: React.FC<Props> = () => {
   const typeParam = queryParams.get("type")?.toLowerCase() || "";
   const searchQuery = queryParams.get("q")?.toLowerCase() || "";
   const authorParam = queryParams.get("author")?.toLowerCase() || "";
-
-  // const isFirstRunRef = useRef(true); // this will check the first run to prevent requesting a query twice
 
   const [postings, setPostings] = useState<Posting[]>([]);
   const [page, setPage] = useState<number>(1);

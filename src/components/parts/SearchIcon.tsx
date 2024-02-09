@@ -1,7 +1,4 @@
-import React from "react";
-
-interface Props {}
-const SearchIcon: React.FC<Props> = () => {
+const SearchIcon: React.FC = () => {
   return (
     <svg className="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 20 20">
       <path

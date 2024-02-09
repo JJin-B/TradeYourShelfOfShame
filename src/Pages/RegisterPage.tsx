@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import RegisterPasswordInput from "../components/parts/RegisterPasswordInput";
 import RegisterSubmitButton from "../components/parts/RegisterSubmitButton";
 import RegisterEmailInput from "../components/parts/RegisterEmailInput";
@@ -12,8 +12,6 @@ interface passwordCriteria {
   number: boolean;
 }
 
-interface Props {}
-
 const symbolRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
 const upperCharacterRegex = /[A-Z]/;
 const lowerCharacterRegex = /[a-z]/;
@@ -21,7 +19,7 @@ const numberRegex = /[0-9]/;
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const RegisterPage: React.FC<Props> = () => {
+const RegisterPage: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");

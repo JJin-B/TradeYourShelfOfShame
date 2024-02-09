@@ -1,7 +1,6 @@
-import React from "react";
 import SearchIcon from "./SearchIcon";
 
-interface Props {
+interface BggSearchBarProps {
   input: string;
   bggToggle: boolean;
   onClick: React.MouseEventHandler;
@@ -9,7 +8,7 @@ interface Props {
   classNamesToAdd?: string;
 }
 
-const PostBggSearchBar: React.FC<Props> = ({
+const PostBggSearchBar: React.FC<BggSearchBarProps> = ({
   input,
   bggToggle,
   onChangeInput,

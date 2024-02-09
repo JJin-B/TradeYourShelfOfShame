@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import fetchBggData from "../functions/fetchBggData";
 
@@ -7,25 +7,9 @@ import PostBggSearchBar from "./PostBggSearchBar";
 import PostBggSearchResult from "./PostBggSearchResult";
 import PostBggResultChosen from "./PostBggResultChosen";
 
-interface BggItem {
-  attributes: { id: string };
-  children: [
-    { name: "name"; attributes: { value: string } },
-    { name: "yearpublished"; attributes: { value: string } }?
-  ];
-}
+import { BggData, BggItem, BggResponse } from "../classes/interfaces";
 
-interface BggResponse {
-  children: BggItem[];
-}
-
-interface BggData {
-  id: string;
-  name: string;
-  year?: string;
-}
-
-interface Props {
+interface PostBggSearchProps {
   bggResultSelected: BggData[];
   addBggResultSelected: (chosenResult: BggData) => void;
   removeBggResultSelected: (chosenResult: BggData) => void;
@@ -33,7 +17,7 @@ interface Props {
   handleBggToggle: () => void;
 }
 
-const PostBggSearch: React.FC<Props> = ({
+const PostBggSearch: React.FC<PostBggSearchProps> = ({
   bggResultSelected,
   addBggResultSelected,
   removeBggResultSelected,

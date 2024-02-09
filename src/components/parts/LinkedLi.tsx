@@ -1,13 +1,12 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
-interface Props {
+interface LinkedLiProps {
   link: string;
   text: string;
   className?: string;
   onClick?: () => void;
 }
-const LinkedLi: React.FC<Props> = ({ link, text, className, onClick }) => {
+const LinkedLi: React.FC<LinkedLiProps> = ({ link, text, className, onClick }) => {
   const navigator = useNavigate();
   const handleClick = () => {
     if (onClick) {

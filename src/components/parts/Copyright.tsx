@@ -1,5 +1,3 @@
-import React from "react";
-
 interface CopyRightProps {}
 const Copyright: React.FC<CopyRightProps> = () => {
   return (
