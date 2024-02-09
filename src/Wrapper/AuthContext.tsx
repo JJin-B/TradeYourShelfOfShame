@@ -11,7 +11,8 @@ import { toast } from "react-toastify";
 import { UserWithNotification } from "../components/classes/interfaces";
 
 const apiAddress =
-  process.env.REACT_APP_AWS_API_Gateway_Address || "http://localhost:3001";
+  import.meta.env.VITE_REACT_APP_AWS_API_Gateway_Address ||
+  "http://localhost:3001";
 
 interface AuthContextProps {
   user: UserWithNotification | null; // Replace YourUserType with your actual user type

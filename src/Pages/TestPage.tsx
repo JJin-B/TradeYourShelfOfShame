@@ -1,7 +1,10 @@
 const TestPage: React.FC = () => {
-  console.log(process.env);
+  console.log(import.meta.env);
   return (
-    <div>ApiAddress : {process.env.REACT_APP_AWS_API_Gateway_Address}</div>
+    <div>
+      ApiAddress :{" "}
+      {import.meta.env.VITE_REACT_APP_AWS_API_Gateway_Address}
+    </div>
   );
 };
 
