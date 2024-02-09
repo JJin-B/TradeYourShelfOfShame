@@ -138,7 +138,7 @@ const ChatPage: React.FC<ChatProps> = ({ userId }) => {
         if (chatId) {
           const chat = data.find((chat) => chat._id === chatId) || null;
           setChatSelected(chat);
-          console.log(chat);
+          // console.log(chat);
         }
       })
       .catch((error) => {

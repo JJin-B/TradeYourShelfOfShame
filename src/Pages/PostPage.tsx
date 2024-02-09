@@ -102,8 +102,8 @@ const PostPage: React.FC = () => {
         throw new Error("Network response was not ok");
       }
 
-      const data = await response.json();
-      console.log("Server response:", data);
+      // const data = await response.json();
+      // console.log("Server response:", data);
 
       // Redirect to the posting detail page with the _id
       navigate(`/posting/${data._id}`);

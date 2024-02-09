@@ -11,6 +11,7 @@ import {
   BggData,
   BggResponse,
 } from "../classes/interfaces";
+import { toast } from "react-toastify";
 
 interface UserTradeBggSearchProps {
   onClickAdd: (interest: UserInterest) => void;
@@ -60,7 +61,9 @@ const UserTradeBggSearch: React.FC<UserTradeBggSearchProps> = ({
         };
         setBggSearchResults((prevResults) => [...prevResults, newResult]);
       } catch {
-        console.log(child, "has an error");
+        toast.error(`${child} has an error`, { autoClose: 3000 });
+
+        // console.log(child, "has an error");
       }
     });
   }, [bggData]);

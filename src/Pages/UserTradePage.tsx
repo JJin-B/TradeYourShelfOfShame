@@ -30,7 +30,7 @@ const UserTradePage: React.FC = () => {
     axios
       .get<UserInfo>(fetchUrl)
       .then((response: AxiosResponse<UserInfo>) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data) {
           setUserPOI(response.data);
         }

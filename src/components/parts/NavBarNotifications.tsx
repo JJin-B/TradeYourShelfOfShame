@@ -4,6 +4,7 @@ import NotificationBell from "./NotificationBell";
 import BuySellBadge from "./BuySellBadge";
 import axios from "axios";
 import { apiAddress, useAuth } from "../../Wrapper/AuthContext";
+import { toast } from "react-toastify";
 
 interface PostingNotification {
   postingId: { _id: string; title: string; type: "sell" | "buy" };
@@ -43,7 +44,7 @@ const NavBarNotifications: React.FC<NotificationProps> = ({
             signin(res.data);
           }
         })
-        .catch((e) => console.log(e));
+        .catch((e) => toast.error(e, { autoClose: 3000 }));
     }
   };
 

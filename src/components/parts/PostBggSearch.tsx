@@ -8,6 +8,7 @@ import PostBggSearchResult from "./PostBggSearchResult";
 import PostBggResultChosen from "./PostBggResultChosen";
 
 import { BggData, BggItem, BggResponse } from "../classes/interfaces";
+import { toast } from "react-toastify";
 
 interface PostBggSearchProps {
   bggResultSelected: BggData[];
@@ -56,7 +57,8 @@ const PostBggSearch: React.FC<PostBggSearchProps> = ({
         setBggSearchResults((prevResults) => [...prevResults, newResult]);
         setBggResultsToggle(true);
       } catch {
-        console.log(child, "has an error");
+        toast.error(`${child} has an error`, { autoClose: 3000 });
+        // console.log(child, "has an error");
       }
     });
   }, [bggData]);
