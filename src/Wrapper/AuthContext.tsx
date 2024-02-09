@@ -12,7 +12,11 @@ import { UserWithNotification } from "../components/classes/interfaces";
 
 // const apiAddress = "http://13.59.201.41:3001" // http url for AWS EC2 backend
 // const apiAddress = "https://9afnnp3x28.execute-api.us-east-2.amazonaws.com/TTYS"; // API Gateway address
-const apiAddress = "http://localhost:3001"; // local server for development
+let apiAddress: string = "http://localhost:3001"; // local server for development
+
+if (process.env.AWS_API_Gateway_Address) {
+  apiAddress = process.env.AWS_API_Gateway_Address;
+}
 
 interface AuthContextProps {
   user: UserWithNotification | null; // Replace YourUserType with your actual user type
