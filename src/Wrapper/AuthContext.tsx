@@ -10,13 +10,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { UserWithNotification } from "../components/classes/interfaces";
 
-// const apiAddress = "http://13.59.201.41:3001" // http url for AWS EC2 backend
-// const apiAddress = "https://9afnnp3x28.execute-api.us-east-2.amazonaws.com/TTYS"; // API Gateway address
-let apiAddress: string = "http://localhost:3001"; // local server for development
-
-if (process.env.AWS_API_Gateway_Address) {
-  apiAddress = process.env.AWS_API_Gateway_Address;
-}
+const apiAddress =
+  process.env.REACT_APP_AWS_API_Gateway_Address || "http://localhost:3001";
 
 interface AuthContextProps {
   user: UserWithNotification | null; // Replace YourUserType with your actual user type
