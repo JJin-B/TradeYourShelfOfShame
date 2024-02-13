@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../components/parts/Button";
@@ -15,6 +15,9 @@ import PostPageTitle from "../components/parts/PostPageTitle";
 
 import { BggData } from "../components/classes/interfaces";
 import PostImages from "../components/parts/PostImages";
+import axios from "axios";
+
+const acceptedFileTypes = ["image/png", "image/webp", "image/jpeg"];
 
 interface PostParams {
   type: "buy" | "sell";
@@ -22,7 +25,7 @@ interface PostParams {
   desc: string;
   price: number;
   location: string;
-  imageSrc?: string[];
+  images?: string[];
   bggData: BggData[];
   author: string;
 }
@@ -38,6 +41,10 @@ const PostPage: React.FC = () => {
   const userId = user._id;
 
   const [bggToggle, setBggToggle] = useState<boolean>(false);
+
+  const [imagesToUpload, setImagesToUpload] = useState<File[]>([]);
+  const [mainImgIdx, setMainImgIdx] = useState<number>(0);
+
   const [postParams, setPostParams] = useState<PostParams>({
     type: "sell",
     title: "",
@@ -58,6 +65,8 @@ const PostPage: React.FC = () => {
   ) => {
     if (param === "price") {
       setPostParams({ ...postParams, price: Number(value) });
+    } else if (param === "images") {
+      return;
     } else {
       setPostParams({ ...postParams, [param]: String(value) });
     }
@@ -82,6 +91,28 @@ const PostPage: React.FC = () => {
     }));
   };
 
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+
+      const validFiles = files
+        .filter((file) => acceptedFileTypes.includes(file.type))
+        .slice(0, 5 - imagesToUpload.length);
+      setImagesToUpload((prev) => [...prev, ...validFiles]);
+    }
+  };
+
+  const removeImageByIndex = (idx: number) => {
+    setImagesToUpload((prev) => {
+      const newArray = [...prev.slice(0, idx), ...prev.slice(idx + 1)];
+      return newArray;
+    });
+  };
+
+  const handleMainImgIdx = (idx: number) => {
+    setMainImgIdx(idx);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const modifiedParams = { ...postParams };
@@ -89,22 +120,42 @@ const PostPage: React.FC = () => {
       modifiedParams.bggData = [];
     }
 
-    try {
-      const response = await fetch(apiAddress + "/posting/new", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const formData = new FormData();
+    formData.append("type", modifiedParams.type);
+    formData.append("title", modifiedParams.title);
+    modifiedParams.bggData.forEach((bggItem, index) => {
+      formData.append(`bggData[${index}]`, JSON.stringify(bggItem));
+    });
+    formData.append("desc", modifiedParams.desc);
+    formData.append("price", modifiedParams.price.toString());
+    formData.append("location", modifiedParams.location);
+    formData.append("author", modifiedParams.author);
+    imagesToUpload.forEach((file, index) => {
+      formData.append(`images[${index}]`, file);
+    });
 
-        body: JSON.stringify(modifiedParams),
+    console.log(formData);
+
+    try {
+      // const response = await fetch(apiAddress + "/posting/new", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+
+      //   body: JSON.stringify(modifiedParams),
+      // });
+
+      const response = await axios.post(apiAddress + "/posting/new", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
-      if (!response.ok) {
+      const data = await response.data;
+      if (!data) {
         throw new Error("Network response was not ok");
       }
-
-      const data = await response.json();
-
       // Redirect to the posting detail page with the _id
       navigate(`/posting/${data._id}`);
     } catch (error) {
@@ -143,7 +194,13 @@ const PostPage: React.FC = () => {
         onChange={(e) => handlePostParmas("desc", e.target.value)}
       />
 
-      <PostImages />
+      <PostImages
+        selectedFiles={imagesToUpload}
+        mainImgIdx={mainImgIdx}
+        handleFileChange={handleFileChange}
+        removeImageByIndex={removeImageByIndex}
+        handleMainImgIdx={handleMainImgIdx}
+      />
 
       <PostPrice
         price={postParams.price}

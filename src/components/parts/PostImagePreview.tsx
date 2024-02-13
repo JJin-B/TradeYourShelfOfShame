@@ -54,8 +54,8 @@ const PostImagePreview: React.FC<PostImageProps> = ({
       />
       {!isMain && isHovered && (
         <p
-          className="absolute flex justify-center bg-gray-500 opacity-70 w-full bottom-0 cursor-pointer text-white px-2 rounded-b-lg border-b-2 border-x-2"
           onClick={onClickSetMain}
+          className="absolute flex justify-center bg-gray-500 opacity-70 w-full bottom-0 cursor-pointer text-white px-2 rounded-b-lg border-b-2 border-x-2 hover:opacity-90 hover:bg-gray-700"
         >
           Set Main
         </p>

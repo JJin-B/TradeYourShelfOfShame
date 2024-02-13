@@ -1,35 +1,23 @@
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import PostImagePreview from "./PostImagePreview";
 
-const acceptedFileTypes = ["image/png", "image/webp", "image/jpeg"];
+// const acceptedFileTypes = ["image/png", "image/webp", "image/jpeg"];
 
-interface Props {}
-const PostImages: React.FC<Props> = () => {
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [mainImgIdx, setMainImgIdx] = useState<number>(0);
+interface PostImagesProps {
+  selectedFiles: File[];
+  mainImgIdx: number;
+  handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  removeImageByIndex: (idx: number) => void;
+  handleMainImgIdx: (idx: number) => void;
+}
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const files = Array.from(e.target.files);
-
-      const validFiles = files
-        .filter((file) => acceptedFileTypes.includes(file.type))
-        .slice(0, 5 - selectedFiles.length);
-      setSelectedFiles((prev) => [...prev, ...validFiles]);
-    }
-  };
-
-  const removeImageByIndex = (idx: number) => {
-    setSelectedFiles((prev) => {
-      const newArray = [...prev.slice(0, idx), ...prev.slice(idx + 1)];
-      return newArray;
-    });
-  };
-
-  const handleMainImgIdx = (idx: number) => {
-    setMainImgIdx(idx);
-  };
-
+const PostImages: React.FC<PostImagesProps> = ({
+  selectedFiles,
+  mainImgIdx,
+  handleFileChange,
+  removeImageByIndex,
+  handleMainImgIdx,
+}) => {
   return (
     <div className="flex flex-col flex-wrap mb-2">
       <label
@@ -58,7 +46,7 @@ const PostImages: React.FC<Props> = () => {
               <span className="text-6xl dark:text-gray-300">&#43;</span>
 
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                PNG, JPG
+                PNG, JPG, WEBP
               </p>
             </div>
             <input
