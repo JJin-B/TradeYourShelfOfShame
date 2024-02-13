@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NotificationBell from "./NotificationBell";
-import BuySellBadge from "./BuySellBadge";
+import NotificationBellIcon from "./NotificationBellIcon";
+import BuySellBadge from "../BuySellBadge";
 import axios from "axios";
-import { apiAddress, useAuth } from "../../Wrapper/AuthContext";
+import { apiAddress, useAuth } from "../../../Wrapper/AuthContext";
 import { toast } from "react-toastify";
 
 interface PostingNotification {
@@ -55,7 +55,7 @@ const NavBarNotifications: React.FC<NotificationProps> = ({
 
   return (
     <div className="relative flex items-center">
-      <NotificationBell count={notyCount} onClick={bellOnClick} />
+      <NotificationBellIcon count={notyCount} onClick={bellOnClick} />
       <div
         className={`${
           !notyDropdownToggle && "hidden"

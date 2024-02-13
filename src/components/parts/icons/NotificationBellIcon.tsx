@@ -21,7 +21,7 @@ const notyNumStyle = {
   borderRadius: "20px" as const,
 };
 
-const NotificationBell: React.FC<NotyBellProps> = ({
+const NotificationBellIcon: React.FC<NotyBellProps> = ({
   width = "30px",
   count = 0,
   onClick,
@@ -49,4 +49,4 @@ const NotificationBell: React.FC<NotyBellProps> = ({
   );
 };
 
-export default NotificationBell;
+export default NotificationBellIcon;

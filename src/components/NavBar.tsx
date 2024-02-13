@@ -9,8 +9,8 @@ import NavBarLoginRegisterBtn from "./parts/NavBarLoginRegisterBtn";
 import NavBarUserMenu from "./parts/NavBarUserMenu";
 import Button from "./parts/Button";
 import SearchBar from "./parts/SearchBar";
-import NavBarNotifications from "./parts/NavBarNotifications";
-import MailboxIcon from "./parts/MailboxIcon";
+import NavBarNotifications from "./parts/icons/NavBarNotifications";
+import MailboxIcon from "./parts/icons/MailboxIcon";
 
 import { UserWithNotification } from "./classes/interfaces";
 

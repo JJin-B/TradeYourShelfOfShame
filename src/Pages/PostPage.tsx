@@ -14,6 +14,7 @@ import { useAuth } from "../Wrapper/AuthContext";
 import PostPageTitle from "../components/parts/PostPageTitle";
 
 import { BggData } from "../components/classes/interfaces";
+import PostImages from "../components/parts/PostImages";
 
 interface PostParams {
   type: "buy" | "sell";
@@ -141,6 +142,8 @@ const PostPage: React.FC = () => {
         desc={postParams.desc}
         onChange={(e) => handlePostParmas("desc", e.target.value)}
       />
+
+      <PostImages />
 
       <PostPrice
         price={postParams.price}
