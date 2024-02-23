@@ -29,8 +29,8 @@ This project assumes running the backend using another repository: [TradeYourShe
 1. Ensure you have completed the installation steps outlined in the "Installation" section.
 2. Start the app:
  `npm run dev`
-This command automatically compiles TypeScript to JavaScript and starts the development server.
-3. Open your browser and go to http://localhost:5173 (or the specified port number) to access the website.
+3. Open your browser and go to http://localhost:5173 (or the specified port number) to access the website. Ensure the backend server is on http://localhost:3001.
+
 
 ## Run on AWS
 1. If you want to run the app with a backend connected to AWS Gateway, create a .env file in the root directory of the project.
@@ -38,7 +38,6 @@ This command automatically compiles TypeScript to JavaScript and starts the deve
   `VITE_REACT_APP_AWS_API_Gateway_Address=https://your-aws-api-gateway-address`
 3. Start the app:
  `npm run dev`
-This command automatically compiles TypeScript to JavaScript and starts the development server.
-4. Open your browser and go to http://localhost:5173 (or the specified port number) to access the website.
+4. Make sure the backend is set up accordingly with the API address. Open your browser and go to http://localhost:5173 (or the specified port number) to access the website.
 
 
